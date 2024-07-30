@@ -1,0 +1,4 @@
+SELECT `invoice_id`, `title`, `quantity`, `price`
+FROM `item_invoice`
+INNER JOIN `item` ON `item_id` = `product_id`
+WHERE `invoice_id` = 666;
