@@ -5,6 +5,7 @@
     <title>Register</title>
 </head>
 <body>
+    <!--<div></div> ZDE JE DIV S FLASH MESSAGE O CHYBÁCH-->
     <h1>This is Register Page</h1>
     <form th:action="@{/register}" th:object="${userDTO}" method="post" ><!-- nezapomenout atribut method, potřeba je th:action a th:object -->
         <div>
