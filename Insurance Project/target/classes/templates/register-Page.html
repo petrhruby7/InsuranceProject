@@ -2,11 +2,11 @@
 <html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
 </head>
 <body>
     <h1>This is Register Page</h1>
-    <form th:action="@{/register}" th:object="${userDTO}" method="post"><!-- nezapomenout atribut method, potřeba je th:action a th:object -->
+    <form th:action="@{/register}" th:object="${userDTO}" method="post" ><!-- nezapomenout atribut method, potřeba je th:action a th:object -->
         <div>
             <label for="uname">User name:</label><br>
             <input type="text" id="uname" name="uname" th:field="*{userName}"><br>

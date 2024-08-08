@@ -1,25 +1,29 @@
 package com.example.demo.models.dto;
 
-public class userDTO {
-    // @NotBlank(message = "Vyplňte uživatelské jméno")
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public class UserDTO {
+    @NotBlank(message = "User name is required")
     private String userName; //uživatelské jméno
 
-    // @Email(message = "Vyplňte validní email")
-    // @NotBlank(message = "Vyplňte uživatelská email")
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is required")
     private String email;// uživatelský email
 
-    // @NotBlank(message = "Vyplňte své křestní jméno")
+    @NotBlank(message = "First name is required")
     private String firstName; //Křestní jméno užvatele todo: je nutné mít to už zde? nelze mit oddeělenou entitu na profilu
 
-    // @NotBlank(message = "Vyplňte své příjmení")
+    @NotBlank(message = "Last name is required")
     private String lastName; //Příjmení uživatele todo: to samé jako u křestního jména
 
-    // @NotBlank(message = "Vyplňte uživatelské heslo")
-    // @Size(min = 6, message = "Heslo musí mít alespoň 6 znaků")
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password should be at least 6 characters long")
     private String password;
 
-    // @NotBlank(message = "Vyplňte uživatelské heslo")
-    // @Size(min = 6, message = "Heslo musí mít alespoň 6 znaků")
+    @NotBlank(message = "Confirm password is required")
+    @Size(min = 6, message = "Password should be at least 6 characters long")
     private String confirmPassword;
 
     //region: Gettery a Settery
