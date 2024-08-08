@@ -2,7 +2,9 @@ package com.example.demo.data.entities;
 
 import jakarta.persistence.*;
 
+
 @Entity
+@Table(name = "Users")
 public class UserEntity {
 
     @Id
@@ -67,9 +69,11 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
+
     public String getPassword() {
         return password;
     }
+
 
     public void setPassword(String password) {
         this.password = password;
