@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
 
         //pozdějí vyřeším pomocí mapperu
         UserEntity user = new UserEntity();
-        user.setUserName(user.getUserName());
-        user.setEmail(user.getEmail());
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
+        user.setUserName(userDTO.getUserName());
+        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
 
         // zatím nehashuji. todo: musím napravit
-        user.setPassword(user.getPassword());
+        user.setPassword(userDTO.getPassword());
 
         userRepository.save(user);
     }

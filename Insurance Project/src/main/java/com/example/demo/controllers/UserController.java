@@ -10,40 +10,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-//todo tohle musim přejmenovat, celá složka působí divně
+
 
 @Controller
-public class pages {
+public class UserController {
 
     @Autowired
     private UserService userService;
 
-    //kontroler pro landing page
+    //kontroler pro landing page todo možná do jiné složky
     @GetMapping("/")
     public String landingPage(){
         return "landing-Page";
     }
     @GetMapping("/login")
     public  String loginPage() {
-        return "login-Page";
+        return "/user/login-Page";
     }
     @GetMapping("/register")
     public String showRegisterPage(@ModelAttribute UserDTO userDTO){
-        return "register-Page";
+        return "/user/register-Page";
     }
     @GetMapping("/registrationSuccess") //prozatimní řešení, potvrzení že registrace proběhla úspěšně
     public  String showRegistrationSuccess(){
-        return "registrationSuccess-Page";
+        return "/user/registrationSuccess-Page";
     }
 
     @PostMapping("/register")
-    public String handleRegisterPage(@Valid @ModelAttribute UserDTO userDTO, BindingResult result, RedirectAttributes redirectAttributes){
+    public String handleRegisterPage(
+            @Valid @ModelAttribute UserDTO userDTO,
+            BindingResult result,
+            RedirectAttributes redirectAttributes){
+
+
         if(result.hasErrors()){
             return showRegisterPage(userDTO);
         }
-
+        userService.createUser(userDTO);
         redirectAttributes.addFlashAttribute("success", "User is registered");
-        return "registrationSuccess-Page";//todo opravit navratovou hodnotu
+
+        return "redirect:/";
     }
 
 }
