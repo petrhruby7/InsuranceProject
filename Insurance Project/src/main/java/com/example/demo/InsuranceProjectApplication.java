@@ -18,5 +18,3 @@ public class InsuranceProjectApplication {
 
 //todo: nezapomenout na atributy v register a login thymeleaf
 //todo: sehnat dependency pro mapper a pro validationAPI
-
-
