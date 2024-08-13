@@ -11,6 +11,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true) //todo potřebuju až budu řešit role
+
 public class ApplicationSecurityConfiguration {
 
     @Bean

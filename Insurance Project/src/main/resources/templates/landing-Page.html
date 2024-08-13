@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
     <!-- ZDE JE DIV S SUCCCESS MESSAGE-->
     <div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
 
@@ -14,5 +16,6 @@
     <form method="post" th:action="@{/logout}">
         <button sec:authorize="isAuthenticated()">Odhlásit se</button>
     </form>
+
 </body>
 </html>

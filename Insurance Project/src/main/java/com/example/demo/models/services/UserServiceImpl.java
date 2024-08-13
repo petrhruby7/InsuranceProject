@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -54,4 +55,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
+
 }

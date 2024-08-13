@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -28,5 +29,6 @@
     <form method="post" th:action="@{/logout}">
         <button sec:authorize="isAuthenticated()">Odhlásit se</button>
     </form>
+
 </body>
 </html>
