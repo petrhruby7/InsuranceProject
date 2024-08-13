@@ -48,10 +48,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    // nelze se přihlásit se špatným uživatelským jménem - uživtallske jméno neexistuje TODO otestovat
+    // nelze se přihlásit se špatným uživatelským jménem,či uživatelské jméno neexistuje TODO otestovat
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) userRepository.findByUserName(username)
+        return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
 }

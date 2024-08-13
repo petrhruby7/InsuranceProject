@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="cs-cz">
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
 <body>
+    <div style="color:red" class="flash-message message-error" th:text="${error}" th:if="${error}"> </div>
     <h1>This is Login Page</h1>
-    <form method="post">
-        <label for="uname">User name:</label><br>
-        <input type="text" id="uname" name="uname"><br>
-        <label for="pass"> Password:</label><br>
-        <input type="password" id="pass" name="pw"><br>
-        <input type="submit" value="Log in">
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label for="uname">User name:</label><br>
+            <input type="text" id="uname" name="userName"><br>
+           <!-- <small style="color:red" th:errors="*{userName}"></small> -->
+        </div>
+        <div>
+            <label for="pass"> Password:</label><br>
+            <input type="password" id="pass" name="password"><br>
+
+        </div>
+        <div>
+            <input type="submit" value="Log in">
+        </div>
     </form>
     <a href="/">home</a>
     <a href="/register">register</a>
