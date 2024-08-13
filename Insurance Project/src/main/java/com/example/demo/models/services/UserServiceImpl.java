@@ -3,6 +3,7 @@ package com.example.demo.models.services;
 import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.UserRepository;
 import com.example.demo.models.dto.UserDTO;
+
 import com.example.demo.models.exceptions.DuplicateEmailException;
 import com.example.demo.models.exceptions.DuplicateUserNameException;
 import com.example.demo.models.exceptions.PasswordDoNotEqualException;
@@ -11,6 +12,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -54,4 +59,25 @@ public class UserServiceImpl implements UserService {
         return (UserDetails) userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
+
+
+    @Override
+    public void createUser (UserDTO userDTO){
+
+        //pozdějí vyřeším pomocí mapperu
+        UserEntity user = new UserEntity();
+        user.setUserName(user.getUserName());
+        user.setEmail(user.getEmail());
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
+
+        // zatím nehashuji. todo: musím napravit
+        user.setPassword(user.getPassword());
+
+        userRepository.save(user);
+    }
+
+
+
+
 }
