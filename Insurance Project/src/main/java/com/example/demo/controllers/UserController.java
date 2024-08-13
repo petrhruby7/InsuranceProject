@@ -21,17 +21,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //kontroler pro landing page todo možná do jiného kontroleru
-    @GetMapping("/")
-    public String landingPage(){
-        return "landing-Page";
-    }
+
     @GetMapping("/login")
-    public  String loginPage() {
+    public String loginPage() {
         return "/user/login-Page";
     }
+
     @GetMapping("/register")
-    public String showRegisterPage(@ModelAttribute UserDTO userDTO){
+    public String showRegisterPage(@ModelAttribute UserDTO userDTO) {
         return "/user/register-Page";
     }
 
@@ -40,8 +37,8 @@ public class UserController {
             @Valid @ModelAttribute UserDTO userDTO,
             BindingResult result,
             RedirectAttributes redirectAttributes
-    ){
-        if(result.hasErrors())
+    ) {
+        if (result.hasErrors())
             return showRegisterPage(userDTO);
 
         try {

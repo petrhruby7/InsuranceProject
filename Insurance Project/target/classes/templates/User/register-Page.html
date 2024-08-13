@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -14,7 +16,8 @@
     <form th:action="@{/register}" th:object="${userDTO}" method="post" ><!-- nezapomenout atribut method, potřeba je th:action a th:object -->
         <div>
             <label for="uname">User name:</label><br>
-            <input type="text" id="uname" name="uname" th:field="*{userName}"><br>
+
+            <input type="text" id="uname" name="userName" th:field="*{userName}"><br>
             <small style="color:red" th:errors="*{userName}"></small>
         </div>
         <div>
@@ -24,17 +27,19 @@
         </div>
         <div>
             <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname" th:field="*{firstName}"><br>
+
+            <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
             <small style="color:red" th:errors="*{firstName}"></small>
         </div>
         <div>
             <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname" th:field="*{lastName}"><br>
+            <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
+
             <small style="color:red" th:errors="*{lastName}"></small>
         </div>
         <div>
             <label for="pass"> Password:</label><br>
-            <input type="password" id="pass" name="pw" th:field="*{password}"><br> <!-- použít requied? minnlength a maxlength? -->
+            <input type="password" id="pass" name="password" th:field="*{password}"><br> <!-- použít requied? minnlength a maxlength? -->
             <small style="color:red" th:errors="*{password}"></small>
         </div>
         <div>
@@ -47,7 +52,11 @@
         </div>
 
     </form>
-    <a href="/">home</a>
-    <a href="/login">login</a>
+
+    <a sec:authorize="isAnonymous"  href="/">home</a>
+    <a sec:authorize="isAnonymous"  href="/login">login</a>
+    <form method="post" th:action="@{/logout}">
+        <button sec:authorize="isAuthenticated()">Odhlásit se</button>
+    </form>
 </body>
 </html>

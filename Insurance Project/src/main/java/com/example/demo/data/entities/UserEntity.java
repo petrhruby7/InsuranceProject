@@ -1,31 +1,53 @@
 package com.example.demo.data.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 
 @Entity
 @Table(name = "Users")
-public class UserEntity {
+
+public class UserEntity implements UserDetails {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @Column (nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String userName;
 
-    @Column (nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String lastName;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String password;
-    // boolean zda jakou má roli
+    // todo: boolean zda jakou má roli
+
+    //region: UserDetails Methods
+
+    @Override
+    public String getUsername(){ return userName;}
+
+    @Override
+    public String getPassword(){ return password;}
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        //todo implementace rolí
+        return null;
+    }
+
+    //konec regionu
 
     // region gettery a settery
 
@@ -37,9 +59,6 @@ public class UserEntity {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -67,11 +86,6 @@ public class UserEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-
-    public String getPassword() {
-        return password;
     }
 
 
