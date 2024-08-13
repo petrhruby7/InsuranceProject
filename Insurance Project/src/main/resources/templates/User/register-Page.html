@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -47,7 +47,10 @@
         </div>
 
     </form>
-    <a href="/">home</a>
-    <a href="/login">login</a>
+    <a sec:authorize="isAnonymous"  href="/">home</a>
+    <a sec:authorize="isAnonymous"  href="/login">login</a>
+    <form method="post" th:action="@{/logout}">
+        <button sec:authorize="isAuthenticated()">Odhlásit se</button>
+    </form>
 </body>
 </html>

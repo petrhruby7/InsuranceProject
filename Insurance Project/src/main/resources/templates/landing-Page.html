@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="cs-cz" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,7 +9,10 @@
     <div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
 
     <h1>This is landing Page</h1>
-    <a href="/login">login</a>
-    <a href="/register"> register </a>
+    <a sec:authorize="isAnonymous" href="/login">login</a>
+    <a sec:authorize="isAnonymous" href="/register"> register </a>
+    <form method="post" th:action="@{/logout}">
+        <button sec:authorize="isAuthenticated()">Odhlásit se</button>
+    </form>
 </body>
 </html>
