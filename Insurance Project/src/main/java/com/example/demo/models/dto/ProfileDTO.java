@@ -24,44 +24,44 @@ public class ProfileDTO {
 
     //Region Gettery a Settery
 
-    public @NotBlank(message = "Country is required") String getCountry() {
-        return country;
-    }
-
-    public void setCountry(@NotBlank(message = "Country is required") String country) {
-        this.country = country;
-    }
-
-    public @NotBlank(message = "ZIP code is required") String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(@NotBlank(message = "ZIP code is required") String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public @NotBlank(message = "City is required") String getCity() {
-        return city;
-    }
-
-    public void setCity(@NotBlank(message = "City is required") String city) {
-        this.city = city;
-    }
-
-    public @NotBlank(message = "Address is required") String getAdrress() {
-        return adrress;
-    }
-
-    public void setAdrress(@NotBlank(message = "Address is required") String adrress) {
-        this.adrress = adrress;
-    }
-
-    public @NotBlank(message = "Phone Number is required") String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(@NotBlank(message = "Phone Number is required") String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAdrress() {
+        return adrress;
+    }
+
+    public void setAdrress(String adrress) {
+        this.adrress = adrress;
     }
 
     //konec regionu
