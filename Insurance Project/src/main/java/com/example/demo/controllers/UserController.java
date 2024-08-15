@@ -24,12 +24,12 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "/user/login-Page";
+        return "/user/login-Page"; //vrací šablonu login page
     }
 
     @GetMapping("/register")
     public String showRegisterPage(@ModelAttribute UserDTO userDTO) {
-        return "/user/register-Page";
+        return "/user/register-Page"; //vrací šablonu register page
     }
 
     @PostMapping("/register")
@@ -39,7 +39,7 @@ public class UserController {
             RedirectAttributes redirectAttributes
     ) {
         if (result.hasErrors())
-            return showRegisterPage(userDTO);
+            return showRegisterPage(userDTO); //při chybné registraci znovu vrací register page
 
         try {
             userService.createUser(userDTO);
@@ -52,12 +52,12 @@ public class UserController {
         } catch (PasswordDoNotEqualException e) {
             result.rejectValue("password", "error", "Passwords do not match. please try again");
             result.rejectValue("confirmPassword", "error", "Passwords do not match. please try again");
-            return ("/user/register-Page"); //kontrola zda je zadano správně helso
+            return ("/user/register-Page"); //kontrola zda je zadáno správně heslo
         }
 
-        redirectAttributes.addFlashAttribute("success", "User is registered");
+        redirectAttributes.addFlashAttribute("success", "User is registered");//uspěšná hláška, zjeví se pokud se podaří uživateli zaregistrovat se
 
-        return "redirect:/";
+        return "redirect:/"; // po uspěšné registraci přesměruje uživatele a vrací langing page
     }
 
 }

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface UserRepository extends CrudRepository <UserEntity, Long> {
 
+    //vyhledávání entity dle User name
     Optional<UserEntity> findByUserName(String userName);
+    //vyhledávání entity dle emailu
     Optional<UserEntity> findByEmail(String email);
 }

@@ -11,33 +11,57 @@ import java.util.Collection;
 @Table(name = "Users")
 public class UserEntity implements UserDetails {
 
+    /**
+    Id uživatele: samo se generuje
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private Long userId;
 
+    /**
+     * User name:uživatelské jméno - musí být jedinečné, potřebné pro přihlášení
+     * musí být vyplněno
+     */
     @Column(nullable = false, unique = true)
     private String userName;
 
+    /**
+     * email: musí být jedinečný
+     * musí být vyplněn
+     */
     @Column(nullable = false, unique = true)
     private String email;
 
+    /**
+     * Křestní jméno uživatele
+     * musí být vyplněné
+     */
     @Column(nullable = false)
     private String firstName;
 
+    /**
+     * Přijmení uživatele
+     * musí být vyplněno
+     */
     @Column(nullable = false)
     private String lastName;
 
+    /**
+     * heslo uživatele
+     * musí být vyplněno
+     */
     @Column(nullable = false)
     private String password;
+
     // todo: boolean zda jakou má roli
 
     //region: UserDetails Methods
 
     @Override
-    public String getUsername(){ return userName;}
+    public String getUsername(){ return userName;} //pomáhá uživateli přihlásit dle uživatelského jména
 
     @Override
-    public String getPassword(){ return password;}
+    public String getPassword(){ return password;} //pomáhá uživateli přihlásit dle uživatelského jména
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -45,11 +69,11 @@ public class UserEntity implements UserDetails {
         return null;
     }
 
-    //konec regionu
+    //konec regionu UserDetails Methods
 
     // region gettery a settery
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -89,5 +113,5 @@ public class UserEntity implements UserDetails {
         this.password = password;
     }
 
-    // konec regionu
+    // konec regionu gettery a settery
 }

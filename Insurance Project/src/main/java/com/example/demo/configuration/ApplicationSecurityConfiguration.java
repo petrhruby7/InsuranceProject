@@ -30,6 +30,8 @@ public class ApplicationSecurityConfiguration {
                 );
         return http.build();
     }
+
+    //umožní hashovat hesla do databáze
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

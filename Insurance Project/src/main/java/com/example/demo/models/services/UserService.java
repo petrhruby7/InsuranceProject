@@ -6,5 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
 
+    //metoda vytvoří uživatele
     void createUser (UserDTO user);
 }

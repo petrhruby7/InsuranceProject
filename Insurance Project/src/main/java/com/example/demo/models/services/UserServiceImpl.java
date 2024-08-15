@@ -7,7 +7,6 @@ import com.example.demo.models.exceptions.DuplicateEmailException;
 import com.example.demo.models.exceptions.DuplicateUserNameException;
 import com.example.demo.models.exceptions.PasswordDoNotEqualException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateEmailException();
         }
 
-        //pozdějí vyřeším pomocí mapperu
+        //nastavení parametrů nového usera, včetně hashování hesla
         UserEntity user = new UserEntity();
         user.setUserName(userDTO.getUserName());
         user.setEmail(userDTO.getEmail());
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    // nelze se přihlásit se špatným uživatelským jménem,či uživatelské jméno neexistuje TODO otestovat
+    // nejsem si jistej zda toto funguje jak má respektive zda ta exception neni zbytečná todo zjistit
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
