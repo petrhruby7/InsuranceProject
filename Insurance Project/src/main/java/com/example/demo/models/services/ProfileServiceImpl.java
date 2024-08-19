@@ -16,11 +16,10 @@ public class ProfileServiceImpl {
     @Autowired
     private ProfileMapper profileMapper;
 
-    /*
-    public ProfileDTO create (ProfileDTO profileDTO){
+    public ProfileDTO create(ProfileDTO profileDTO){
         ProfileEntity profileEntity = profileMapper.toEntity(profileDTO);
-        profileEntity = profileRepository.saveAll(profileEntity);
+        profileEntity = profileRepository.saveAndFlush(profileEntity);
         return profileMapper.toDTO(profileEntity);
-    */
+
     }
 }
