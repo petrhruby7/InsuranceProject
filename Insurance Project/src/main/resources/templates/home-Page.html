@@ -5,12 +5,30 @@
     <title>Home page</title>
 </head>
 <body>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/profile"></a>Profile</li>
+                <li>Home</li>
+                <li>My insurances</li>
+                <li>Users</li>
+                <li>Events</li>
+
+                <li>about us</li>
+                <li>contact</li>
+                <li>
+                    <form method="post" th:action="@{/logout}">
+                    <button sec:authorize="isAuthenticated()">Odhlásit se</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
 
     <h1>You can see this page only if you are sign up!</h1>
 
-    <form method="post" th:action="@{/logout}">
-        <button sec:authorize="isAuthenticated()">Odhlásit se</button>
-    </form>
+
 </body>
 </html>

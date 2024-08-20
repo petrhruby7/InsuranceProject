@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 
@@ -52,6 +53,49 @@ public class UserEntity implements UserDetails {
      */
     @Column(nullable = false)
     private String password;
+
+    /**
+     * telefoní číslo uživatel
+     * musí být vyplněno
+     */
+    @Column(nullable = false)
+    private String phoneNumber;
+    /**
+     * adresa uživatele
+     * musí být vyplněno
+     */
+    @Column (nullable = false)
+    private String address;
+    /**
+     * město uživatele
+     * musí být vyplněno
+     */
+    @Column (nullable = false)
+    private String city;
+    /**
+     * směrovací číslo uživatele - tzv. PSČ
+     * musí být vyplněno
+     */
+    @Column (nullable = false)
+    private String zipCode;
+    /**
+     * Stát uživatele
+     * muí být vyplněno
+     */
+    @Column (nullable = false)
+    private String country;
+    /**
+     * Datum narození uživatele
+     * musí být vyplněno
+     */
+    @Column (nullable = false)
+    private LocalDate dateOfBirth;
+    /**
+     * rodné číslo uživatele
+     * musí být vyplěno
+     */
+    @Column (nullable = false)
+    private String socialSecurityNumber;
 
     // todo: boolean zda jakou má roli
 
@@ -111,6 +155,62 @@ public class UserEntity implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    public void setSocialSecurityNumber(String socialSecurityNumber) {
+        this.socialSecurityNumber = socialSecurityNumber;
     }
 
     // konec regionu gettery a settery

@@ -4,6 +4,7 @@ import com.example.demo.models.dto.UserDTO;
 import com.example.demo.models.exceptions.DuplicateEmailException;
 import com.example.demo.models.exceptions.DuplicateUserNameException;
 import com.example.demo.models.exceptions.PasswordDoNotEqualException;
+import com.example.demo.models.exceptions.UserIsNotAdultException;
 import com.example.demo.models.services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,9 @@ public class UserController {
             result.rejectValue("password", "error", "Passwords do not match. please try again");
             result.rejectValue("confirmPassword", "error", "Passwords do not match. please try again");
             return ("/user/register-Page"); //kontrola zda je zadáno správně heslo
+        } catch (UserIsNotAdultException e) {
+            result.rejectValue("dateOfBirth","error", "User is not older than 18 years");
+            return ("/user/register-Page"); //kontrola že je uživatel dospělý
         }
 
         redirectAttributes.addFlashAttribute("success", "User is registered");//uspěšná hláška, zjeví se pokud se podaří uživateli zaregistrovat se
