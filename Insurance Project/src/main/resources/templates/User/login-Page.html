@@ -5,6 +5,7 @@
     <title>Login</title>
 </head>
 <body>
+    <header th:replace="~{Fragments/layout.html :: header}"></header>
     <div style="color:red" class="flash-message message-error" th:if="${param.error}"> Invalid user name or password </div>
 
     <h1>This is Login Page</h1>
@@ -23,10 +24,6 @@
             <input type="submit" value="Log in">
         </div>
     </form>
-    <a sec:authorize="isAnonymous"  href="/">home</a>
-    <a sec:authorize="isAnonymous"  href="/register">register</a>
-    <form method="post" th:action="@{/logout}">
-        <button sec:authorize="isAuthenticated()">Odhlásit se</button>
-    </form>
+
 </body>
 </html>
