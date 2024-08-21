@@ -59,9 +59,31 @@ public class  UserServiceImpl implements UserService {
         user.setCountry(userDTO.getCountry());
         user.setDateOfBirth(userDTO.getDateOfBirth());
         user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
-
+        //uložení udajů
         userRepository.save(user);
 
+    }
+
+    @Override
+    public void updateUserProfile(UserDTO userDTO){
+        //získání aktuálního uživatele
+        String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepository.findByUserName(currentUserName)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        //aktualizace údajů
+        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setAddress(userDTO.getAddress());
+        user.setCity(userDTO.getCity());
+        user.setZipCode(userDTO.getZipCode());
+            user.setCountry(userDTO.getCountry());
+        user.setDateOfBirth(userDTO.getDateOfBirth());
+        user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
+        //uložení změn
+        userRepository.save(user);
     }
 
     // nejsem si jistej zda toto funguje jak má respektive zda ta exception neni zbytečná todo zjistit
