@@ -8,6 +8,7 @@ import com.example.demo.models.exceptions.DuplicateUserNameException;
 import com.example.demo.models.exceptions.PasswordDoNotEqualException;
 import com.example.demo.models.exceptions.UserIsNotAdultException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,9 +65,34 @@ public class  UserServiceImpl implements UserService {
     }
 
     // nejsem si jistej zda toto funguje jak má respektive zda ta exception neni zbytečná todo zjistit
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
+    }
+
+    public UserDTO getCurrentUser(){
+        String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepository.findByUserName(currentUserName)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return toDTO(user);
+    }
+
+    //metoda pro načtení údajů uživatele
+    private UserDTO toDTO(UserEntity user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserName(user.getUsername());//potřebuju tuto??
+        userDTO.setEmail(user.getEmail());//potřebuju tuto??
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setAddress(user.getAddress());
+        userDTO.setCity(user.getCity());
+        userDTO.setZipCode(user.getZipCode());
+        userDTO.setCountry(user.getCountry());
+        userDTO.setDateOfBirth(user.getDateOfBirth());
+        userDTO.setSocialSecurityNumber(user.getSocialSecurityNumber());
+        return userDTO;
     }
 }
