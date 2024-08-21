@@ -1,19 +1,25 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
 <body>
+
     <header th:replace="~{Fragments/layout.html :: header}"></header>
+
 
     <!-- ZDE JE DIV S FLASH MESSAGE O CHYBÁCH-->
     <div style="color:red" class="flash-message message-error" th:text="${error}" th:if="${error}"> </div>
 
     <h1>This is Register Page</h1>
+
     <form th:action="@{/register}" th:object="${userDTO}" method="post" >
         <div>
             <label for="uname">User name:</label><br>
+
             <input type="text" id="uname" name="userName" th:field="*{userName}"><br>
             <small style="color:red" th:errors="*{userName}"></small>
         </div>
@@ -24,12 +30,14 @@
         </div>
         <div>
             <label for="fname">First name:</label><br>
+
             <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
             <small style="color:red" th:errors="*{firstName}"></small>
         </div>
         <div>
             <label for="lname">Last name:</label><br>
             <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
+
             <small style="color:red" th:errors="*{lastName}"></small>
         </div>
         <div>
@@ -82,8 +90,6 @@
         <div>
             <input type="submit" value="Register"> <br>
         </div>
-
     </form>
-
 </body>
 </html>

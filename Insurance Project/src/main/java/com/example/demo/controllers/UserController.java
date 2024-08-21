@@ -26,6 +26,7 @@ public class UserController {
     @GetMapping("/login")
     public String loginPage() {
         return "/user/login-Page"; //vrací šablonu login page
+
     }
 
     @GetMapping("/register")
@@ -60,8 +61,8 @@ public class UserController {
         }
 
         redirectAttributes.addFlashAttribute("success", "User is registered");//uspěšná hláška, zjeví se pokud se podaří uživateli zaregistrovat se
-
         return "redirect:/"; // po uspěšné registraci přesměruje uživatele a vrací langing page
+
     }
 
 }

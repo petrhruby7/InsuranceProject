@@ -3,13 +3,13 @@ package com.example.demo.data.entities;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDate;
 import java.util.Collection;
 
 
 @Entity
 @Table(name = "Users")
+
 public class UserEntity implements UserDetails {
 
     /**
@@ -107,17 +107,18 @@ public class UserEntity implements UserDetails {
     @Override
     public String getPassword(){ return password;} //pomáhá uživateli přihlásit dle uživatelského jména
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //todo implementace rolí
         return null;
     }
-
     //konec regionu UserDetails Methods
 
     // region gettery a settery
 
     public Long getUserId() {
+
         return userId;
     }
 
@@ -156,6 +157,7 @@ public class UserEntity implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -214,4 +216,5 @@ public class UserEntity implements UserDetails {
     }
 
     // konec regionu gettery a settery
+
 }

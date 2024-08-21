@@ -1,5 +1,6 @@
 package com.example.demo.models.dto;
 
+
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class UserDTO {
     @NotBlank(message = "social security number (the birth number) is required")
     @Pattern(regexp = "\\d{6}/\\d{4}", message = "social security number (the birth number) must be in format ######/####")
     private String socialSecurityNumber;
+
 
     //region: Gettery a Settery
 

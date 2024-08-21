@@ -11,4 +11,5 @@ public interface UserRepository extends CrudRepository <UserEntity, Long> {
     Optional<UserEntity> findByUserName(String userName);
     //vyhledávání entity dle emailu
     Optional<UserEntity> findByEmail(String email);
+
 }

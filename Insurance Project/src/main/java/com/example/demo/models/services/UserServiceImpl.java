@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.time.Period;
 import java.time.LocalDate;
 
@@ -22,6 +23,7 @@ public class  UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -46,6 +48,7 @@ public class  UserServiceImpl implements UserService {
         }
 
         //nastavení parametrů nového usera, včetně hashování hesla
+
         UserEntity user = new UserEntity();
         user.setUserName(userDTO.getUserName());
         user.setEmail(userDTO.getEmail());
@@ -93,6 +96,7 @@ public class  UserServiceImpl implements UserService {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
+
 
     public UserDTO getCurrentUser(){
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
