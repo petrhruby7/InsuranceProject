@@ -79,7 +79,7 @@ public class  UserServiceImpl implements UserService {
         user.setAddress(userDTO.getAddress());
         user.setCity(userDTO.getCity());
         user.setZipCode(userDTO.getZipCode());
-            user.setCountry(userDTO.getCountry());
+        user.setCountry(userDTO.getCountry());
         user.setDateOfBirth(userDTO.getDateOfBirth());
         user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
         //uložení změn

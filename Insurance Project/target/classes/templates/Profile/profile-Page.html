@@ -6,6 +6,8 @@
 </head>
 <body>
     <header th:replace="~{Fragments/layout.html :: header}"></header>
+    <div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
+
     <h1>This is your profile page</h1>
 
     <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
@@ -19,7 +21,9 @@
     <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
     <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
 
-
+    <a th:href="@{/profile/update}">
+        <button type = button>Change my details</button>
+    </a>
 
 </body>
 </html>
