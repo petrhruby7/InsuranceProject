@@ -72,6 +72,11 @@ public class  UserServiceImpl implements UserService {
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+        //kontrola věku
+        if (Period.between(userProfileDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18){
+            throw new UserIsNotAdultException();
+        }
+
         //aktualizace údajů
         user.setEmail(userProfileDTO.getEmail());
         user.setFirstName(userProfileDTO.getFirstName());
