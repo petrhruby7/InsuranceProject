@@ -123,8 +123,6 @@ public class UserProfileDTO {
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
-
-
     //konec getters a setters
 }
 

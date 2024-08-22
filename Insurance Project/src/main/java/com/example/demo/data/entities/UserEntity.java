@@ -13,7 +13,7 @@ import java.util.Collection;
 public class UserEntity implements UserDetails {
 
     /**
-    Id uživatele: samo se generuje
+     * Id uživatele: samo se generuje
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,37 +64,37 @@ public class UserEntity implements UserDetails {
      * adresa uživatele
      * musí být vyplněno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String address;
     /**
      * město uživatele
      * musí být vyplněno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String city;
     /**
      * směrovací číslo uživatele - tzv. PSČ
      * musí být vyplněno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String zipCode;
     /**
      * Stát uživatele
      * muí být vyplněno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String country;
     /**
      * Datum narození uživatele
      * musí být vyplněno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private LocalDate dateOfBirth;
     /**
      * rodné číslo uživatele
      * musí být vyplěno
      */
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String socialSecurityNumber;
 
     // todo: boolean zda jakou má roli
@@ -102,10 +102,14 @@ public class UserEntity implements UserDetails {
     //region: UserDetails Methods
 
     @Override
-    public String getUsername(){ return userName;} //pomáhá uživateli přihlásit dle uživatelského jména
+    public String getUsername() {
+        return userName;
+    } //pomáhá uživateli přihlásit dle uživatelského jména
 
     @Override
-    public String getPassword(){ return password;} //pomáhá uživateli přihlásit dle uživatelského jména
+    public String getPassword() {
+        return password;
+    } //pomáhá uživateli přihlásit dle uživatelského jména
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

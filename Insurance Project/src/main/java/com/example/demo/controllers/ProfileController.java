@@ -26,13 +26,14 @@ public class ProfileController {
     public String showProfilePage(Model model){
         UserDTO userDTO = userService.getCurrentUser();
         model.addAttribute("userDTO", userDTO);
-        return "profile/profile-Page";
+        return "profile/profile-Page"; //vrací na profile-Page
     }
 
+    //zobrazení formuláře (uprava osobních údajů)
     @GetMapping("/profile/update")
     public String showUpdateProfilePage(Model model){
         UserProfileDTO userProfileDTO = new UserProfileDTO();
-        UserDTO currentUser = userService.getCurrentUser();
+        UserDTO currentUser = userService.getCurrentUser(); //získání přihlášeného uživatele
 
         //mapování udajů
         userProfileDTO.setEmail(currentUser.getEmail());
@@ -47,9 +48,10 @@ public class ProfileController {
         userProfileDTO.setSocialSecurityNumber(currentUser.getSocialSecurityNumber());
 
         model.addAttribute("userProfileDTO", userProfileDTO);
-        return "profile/updateProfile-Page";
+        return "profile/updateProfile-Page"; //vrátí updateProfilePage
     }
 
+    //možnost zadat nové údaje do formuláře pro úpravu osobních údajů
     @PostMapping("/profile/update")
     public String handleUpdateProfile(
             @Valid @ModelAttribute("userProfileDTO")UserProfileDTO userProfileDTO,
@@ -59,7 +61,7 @@ public class ProfileController {
     ){
         if (result.hasErrors()) {
             model.addAttribute("userProfileDTO", userProfileDTO);
-            return "profile/updateProfile-Page";
+            return "profile/updateProfile-Page"; //pokud se nepodaří změnit údaje, vrátí na updateProfile-Page
         }
 
         try {
@@ -73,7 +75,7 @@ public class ProfileController {
         }
 
         redirectAttributes.addFlashAttribute("success","Your changes have been saved");
-        return "redirect:/profile"; // po úspěšné změně, přesměruje zpět na profil. TODO success nad profil page
+        return "redirect:/profile"; // po úspěšné změně, přesměruje zpět na profil.Page.
     }
 
 }

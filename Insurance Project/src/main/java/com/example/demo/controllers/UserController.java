@@ -22,17 +22,19 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-
+    //zobrazení login formuláře
     @GetMapping("/login")
     public String loginPage() {
         return "/user/login-Page"; //vrací šablonu login page
     }
 
+    //zobrazení register formuláře
     @GetMapping("/register")
     public String showRegisterPage(@ModelAttribute UserDTO userDTO) {
         return "/user/register-Page"; //vrací šablonu register page
     }
 
+    //možnost registrovat se - vpylnit udaje do registračního formuláře
     @PostMapping("/register")
     public String handleRegisterPage(
             @Valid @ModelAttribute UserDTO userDTO,
@@ -55,7 +57,7 @@ public class UserController {
             result.rejectValue("confirmPassword", "error", "Passwords do not match. please try again");
             return ("/user/register-Page"); //kontrola zda je zadáno správně heslo
         } catch (UserIsNotAdultException e) {
-            result.rejectValue("dateOfBirth","error", "User is not older than 18 years");
+            result.rejectValue("dateOfBirth", "error", "User is not older than 18 years");
             return ("/user/register-Page"); //kontrola že je uživatel dospělý
         }
 

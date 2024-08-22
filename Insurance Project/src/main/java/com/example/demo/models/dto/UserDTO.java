@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UserDTO {
-
+    //DTO pro vytvoření uživatele - registraci a login
     @NotBlank(message = "User name is required")
     private String userName; //uživatelské jméno - musí být zadáno
 
@@ -14,10 +14,10 @@ public class UserDTO {
     private String email;// uživatelský email - musí být zadán ve formátu emailu
 
     @NotBlank(message = "First name is required")
-    private String firstName; //Křestní jméno užvatele  - musí být zadáno todo: je nutné mít to už zde? nelze mit oddeělenou entitu na profilu
+    private String firstName; //Křestní jméno užvatele  - musí být zadáno
 
     @NotBlank(message = "Last name is required")
-    private String lastName; //Příjmení uživatele  - musí být zadáno todo: to samé jako u křestního jména
+    private String lastName; //Příjmení uživatele  - musí být zadáno
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password should be at least 6 characters long")

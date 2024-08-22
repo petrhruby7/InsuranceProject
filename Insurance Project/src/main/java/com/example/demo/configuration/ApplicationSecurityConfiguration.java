@@ -33,7 +33,7 @@ public class ApplicationSecurityConfiguration {
 
     //umožní hashovat hesla do databáze
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

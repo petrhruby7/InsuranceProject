@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserService extends UserDetailsService {
 
     //metoda vytvoří uživatele
-    void createUser (UserDTO user);
-    void updateUserProfile (UserProfileDTO userProfileDTO);
+    void createUser(UserDTO user);
+
+    //metoda umožní upravit uživatelovi údaje
+    void updateUserProfile(UserProfileDTO userProfileDTO);
 
 
 }

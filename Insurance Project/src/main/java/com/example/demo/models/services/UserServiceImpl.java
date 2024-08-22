@@ -14,12 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.Period;
 import java.time.LocalDate;
 
 @Service
-public class  UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -33,16 +32,16 @@ public class  UserServiceImpl implements UserService {
             throw new PasswordDoNotEqualException();
 
         //kontrola zda existuje uživatelské jméno
-        if (userRepository.findByUserName(userDTO.getUserName()).isPresent()){
+        if (userRepository.findByUserName(userDTO.getUserName()).isPresent()) {
             throw new DuplicateUserNameException();
         }
         //kontrola zda již existuje email
-        if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){
+        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new DuplicateEmailException();
         }
 
         //kontrola zda je registrovaný starší 18let
-        if (Period.between(userDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18){
+        if (Period.between(userDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
             throw new UserIsNotAdultException();
         }
 
@@ -66,14 +65,14 @@ public class  UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserProfile(UserProfileDTO userProfileDTO){
+    public void updateUserProfile(UserProfileDTO userProfileDTO) {
         //získání aktuálního uživatele
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         //kontrola věku
-        if (Period.between(userProfileDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18){
+        if (Period.between(userProfileDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
             throw new UserIsNotAdultException();
         }
 
@@ -98,7 +97,7 @@ public class  UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
 
-    public UserDTO getCurrentUser(){
+    public UserDTO getCurrentUser() {
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -106,7 +105,7 @@ public class  UserServiceImpl implements UserService {
     }
 
     //metoda pro načtení údajů uživatele
-    private UserDTO toDTO(UserEntity user){
+    private UserDTO toDTO(UserEntity user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserName(user.getUsername());
         userDTO.setEmail(user.getEmail());
