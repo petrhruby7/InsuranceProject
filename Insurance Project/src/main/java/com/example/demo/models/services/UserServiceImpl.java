@@ -3,6 +3,7 @@ package com.example.demo.models.services;
 import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.UserRepository;
 import com.example.demo.models.dto.UserDTO;
+import com.example.demo.models.dto.UserProfileDTO;
 import com.example.demo.models.exceptions.DuplicateEmailException;
 import com.example.demo.models.exceptions.DuplicateUserNameException;
 import com.example.demo.models.exceptions.PasswordDoNotEqualException;
@@ -65,28 +66,26 @@ public class  UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserProfile(UserDTO userDTO){
+    public void updateUserProfile(UserProfileDTO userProfileDTO){
         //získání aktuálního uživatele
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         //aktualizace údajů
-        user.setEmail(userDTO.getEmail());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setAddress(userDTO.getAddress());
-        user.setCity(userDTO.getCity());
-        user.setZipCode(userDTO.getZipCode());
-        user.setCountry(userDTO.getCountry());
-        user.setDateOfBirth(userDTO.getDateOfBirth());
-        user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
+        user.setEmail(userProfileDTO.getEmail());
+        user.setFirstName(userProfileDTO.getFirstName());
+        user.setLastName(userProfileDTO.getLastName());
+        user.setPhoneNumber(userProfileDTO.getPhoneNumber());
+        user.setAddress(userProfileDTO.getAddress());
+        user.setCity(userProfileDTO.getCity());
+        user.setZipCode(userProfileDTO.getZipCode());
+        user.setCountry(userProfileDTO.getCountry());
+        user.setDateOfBirth(userProfileDTO.getDateOfBirth());
+        user.setSocialSecurityNumber(userProfileDTO.getSocialSecurityNumber());
         //uložení změn
         userRepository.save(user);
     }
-
-    // nejsem si jistej zda toto funguje jak má respektive zda ta exception neni zbytečná todo zjistit
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -104,8 +103,8 @@ public class  UserServiceImpl implements UserService {
     //metoda pro načtení údajů uživatele
     private UserDTO toDTO(UserEntity user){
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserName(user.getUsername());//potřebuju tuto??
-        userDTO.setEmail(user.getEmail());//potřebuju tuto??
+        userDTO.setUserName(user.getUsername());
+        userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
         userDTO.setPhoneNumber(user.getPhoneNumber());

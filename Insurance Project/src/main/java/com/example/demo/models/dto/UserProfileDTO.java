@@ -4,62 +4,45 @@ import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
-public class UserDTO {
+public class UserProfileDTO {
 
-    @NotBlank(message = "User name is required")
-    private String userName; //uživatelské jméno - musí být zadáno
+    //DTO pro update údajů které chci měnit aniž bych byl nucen měnit heslo
 
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is required")
     private String email;// uživatelský email - musí být zadán ve formátu emailu
 
     @NotBlank(message = "First name is required")
-    private String firstName; //Křestní jméno užvatele  - musí být zadáno todo: je nutné mít to už zde? nelze mit oddeělenou entitu na profilu
+    private String firstName; //Křestní jméno užvatele  - musí být zadáno
 
     @NotBlank(message = "Last name is required")
-    private String lastName; //Příjmení uživatele  - musí být zadáno todo: to samé jako u křestního jména
-
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password should be at least 6 characters long")
-    private String password; //Heslo uživatele  - musí být zadáno a být alespoň 6 znaků dlouhé
-
-    @NotBlank(message = "Confirm password is required")
-    @Size(min = 6, message = "Password should be at least 6 characters long")
-    private String confirmPassword; //Potvrzení heslo - musí být zadáno a musí se shodovat s heslem
+    private String lastName; //Příjmení uživatele  - musí být zadáno
 
     @NotBlank(message = "phoneNumber is required")
-    private String phoneNumber; //telefoní číslo uživatele  - musí být zadán
+    private String phoneNumber; //telefonní číslo uživatele - musí být zadáno
 
     @NotBlank(message = "Address is required")
-    private String address; //adressa uživatele - musí být zadána
+    private String address; //addresa uživatele  - musí být zadána
 
     @NotBlank(message = "City is required")
-    private String city; //město uživatele - musí být zadáno
+    private String city; // město uživatele - musí být zadáno
 
     @NotBlank(message = "ZIP/Postal code is required")
     @Pattern(regexp = "\\d{5}", message = "Your ZIP/Postal code must contain 5 digits")
-    private String zipCode; //Psč uživatele  - musí být zadáno (5 čísel)
+    private String zipCode; //Psč uživatele - musí být zadáno (5 čísel)
 
     @NotBlank(message = "Country is required")
     private String country; //stát uživatele  - musí být zadáno
 
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be in past")
-    private LocalDate dateOfBirth; // datum narození uživatele  - musí být zadáno (musí být datum v minulosti)
+    private LocalDate dateOfBirth; //datum narození uživatele - musí být zadáno (musí být v minulosti)
 
     @NotBlank(message = "social security number (the birth number) is required")
     @Pattern(regexp = "\\d{6}/\\d{4}", message = "social security number (the birth number) must be in format ######/####")
-    private String socialSecurityNumber; //rodné číslo uživatele  - musí být zadáno (######/####)
+    private String socialSecurityNumber; //rodné číslo uživatele - musí být zadáno (######/####)
 
-    //region: Gettery a Settery
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    //region getters a setters
 
     public String getEmail() {
         return email;
@@ -83,22 +66,6 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getPhoneNumber() {
@@ -157,6 +124,8 @@ public class UserDTO {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    //konec region
 
+    //konec getters a setters
 }
+
+

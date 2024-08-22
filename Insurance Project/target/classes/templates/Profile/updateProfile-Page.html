@@ -8,7 +8,7 @@
     <header th:replace="~{Fragments/layout.html :: header}"></header>
     <h1>You can update your Profile here</h1>
 
-    <form th:action="@{/profile/update}" th:object="${userDTO}" method="post" >
+    <form th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post" >
         <div>
             <label for="email">Email:</label><br>
             <input type="email" id="email" name="email" th:field="*{email}"><br>
@@ -27,7 +27,7 @@
         <p>_____________________________________</p>
         <div>
             <label for="phone">Phone number: </label><br>
-            <input type="tel" id="phone" name="phone" th:field="*{phoneNumber}"><br>
+            <input type="tel" id="phone" name="phoneNumber" th:field="*{phoneNumber}"><br>
             <small style="color:red" th:errors="*{phoneNumber}"></small>
         </div>
         <div>
@@ -41,8 +41,8 @@
             <small style="color:red" th:errors="*{city}"></small>
         </div>
         <div>
-            <label for="zip">ZIP/Postal Code: </label><br>
-            <input type="number" id="zip" name="zipCode" th:field="*{zipCode}"><br>
+            <label for="zipCode">ZIP/Postal Code: </label><br>
+            <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}"><br>
             <small style="color:red" th:errors="*{zipCode}"></small>
         </div>
         <div>
