@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create insurance</title>
+</head>
+<body>
+    <header th:replace="~{Fragments/layout.html :: header}"></header>
+
+    <h1>Here you can add your insurance</h1>
+    <form th:action="@{/insurance/create}" th:object="${insuranceDTO}" method="post" >
+        <div>
+            <label for="insuranceType">Insurance type:</label><br>
+            <select id="insuranceType" name="insuranceType" th:field="*{insuranceType}">
+                <option th:each="type : ${T(com.example.demo.models.enums.InsuranceType).values()}"
+                        th:value="${type}" th:text="${type.displayName}"></option>
+            </select><br>
+            <small style="color:red" th:errors="*{insuranceType}"></small>
+        </div>
+        <div>
+            <label for="amount">Sum insured:</label><br>
+            <input type="number" id="amount" name="amount" th:field="*{amount}"><br>
+            <small style="color:red" th:errors="*{amount}"></small>
+        </div>
+        <div>
+            <label for="insuranceItem">Insured item/person:</label><br>
+            <input type="text" id="insuranceItem" name="insuredItem" th:field="*{insuredItem}"><br>
+            <small style="color:red" th:errors="*{insuredItem}"></small>
+        </div>
+        <div>
+            <label for="startDate">Insurance start date:</label><br>
+            <input type="date" id="startDate" name="startDate" th:field="*{startDate}"><br>
+            <small style="color:red" th:errors="*{startDate}"></small>
+        </div>
+        <div>
+            <label for="endDate">Insurance end date:</label><br>
+            <input type="date" id="endDate" name="endDate" th:field="*{endDate}"><br>
+            <small style="color:red" th:errors="*{endDate}"></small>
+        </div>
+        <div>
+            <input type="submit" value="Create Insurance"> <br>
+        </div>
+    </form>
+</body>
+</html>
