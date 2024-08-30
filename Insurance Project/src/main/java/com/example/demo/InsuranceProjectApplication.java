@@ -16,3 +16,5 @@ public class InsuranceProjectApplication {
 
 
 //todo: možnost změnit uživatelské heslo
+
+//todo: enddate by mohlo být minimálně rok po startu pojištění
