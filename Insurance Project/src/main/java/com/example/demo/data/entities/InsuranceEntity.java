@@ -1,0 +1,119 @@
+package com.example.demo.data.entities;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "Insurance")
+public class InsuranceEntity{
+    /**
+     * Id pojištění: samo se generuje
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long insuranceId;
+    /**
+     * navazujeme na existující Entity - UserEntity
+     * InsuranceEntity je více na jednu UserEntity
+     */
+    @ManyToOne
+    private  UserEntity userEntity;
+    /**
+     * Typ pojištění - vybírat se bude přes ENUM
+     * musí být vyplněno
+     */
+    @Column(nullable = false)
+    private String insuranceType;
+    /**
+     * pojistná částka
+     * musí být vyplněno
+     */
+    @Column(nullable = false)
+    private int amount;
+    /**
+     * předmět pojištění
+     * musí být vyplněno
+     */
+    @Column(nullable = false)
+    private String insuranceItem;
+    /**
+     * datum vzniku pojištění
+     * musí být vyplněno
+     */
+    @Column(nullable = false)
+    private LocalDate startDate;
+    /**
+     * konec vniku pojištění
+     */
+    @Column(nullable = false)
+    private LocalDate endDate;
+
+    //sekce Gettery a settery
+
+    public Long getInsuranceId() {
+        return insuranceId;
+    }
+
+    public void setInsuranceId(Long insuranceId) {
+        this.insuranceId = insuranceId;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public String getInsuranceType() {
+        return insuranceType;
+    }
+
+    public void setInsuranceType(String insuranceType) {
+        this.insuranceType = insuranceType;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getInsuranceItem() {
+        return insuranceItem;
+    }
+
+    public void setInsuranceItem(String insuranceItem) {
+        this.insuranceItem = insuranceItem;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    //getter navíc - získá ID uživatele
+    public Long getUserId(){
+        if(getUserEntity()==null){
+            return null;
+        }
+        return this.userEntity.getUserId();
+    }
+
+    //konec sekce Gettery a Settery
+}
