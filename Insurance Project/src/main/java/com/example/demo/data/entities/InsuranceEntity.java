@@ -18,11 +18,13 @@ public class InsuranceEntity{
      * InsuranceEntity je více na jednu UserEntity
      */
     @ManyToOne
+    @JoinColumn (name = "userId", nullable = false)
     private  UserEntity userEntity;
     /**
-     * Typ pojištění - vybírat se bude přes ENUM
+     * Typ pojištění - vybírá se bude přes ENUM
      * musí být vyplněno
      */
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private String insuranceType;
     /**

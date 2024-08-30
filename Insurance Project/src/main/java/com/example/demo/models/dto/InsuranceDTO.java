@@ -1,15 +1,15 @@
 package com.example.demo.models.dto;
 
+import com.example.demo.models.enums.InsuranceType;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
 public class InsuranceDTO {
 
-    private Long userId; //todo: nevim co s tímhle má to být DTO? Chci aby useID bylo použito toho přihlášeného uživatele
 
     @NotBlank(message = "You must choose type of insurance.")
-    private String insuranceType;
+    private InsuranceType insuranceType;
 
     @NotNull(message = "Sum insured is required")
     @Positive(message = "Sum insured must be positive number")
@@ -28,19 +28,12 @@ public class InsuranceDTO {
 
     //region: gettery a settery
 
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getInsuranceType() {
+    public InsuranceType getInsuranceType() {
         return insuranceType;
     }
 
-    public void setInsuranceType(String insuranceType) {
+    public void setInsuranceType(InsuranceType insuranceType) {
         this.insuranceType = insuranceType;
     }
 
