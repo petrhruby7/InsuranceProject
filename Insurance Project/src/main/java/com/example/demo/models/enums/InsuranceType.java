@@ -2,7 +2,7 @@ package com.example.demo.models.enums;
 
 public enum InsuranceType {
     /**
-     * Tipy pojištění
+     * Typy pojištění
      */
     TRAVEL("Travel Insurance"),
     PROPERTY("Property Insurance"),
@@ -22,5 +22,13 @@ public enum InsuranceType {
      */
     InsuranceType(String displayName) {
         this.displayName = displayName;
+    }
+
+    /**
+     * veřejná metoda pro získání display name
+     * @return displayName
+     */
+    public String getDisplayName(){
+        return displayName;
     }
 }
