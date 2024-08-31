@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/insurance")
 public class InsuranceController {
 
-    @GetMapping("/")
+    @GetMapping()
     public String renderInsurances(){
         //todo přidat seznam pojištění
 
