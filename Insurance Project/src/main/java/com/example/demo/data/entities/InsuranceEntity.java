@@ -1,5 +1,6 @@
 package com.example.demo.data.entities;
 
+import com.example.demo.models.enums.InsuranceType;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class InsuranceEntity{
      */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String insuranceType;
+    private InsuranceType insuranceType;
     /**
      * pojistná částka
      * musí být vyplněno
@@ -69,11 +70,11 @@ public class InsuranceEntity{
         this.userEntity = userEntity;
     }
 
-    public String getInsuranceType() {
+    public InsuranceType getInsuranceType() {
         return insuranceType;
     }
 
-    public void setInsuranceType(String insuranceType) {
+    public void setInsuranceType(InsuranceType insuranceType) {
         this.insuranceType = insuranceType;
     }
 
