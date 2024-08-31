@@ -23,9 +23,9 @@
             <small style="color:red" th:errors="*{amount}"></small>
         </div>
         <div>
-            <label for="insuranceItem">Insured item/person:</label><br>
-            <input type="text" id="insuranceItem" name="insuranceItem" th:field="*{insuranceItem}"><br>
-            <small style="color:red" th:errors="*{insuranceItem}"></small>
+            <label for="insuredItem">Insured item/person:</label><br>
+            <input type="text" id="insuredItem" name="insuredItem" th:field="*{insuredItem}"><br>
+            <small style="color:red" th:errors="*{insuredItem}"></small>
         </div>
         <div>
             <label for="startDate">Insurance start date:</label><br>
@@ -41,5 +41,9 @@
             <input type="submit" value="Create Insurance"> <br>
         </div>
     </form>
+
+    <a th:href="@{/insurance}">
+        <button>Back</button>
+    </a>
 </body>
 </html>

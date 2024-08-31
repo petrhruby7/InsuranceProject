@@ -8,15 +8,15 @@ import java.time.LocalDate;
 public class InsuranceDTO {
 
 
-    @NotBlank(message = "You must choose type of insurance.")
+    @NotNull(message = "You must choose type of insurance.")
     private InsuranceType insuranceType;
 
     @NotNull(message = "Sum insured is required")
     @Positive(message = "Sum insured must be positive number")
     private int amount;
 
-    @NotBlank(message = "Insured item is required")
-    private String insuranceItem;
+    //@NotBlank(message = "Insured item is required")
+    private String insuredItem;
 
     @NotNull(message = "Insurance start date is required")
     @FutureOrPresent(message = "Insurance start date must be today or in future")
@@ -45,12 +45,12 @@ public class InsuranceDTO {
         this.amount = amount;
     }
 
-    public String getInsuranceItem() {
-        return insuranceItem;
+    public String getInsuredItem() {
+        return insuredItem;
     }
 
-    public void setInsuranceItem(String insuranceItem) {
-        this.insuranceItem = insuranceItem;
+    public void setInsuredItem(String insuredItem) {
+        this.insuredItem = insuredItem;
     }
 
     public LocalDate getStartDate() {

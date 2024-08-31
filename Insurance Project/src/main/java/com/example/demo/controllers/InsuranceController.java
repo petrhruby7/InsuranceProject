@@ -39,7 +39,7 @@ public class InsuranceController {
 
         //zde budepráce s databazi
 
-        System.out.println(insurance.getInsuranceType() + "-" + insurance.getAmount() + "-" + insurance.getInsuranceItem() + "-" + insurance.getStartDate() + "-" + insurance.getEndDate());
+        System.out.println(insurance.getInsuranceType() + "-" + insurance.getAmount() + "-" + insurance.getInsuredItem() + "-" + insurance.getStartDate() + "-" + insurance.getEndDate());
         return "redirect:/insurance";
     }
 }

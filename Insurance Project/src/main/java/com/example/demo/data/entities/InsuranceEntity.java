@@ -36,10 +36,10 @@ public class InsuranceEntity{
     private int amount;
     /**
      * předmět pojištění
-     * musí být vyplněno
+     * NEMUSÍ být vyplněno
      */
-    @Column(nullable = false)
-    private String insuranceItem;
+    @Column
+    private String insuredItem;
     /**
      * datum vzniku pojištění
      * musí být vyplněno
@@ -86,12 +86,12 @@ public class InsuranceEntity{
         this.amount = amount;
     }
 
-    public String getInsuranceItem() {
-        return insuranceItem;
+    public String getInsuredItem() {
+        return insuredItem;
     }
 
-    public void setInsuranceItem(String insuranceItem) {
-        this.insuranceItem = insuranceItem;
+    public void setInsuredItem(String insuredItem) {
+        this.insuredItem = insuredItem;
     }
 
     public LocalDate getStartDate() {

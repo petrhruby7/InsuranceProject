@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-31T11:25:45+0200",
+    date = "2024-08-31T11:46:32+0200",
     comments = "version: 1.6.0, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -23,7 +23,7 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 
         insuranceDTO.setInsuranceType( insuranceEntity.getInsuranceType() );
         insuranceDTO.setAmount( insuranceEntity.getAmount() );
-        insuranceDTO.setInsuranceItem( insuranceEntity.getInsuranceItem() );
+        insuranceDTO.setInsuredItem( insuranceEntity.getInsuredItem() );
         insuranceDTO.setStartDate( insuranceEntity.getStartDate() );
         insuranceDTO.setEndDate( insuranceEntity.getEndDate() );
 
@@ -40,7 +40,7 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 
         insuranceEntity.setInsuranceType( insuranceDTO.getInsuranceType() );
         insuranceEntity.setAmount( insuranceDTO.getAmount() );
-        insuranceEntity.setInsuranceItem( insuranceDTO.getInsuranceItem() );
+        insuranceEntity.setInsuredItem( insuranceDTO.getInsuredItem() );
         insuranceEntity.setStartDate( insuranceDTO.getStartDate() );
         insuranceEntity.setEndDate( insuranceDTO.getEndDate() );
 
