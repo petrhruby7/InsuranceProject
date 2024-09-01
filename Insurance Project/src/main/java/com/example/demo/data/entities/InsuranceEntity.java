@@ -19,7 +19,7 @@ public class InsuranceEntity{
      * InsuranceEntity je více na jednu UserEntity
      */
     @ManyToOne
-    @JoinColumn (name = "userId", nullable = false)
+    @JoinColumn (name = "user_id", nullable = false)
     private  UserEntity userEntity;
     /**
      * Typ pojištění - vybírá se bude přes ENUM
@@ -119,4 +119,6 @@ public class InsuranceEntity{
     }
 
     //konec sekce Gettery a Settery
+
+
 }

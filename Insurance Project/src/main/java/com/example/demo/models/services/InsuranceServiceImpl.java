@@ -1,6 +1,7 @@
 package com.example.demo.models.services;
 
 import com.example.demo.data.entities.InsuranceEntity;
+import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.InsuranceRepository;
 import com.example.demo.models.dto.InsuranceDTO;
 import com.example.demo.models.dto.mappers.InsuranceMapper;
@@ -16,8 +17,9 @@ public class InsuranceServiceImpl implements InsuranceService {
     private InsuranceMapper insuranceMapper;
 
     @Override
-    public InsuranceDTO createInsurance(InsuranceDTO insuranceDTO){
+    public InsuranceDTO createInsurance(InsuranceDTO insuranceDTO, UserEntity userEntity){
         InsuranceEntity insuranceEntity = insuranceMapper.toEntity(insuranceDTO);
+        insuranceEntity.setUserEntity(userEntity);
         insuranceEntity = insuranceRepository.saveAndFlush(insuranceEntity);
         return insuranceMapper.toDTO(insuranceEntity);
 
