@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class InsuranceDTO {
 
     //pole pro uživatele
+    private Long insuranceId;
     private Long userId;
 
     @NotNull(message = "You must choose type of insurance.")
@@ -30,6 +31,14 @@ public class InsuranceDTO {
 
     //region: gettery a settery
 
+
+    public Long getInsuranceId() {
+        return insuranceId;
+    }
+
+    public void setInsuranceId(Long insuranceId) {
+        this.insuranceId = insuranceId;
+    }
 
     public Long getUserId() {
         return userId;
