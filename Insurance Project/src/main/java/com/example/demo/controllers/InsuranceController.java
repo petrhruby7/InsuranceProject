@@ -74,10 +74,35 @@ public class InsuranceController {
         model.addAttribute("insurance", insuranceDTO);
         return "/insurance/insuranceDetail-Page";
     }
+    @GetMapping("edit/{insuranceId}")
+    public String renderEditInsuranceForm(
+            @PathVariable Long insuranceId,
+            InsuranceDTO insuranceDTO
+    ){
+        InsuranceDTO fetchedInsurance = insuranceService.getById(insuranceId);
+        insuranceMapper.updateInsuranceDTO(fetchedInsurance,insuranceDTO);
+        return "/insurance/updateInsurance-Page";
+    }
+
+    @PostMapping("edit/{insuranceId}")
+    public String editArticle(
+            @PathVariable Long insuranceId,
+            @Valid InsuranceDTO insuranceDTO,
+            BindingResult result,
+            RedirectAttributes redirectAttributes
+    ){
+        if (result.hasErrors())
+            return renderEditInsuranceForm(insuranceId,insuranceDTO);
+
+        insuranceDTO.setInsuranceId(insuranceId);
+        insuranceService.editInsurance(insuranceDTO);
+
+        redirectAttributes.addFlashAttribute("success", "Insurance was updated");
+        return "redirect:/insurance/";
+    }
 }
 
 
 
-//todo /insurance/detail - detail pojištění
 //todo /insurance/update - uprava pojištění
 //todo /insurance/delete - smazání pojištění

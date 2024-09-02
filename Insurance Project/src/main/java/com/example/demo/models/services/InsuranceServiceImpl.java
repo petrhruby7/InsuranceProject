@@ -45,7 +45,7 @@ public class InsuranceServiceImpl implements InsuranceService {
     @Override
     public void editInsurance(InsuranceDTO insurance) {
         InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insurance.getInsuranceId());
-        
+
         insuranceMapper.updateInsuranceEntity(insurance,fetchedInsurance);
         insuranceRepository.saveAndFlush(fetchedInsurance);
     }
