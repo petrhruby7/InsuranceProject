@@ -71,7 +71,7 @@ public class InsuranceController {
             Model model
     ){
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
-        model.addAttribute("insurance", insuranceDTO);
+        model.addAttribute("insuranceDTO", insuranceDTO);
         return "/insurance/insuranceDetail-Page";
     }
 }
