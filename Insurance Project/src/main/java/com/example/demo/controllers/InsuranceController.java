@@ -13,10 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -66,10 +63,21 @@ public class InsuranceController {
         redirectAttributes.addFlashAttribute("success", "Insurance is created");
         return "redirect:/insurance"; //po vytvoření pojištění přesměruje zpět na seznam pojištění
     }
+
+    //zobrazí detail pojištění
+    @GetMapping("{insuranceId}")
+    public String renderInsuranceDetail(
+            @PathVariable Long insuranceId,
+            Model model
+    ){
+        InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
+        model.addAttribute("insurance", insuranceDTO);
+        return "/insurance/insuranceDetail-Page";
+    }
 }
 
 
-//todo /insurance/create - k vytvoření insurance
-//todo /insurance/ - zobrazení všech pojištění
+
 //todo /insurance/detail - detail pojištění
 //todo /insurance/update - uprava pojištění
+//todo /insurance/delete - smazání pojištění

@@ -34,4 +34,12 @@ public class InsuranceServiceImpl implements InsuranceService {
                 .map(i -> insuranceMapper.toDTO(i))
                 .toList();
     }
+
+    @Override
+    public InsuranceDTO getById(Long insuranceId) {
+        InsuranceEntity fetchedInsurance = insuranceRepository
+                .findById(insuranceId)
+                .orElseThrow();
+        return insuranceMapper.toDTO(fetchedInsurance);
+    }
 }

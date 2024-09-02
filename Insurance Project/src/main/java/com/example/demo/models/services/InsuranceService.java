@@ -2,8 +2,6 @@ package com.example.demo.models.services;
 
 import com.example.demo.data.entities.UserEntity;
 import com.example.demo.models.dto.InsuranceDTO;
-import jakarta.persistence.criteria.CriteriaBuilder;
-
 import java.util.List;
 
 public interface InsuranceService {
@@ -11,6 +9,8 @@ public interface InsuranceService {
     InsuranceDTO createInsurance(InsuranceDTO insurance, UserEntity userEntity);
 
     List<InsuranceDTO> getAll();
+
+    InsuranceDTO getById(Long insuranceId);
 
     //void updateInsurance(InsuranceDTO insurance);
 
