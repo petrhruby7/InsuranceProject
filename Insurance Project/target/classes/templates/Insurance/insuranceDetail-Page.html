@@ -11,13 +11,13 @@
         <h1>Detail of insurance</h1>
     </header>
     <section>
-        <h3 th:text="${insuranceDTO.insuranceType}">...</h3>
-        <p>Sum insured: <span th:text="${insuranceDTO.amount}">...</span></p>
-        <p>Insured item/person: <span th:text="${insuranceDTO.insuredItem}">...</span></p>
-        <p>Start of insurance: <span th:text="${insuranceDTO.startDate}">...</span></p>
-        <p>End of insurance: <span th:text="${insuranceDTO.endDate}">...</span></p>
+        <h3 th:text="${insurance.insuranceType}">...</h3>
+        <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+        <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+        <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
+        <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
         <p>
-            <a href="#">Edit</a>
+            <a th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
             <a href="#">Delete</a>
         </p>
         <a th:href="@{/insurance}">

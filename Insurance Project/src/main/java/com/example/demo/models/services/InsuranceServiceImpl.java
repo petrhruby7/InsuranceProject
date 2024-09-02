@@ -37,9 +37,22 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Override
     public InsuranceDTO getById(Long insuranceId) {
-        InsuranceEntity fetchedInsurance = insuranceRepository
+        InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insuranceId);
+
+        return insuranceMapper.toDTO(fetchedInsurance);
+    }
+
+    @Override
+    public void editInsurance(InsuranceDTO insurance) {
+        InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insurance.getInsuranceId());
+        
+        insuranceMapper.updateInsuranceEntity(insurance,fetchedInsurance);
+        insuranceRepository.saveAndFlush(fetchedInsurance);
+    }
+
+    private InsuranceEntity getInsuranceOrThrow(Long insuranceId){
+        return insuranceRepository
                 .findById(insuranceId)
                 .orElseThrow();
-        return insuranceMapper.toDTO(fetchedInsurance);
     }
 }

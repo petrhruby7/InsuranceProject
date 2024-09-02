@@ -12,7 +12,7 @@ public interface InsuranceService {
 
     InsuranceDTO getById(Long insuranceId);
 
-    //void updateInsurance(InsuranceDTO insurance);
+    void editInsurance(InsuranceDTO insurance);
 
     //void deleteInsurance(InsuranceDTO insurance);
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-02T11:52:23+0200",
+    date = "2024-09-02T14:28:21+0200",
     comments = "version: 1.6.0, compiler: javac, environment: Java 22.0.1 (Oracle Corporation)"
 )
 @Component
@@ -48,5 +48,34 @@ public class InsuranceMapperImpl implements InsuranceMapper {
         insuranceEntity.setEndDate( insuranceDTO.getEndDate() );
 
         return insuranceEntity;
+    }
+
+    @Override
+    public void updateInsuranceDTO(InsuranceDTO insuranceDTO, InsuranceDTO target) {
+        if ( insuranceDTO == null ) {
+            return;
+        }
+
+        target.setInsuranceId( insuranceDTO.getInsuranceId() );
+        target.setUserId( insuranceDTO.getUserId() );
+        target.setInsuranceType( insuranceDTO.getInsuranceType() );
+        target.setAmount( insuranceDTO.getAmount() );
+        target.setInsuredItem( insuranceDTO.getInsuredItem() );
+        target.setStartDate( insuranceDTO.getStartDate() );
+        target.setEndDate( insuranceDTO.getEndDate() );
+    }
+
+    @Override
+    public void updateInsuranceEntity(InsuranceDTO insuranceEntity, InsuranceEntity target) {
+        if ( insuranceEntity == null ) {
+            return;
+        }
+
+        target.setInsuranceId( insuranceEntity.getInsuranceId() );
+        target.setInsuranceType( insuranceEntity.getInsuranceType() );
+        target.setAmount( insuranceEntity.getAmount() );
+        target.setInsuredItem( insuranceEntity.getInsuredItem() );
+        target.setStartDate( insuranceEntity.getStartDate() );
+        target.setEndDate( insuranceEntity.getEndDate() );
     }
 }

@@ -22,7 +22,7 @@
                 <h2><a th:href="@{'/insurance/' + ${insurance.insuranceId}}" th:text="${insurance.insuranceType}"></a>
                 </h2>
                 <p>
-                    <a href="#">Edit</a>
+                    <a th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
                     <a href="#">Delete</a>
                 </p>
             </li>
