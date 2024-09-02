@@ -8,6 +8,8 @@ import com.example.demo.models.dto.mappers.InsuranceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InsuranceServiceImpl implements InsuranceService {
 
@@ -23,5 +25,13 @@ public class InsuranceServiceImpl implements InsuranceService {
         insuranceEntity = insuranceRepository.saveAndFlush(insuranceEntity);
         return insuranceMapper.toDTO(insuranceEntity);
 
+    }
+
+    @Override
+    public List<InsuranceDTO> getAll() {
+        return insuranceRepository.findAll()
+                .stream()
+                .map(i -> insuranceMapper.toDTO(i))
+                .toList();
     }
 }
