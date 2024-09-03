@@ -232,5 +232,6 @@ public class UserEntity implements UserDetails {
         this.insurances = insurances;
     }
 
+
     // konec regionu gettery a settery
 }

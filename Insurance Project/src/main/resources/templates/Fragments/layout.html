@@ -11,12 +11,14 @@
                 <ul>
                     <li><a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
                     <li><a sec:authorize="isAuthenticated()" href="/insurance">My insurances</a></li>
+
                     <li>Users</li>
                     <li>Events</li>
                     <li><a sec:authorize="isAuthenticated()" href="/profile">Profile</a></li>
 
                     <li>About us</li>
                     <li>Contact</li>
+
                     <li><a sec:authorize="isAnonymous" href="/login">login</a></li>
                     <li><a sec:authorize="isAnonymous" href="/register"> register </a> </li>
                     <li>

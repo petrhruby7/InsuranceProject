@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
         //kontrola věku
         validateUserAge(userProfileDTO.getDateOfBirth());
 
+
         //aktualizace údajů
         user.setEmail(userProfileDTO.getEmail());
         user.setFirstName(userProfileDTO.getFirstName());
@@ -122,4 +123,5 @@ public class UserServiceImpl implements UserService {
             throw new UserIsNotAdultException();
         }
     }
+
 }
