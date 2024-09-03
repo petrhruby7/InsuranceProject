@@ -14,5 +14,5 @@ public interface InsuranceService {
 
     void editInsurance(InsuranceDTO insurance);
 
-    //void deleteInsurance(InsuranceDTO insurance);
+    void removeInsurance(Long insuranceId);
 }

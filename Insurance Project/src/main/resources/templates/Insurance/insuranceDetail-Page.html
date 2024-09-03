@@ -17,8 +17,8 @@
         <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
         <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
         <p>
-            <a th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
-            <a href="#">Delete</a>
+            <a th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
+            <a th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
         </p>
         <a th:href="@{/insurance}">
             <button>Back</button>

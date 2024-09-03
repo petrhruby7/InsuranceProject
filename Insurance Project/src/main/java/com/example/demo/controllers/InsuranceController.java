@@ -87,22 +87,33 @@ public class InsuranceController {
     @PostMapping("edit/{insuranceId}")
     public String editArticle(
             @PathVariable Long insuranceId,
-            @Valid InsuranceDTO insuranceDTO,
+            @Valid @ModelAttribute InsuranceDTO insuranceDTO,
             BindingResult result,
-            RedirectAttributes redirectAttributes
-    ){
-        if (result.hasErrors())
-            return renderEditInsuranceForm(insuranceId,insuranceDTO);
+            RedirectAttributes redirectAttributes,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            model.addAttribute("insuranceDTO", insuranceDTO);
+            return "/insurance/updateInsurance-Page";
+        }
 
         insuranceDTO.setInsuranceId(insuranceId);
         insuranceService.editInsurance(insuranceDTO);
 
         redirectAttributes.addFlashAttribute("success", "Insurance was updated");
-        return "redirect:/insurance/";
+        return "redirect:/insurance";
+    }
+
+    @GetMapping("delete/{insuranceId}")
+    public String deleteInsurance (@PathVariable Long insuranceId, RedirectAttributes redirectAttributes) {
+        insuranceService.removeInsurance(insuranceId);
+
+        redirectAttributes.addFlashAttribute("success", "Insurance was deleted");
+        return "redirect:/insurance";
     }
 }
 
 
 
-//todo /insurance/update - uprava pojištění
+
 //todo /insurance/delete - smazání pojištění

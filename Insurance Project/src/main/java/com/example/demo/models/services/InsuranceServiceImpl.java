@@ -55,4 +55,10 @@ public class InsuranceServiceImpl implements InsuranceService {
                 .findById(insuranceId)
                 .orElseThrow();
     }
+
+    @Override
+    public void removeInsurance(Long insuranceId) {
+        InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insuranceId);
+        insuranceRepository.delete(fetchedInsurance);
+    }
 }
