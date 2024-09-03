@@ -5,6 +5,8 @@ import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.UserRepository;
 import com.example.demo.models.dto.InsuranceDTO;
 import com.example.demo.models.dto.mappers.InsuranceMapper;
+import com.example.demo.models.exceptions.InsuranceAmountException;
+import com.example.demo.models.exceptions.InsuranceDurationException;
 import com.example.demo.models.services.InsuranceServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +59,16 @@ public class InsuranceController {
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        insuranceService.createInsurance(insuranceDTO,user);
+        try {
+            insuranceService.createInsurance(insuranceDTO,user);
+        } catch (InsuranceDurationException e) {
+            result.rejectValue("startDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
+            result.rejectValue("endDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
+            return ("/insurance/createInsurance-Page"); //kontrola že je pojištění sjednáno alespon na 6 měsicu a nepřesahuje 5let
+        } catch (InsuranceAmountException e) {
+            result.rejectValue("amount", "error", "The sum insured must be greater than CZK 10,000 and less than CZK 10,000,000");
+            return ("/insurance/createInsurance-Page");// kontrola že že pojistná částka je v hodnotě mezi 10 000 - 10 000 000
+        }
 
         redirectAttributes.addFlashAttribute("success", "Insurance is created");
         return "redirect:/insurance"; //po vytvoření pojištění přesměruje zpět na seznam pojištění
@@ -97,8 +107,18 @@ public class InsuranceController {
             return "/insurance/updateInsurance-Page";
         }
 
-        insuranceDTO.setInsuranceId(insuranceId);
-        insuranceService.editInsurance(insuranceDTO);
+        try {
+            insuranceDTO.setInsuranceId(insuranceId);
+            insuranceService.editInsurance(insuranceDTO);
+
+        }catch (InsuranceDurationException e) {
+            result.rejectValue("startDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
+            result.rejectValue("endDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
+            return "/insurance/updateInsurance-Page"; //kontrola že je pojištění sjednáno alespon na 6 měsicu a nepřesahuje 5let
+        } catch (InsuranceAmountException e) {
+            result.rejectValue("amount", "error", "The sum insured must be greater than CZK 10,000 and less than CZK 10,000,000");
+            return "/insurance/updateInsurance-Page";// kontrola že že pojistná částka je v hodnotě mezi 10 000 - 10 000 000
+        }
 
         redirectAttributes.addFlashAttribute("success", "Insurance was updated");
         return "redirect:/insurance";
@@ -111,9 +131,10 @@ public class InsuranceController {
         redirectAttributes.addFlashAttribute("success", "Insurance was deleted");
         return "redirect:/insurance";
     }
+    //todo: předělat deleteInsurance z Get metody na Delete Metodu!
+
 }
 
 
 
 
-//todo /insurance/delete - smazání pojištění
