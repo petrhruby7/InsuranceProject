@@ -13,5 +13,5 @@ public interface InsuranceMapper {
 
     void updateInsuranceDTO(InsuranceDTO insuranceDTO, @MappingTarget InsuranceDTO target);
     //@Mapping(target = "startDate", ignore = true) todo: bud smazat a nebo vrátit
-    void updateInsuranceEntity(InsuranceDTO insuranceEntity, @MappingTarget InsuranceEntity target);
+    void updateInsuranceEntity(InsuranceDTO insuranceDTO, @MappingTarget InsuranceEntity target);
 }

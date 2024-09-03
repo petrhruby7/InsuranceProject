@@ -4,6 +4,7 @@ import com.example.demo.models.enums.InsuranceType;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Insurance")
@@ -51,6 +52,12 @@ public class InsuranceEntity{
      */
     @Column(nullable = false)
     private LocalDate endDate;
+    /**
+     * seznam událostí, které mužou při pojištění vzniknout
+     * Pojištění je jedno a může mít mnoho událostí
+     */
+    @OneToMany
+    private List<EventEntity> events;
 
     //sekce Gettery a settery
 
@@ -116,6 +123,14 @@ public class InsuranceEntity{
             return null;
         }
         return this.userEntity.getUserId();
+    }
+
+    public List<EventEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventEntity> events) {
+        this.events = events;
     }
 
     //konec sekce Gettery a Settery

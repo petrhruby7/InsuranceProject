@@ -27,7 +27,6 @@ public class InsuranceServiceImpl implements InsuranceService {
         validateInsuranceDuration(insuranceDTO.getStartDate(),insuranceDTO.getEndDate());
         validateInsuranceAmount(insuranceDTO.getAmount());
 
-
         InsuranceEntity insuranceEntity = insuranceMapper.toEntity(insuranceDTO);
         insuranceEntity.setUserEntity(userEntity);
         insuranceEntity = insuranceRepository.saveAndFlush(insuranceEntity);

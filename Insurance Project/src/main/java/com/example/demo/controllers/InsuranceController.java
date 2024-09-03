@@ -123,6 +123,7 @@ public class InsuranceController {
         redirectAttributes.addFlashAttribute("success", "Insurance was updated");
         return "redirect:/insurance";
     }
+    //todo: v tenhle moment funguje uprava špatně... pojištění které jsem založil 1.9 devaty a chci upravit 3.9 musím změnit na to že bylo založeno 3.9!!
 
     @GetMapping("delete/{insuranceId}")
     public String deleteInsurance (@PathVariable Long insuranceId, RedirectAttributes redirectAttributes) {

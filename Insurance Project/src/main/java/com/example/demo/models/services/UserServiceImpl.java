@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Override
     public void createUser(UserDTO userDTO) {
         //kontrola správnosti hesla
@@ -39,7 +40,6 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new DuplicateEmailException();
         }
-
         //kontrola zda je registrovaný starší 18let
         validateUserAge(userDTO.getDateOfBirth());
 
