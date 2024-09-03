@@ -34,7 +34,15 @@ public class EventServiceImpl implements EventService {
                 .stream()
                 .map(i -> eventMapper.toDTO(i))
                 .toList();
-    }
+    } //vrací všechny pojištění
+
+    @Override
+    public List<EventDTO> getEventByInsuranceId(Long insuranceId) {
+        return eventRepository.findByInsuranceEntityInsuranceId(insuranceId)
+                .stream()
+                .map(i -> eventMapper.toDTO(i))
+                .toList();
+    } //vrací pojištění podle insurance Id
 
     @Override
     public EventDTO getById(Long eventId) {

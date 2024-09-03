@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Event")
+@Table(name = "Events")
 public class EventEntity {
     /**
      * Id události: generuje se samo

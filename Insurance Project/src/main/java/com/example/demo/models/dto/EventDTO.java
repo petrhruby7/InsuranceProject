@@ -51,7 +51,7 @@ public class EventDTO {
 
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
-    }
+        }
 
     //konec regionu: gettery a settery
 }

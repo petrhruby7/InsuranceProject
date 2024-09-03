@@ -16,7 +16,7 @@ public class InsuranceProjectApplication {
 
 
 //todo: možnost změnit uživatelské heslo
+//todo: po registraci zustan rovnou přihlášený?
 
-//todo: enddate by mohlo být minimálně rok po startu pojištění
 //todo: updateInsurance-Page - at jde zmenit pojištění i bez start date
 //todo: updateInsurance-Page - at ty type-date maj vyplněnou hodnotu

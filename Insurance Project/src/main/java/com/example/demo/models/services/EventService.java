@@ -12,6 +12,8 @@ public interface EventService {
 
     List<EventDTO> getAll();
 
+    List<EventDTO> getEventByInsuranceId(Long insuranceId);
+
     EventDTO getById(Long eventId);
 
     void editEvent(EventDTO eventDTO);
