@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     @Override
     public void createUser(UserDTO userDTO) {
         //kontrola správnosti hesla
@@ -39,11 +40,8 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new DuplicateEmailException();
         }
-
         //kontrola zda je registrovaný starší 18let
-        if (Period.between(userDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-            throw new UserIsNotAdultException();
-        }
+        validateUserAge(userDTO.getDateOfBirth());
 
         //nastavení parametrů nového usera, včetně hashování hesla
         UserEntity user = new UserEntity();
@@ -72,9 +70,8 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         //kontrola věku
-        if (Period.between(userProfileDTO.getDateOfBirth(), LocalDate.now()).getYears() < 18) {
-            throw new UserIsNotAdultException();
-        }
+        validateUserAge(userProfileDTO.getDateOfBirth());
+
 
         //aktualizace údajů
         user.setEmail(userProfileDTO.getEmail());
@@ -120,4 +117,11 @@ public class UserServiceImpl implements UserService {
         userDTO.setSocialSecurityNumber(user.getSocialSecurityNumber());
         return userDTO;
     }
+
+    private void validateUserAge(LocalDate dateOfBirth){
+        if (Period.between(dateOfBirth, LocalDate.now()).getYears() < 18) {
+            throw new UserIsNotAdultException();
+        }
+    }
+
 }

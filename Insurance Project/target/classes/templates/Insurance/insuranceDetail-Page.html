@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail pojištění</title>
+</head>
+<body>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<article>
+    <header>
+        <h1>Detail of insurance</h1>
+    </header>
+    <section>
+        <h3 th:text="${insurance.insuranceType}">...</h3>
+        <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+        <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+        <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
+        <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
+        <p>
+            <a th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
+            <a th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
+        </p>
+        <a th:href="@{/insurance/event/create}">
+            <button>Create insurance event</button>
+        </a>
+        <a th:href="@{/insurance}">
+            <button>Back</button>
+        </a>
+    </section>
+</article>
+
+</body>
+</html>

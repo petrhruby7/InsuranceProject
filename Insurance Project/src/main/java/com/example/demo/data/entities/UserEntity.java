@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -96,6 +97,12 @@ public class UserEntity implements UserDetails {
      */
     @Column(nullable = false)
     private String socialSecurityNumber;
+    /**
+     * Seznam pojištění které si může uživatel sjednat
+     * Uživatel je jeden a může mít mnoho poijštění
+     */
+    @OneToMany
+    private List<InsuranceEntity> insurances;
 
     // todo: boolean zda jakou má roli
 
@@ -216,6 +223,15 @@ public class UserEntity implements UserDetails {
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
+
+    public List<InsuranceEntity> getInsurances() {
+        return insurances;
+    }
+
+    public void setInsurances(List<InsuranceEntity> insurances) {
+        this.insurances = insurances;
+    }
+
 
     // konec regionu gettery a settery
 }
