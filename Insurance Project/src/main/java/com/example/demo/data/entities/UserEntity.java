@@ -104,6 +104,7 @@ public class UserEntity implements UserDetails {
     @OneToMany
     private List<InsuranceEntity> insurances;
 
+
     // todo: boolean zda jakou má roli
 
     //region: UserDetails Methods
@@ -224,6 +225,7 @@ public class UserEntity implements UserDetails {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
+
     public List<InsuranceEntity> getInsurances() {
         return insurances;
     }
@@ -231,6 +233,7 @@ public class UserEntity implements UserDetails {
     public void setInsurances(List<InsuranceEntity> insurances) {
         this.insurances = insurances;
     }
+
 
     // konec regionu gettery a settery
 }

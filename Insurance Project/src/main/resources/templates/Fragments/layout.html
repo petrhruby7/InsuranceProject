@@ -22,6 +22,7 @@
                     <li>
                         <form method="post" th:action="@{/logout}">
                             <button sec:authorize="isAuthenticated()">Log out</button>
+
                         </form>
                     </li>
                 </ul>

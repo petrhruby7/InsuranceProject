@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         //kontrola zda je registrovaný starší 18let
         validateUserAge(userDTO.getDateOfBirth());
 
+
         //nastavení parametrů nového usera, včetně hashování hesla
         UserEntity user = new UserEntity();
         user.setUserName(userDTO.getUserName());
@@ -71,6 +72,7 @@ public class UserServiceImpl implements UserService {
 
         //kontrola věku
         validateUserAge(userProfileDTO.getDateOfBirth());
+
 
         //aktualizace údajů
         user.setEmail(userProfileDTO.getEmail());
@@ -122,4 +124,5 @@ public class UserServiceImpl implements UserService {
             throw new UserIsNotAdultException();
         }
     }
+
 }
