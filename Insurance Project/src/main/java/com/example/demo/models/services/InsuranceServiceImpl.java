@@ -47,6 +47,7 @@ public class InsuranceServiceImpl implements InsuranceService {
         return insuranceMapper.toDTO(fetchedInsurance);
     }
 
+
     @Override
     public void editInsurance(InsuranceDTO insuranceDTO) {
         validateInsuranceDuration(insuranceDTO.getStartDate(),insuranceDTO.getEndDate());
@@ -64,9 +65,9 @@ public class InsuranceServiceImpl implements InsuranceService {
     }
 
     //metoda pro získání Insurance dle unikátního Id
-    private InsuranceEntity getInsuranceOrThrow(Long insuranceId){
+    public InsuranceEntity getInsuranceOrThrow(Long insuranceId){
         return insuranceRepository
-                .findById(insuranceId)
+                .findByInsuranceId(insuranceId)
                 .orElseThrow();
     }
 

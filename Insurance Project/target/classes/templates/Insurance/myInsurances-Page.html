@@ -21,7 +21,7 @@
             <li th:each="insurance: ${insurances}">
                 <h2><a th:href="@{'/insurance/' + ${insurance.insuranceId}}" th:text="${insurance.insuranceType}"></a>
                 </h2>
-                <a th:href="@{/insurance/event/create}">
+                <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
                     <button>Create insurance event</button>
                 </a>
                 <p>

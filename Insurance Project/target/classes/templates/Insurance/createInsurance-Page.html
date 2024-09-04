@@ -11,6 +11,7 @@
     <header><h1>Here you can add your insurance</h1></header>
     <section>
         <form th:action="@{/insurance/create}" th:object="${insuranceDTO}" method="post">
+
             <div>
                 <label for="insuranceType">Insurance type:</label><br>
                 <select id="insuranceType" name="insuranceType" th:field="*{insuranceType}">

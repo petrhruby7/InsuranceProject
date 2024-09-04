@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService {
     //metoda pro získání unikátního Id události
     private EventEntity getEventOrThrow(Long eventId) {
         return eventRepository
-                .findById(eventId)
+                .findByEventId(eventId)
                 .orElseThrow();
     }
 }
