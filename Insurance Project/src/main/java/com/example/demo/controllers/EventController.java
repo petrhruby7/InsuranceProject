@@ -11,9 +11,12 @@ import com.example.demo.models.services.InsuranceServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/insurance")
@@ -36,7 +39,13 @@ public class EventController {
     @Autowired
     private InsuranceMapper insuranceMapper;
 
-    //todo zobrazeni všech pojištění
+    //zobrazeni všech pojištění
+    @GetMapping("events")
+    public String renderEvents(Model model){
+        List<EventDTO> events = eventService.getAll();
+        model.addAttribute("events", events);
+        return "event/myEvents-Page"; //vrací šablonu se seznamem mých pojištění
+    }
 
     //zobrazeni formuláře pro vytvoření eventu
     @GetMapping("{insuranceId}/event/create")

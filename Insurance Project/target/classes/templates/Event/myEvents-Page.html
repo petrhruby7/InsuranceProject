@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>My Events</title>
+</head>
+<body>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
+
+<article>
+    <header>
+        <h1>My events</h1>
+    </header>
+    <section>
+        <ul>
+            <li th:each="event: ${events}">
+                <h2>Event #: <a th:href="@{{event.insuranceId}/event/create}" th:text="${event.eventId}"></a></h2>
+                <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
+                <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                <p>
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                </p>
+            </li>
+        </ul>
+
+    </section>
+</article>
+</body>
+</html>
