@@ -9,7 +9,7 @@
 <article>
     <header>You can edit your insurance event here</header>
     <section>
-        <form th:action="@{'insurance/events/' + ${eventId} +'edit'}" th:object="${eventDTO}" method="post">
+        <form th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}" method="post">
             <div>
                 <label for="eventDescription">Event description:</label><br>
                 <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>
@@ -25,7 +25,7 @@
             </div>
         </form>
         <a th:href="@{/insurance/events}">
-            <button>Back</button>
+            <button>Back to Events</button>
         </a>
     </section>
 </article>

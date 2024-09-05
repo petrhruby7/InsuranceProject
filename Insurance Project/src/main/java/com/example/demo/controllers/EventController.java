@@ -41,7 +41,7 @@ public class EventController {
 
     //zobrazeni všech pojištění
     @GetMapping("events")
-    public String renderEvents(Model model){
+    public String renderEvents(Model model) {
         List<EventDTO> events = eventService.getAll();
         model.addAttribute("events", events);
         return "event/myEvents-Page"; //vrací šablonu se seznamem mých pojištění
@@ -72,28 +72,50 @@ public class EventController {
         redirectAttributes.addFlashAttribute("success", "Your insurance event is created");
         return "redirect:/insurance/events";
     }
+
     //zobrazí detail eventu
     @GetMapping("events/{eventId}")
     public String renderEventDetail(@PathVariable Long eventId,
-                                    Model model){
+                                    Model model) {
         EventDTO eventDTO = eventService.getById(eventId);
         model.addAttribute("event", eventDTO);
         return "event/eventDetail-Page";
     }
+
     //zobrazí update eventu
     @GetMapping("events/{eventId}/edit")
     public String renderEventEditForm(@PathVariable Long eventId,
-                                      EventDTO eventDTO){
+                                      EventDTO eventDTO) {
         EventDTO fetchedEvent = eventService.getById(eventId);
-        eventMapper.updateEventDTO(fetchedEvent,eventDTO);
+        eventMapper.updateEventDTO(fetchedEvent, eventDTO);
         return "event/updateEvent-Page";
     }
-    //todo umožní upravit event
+
+    // umožní upravit event
+    @PostMapping("events/{eventId}/edit")
+    public String editEvent(@PathVariable Long eventId,
+                            @Valid @ModelAttribute EventDTO eventDTO,
+                            BindingResult result,
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("eventDTO", eventDTO);
+            return "event/updateEvent-Page";
+        }
+
+        //todo invalidní vstupy
+        eventDTO.setEventId(eventId);
+        eventService.editEvent(eventDTO);
+
+
+        redirectAttributes.addFlashAttribute("success", "Your insurance event is edited");
+        return "redirect:/insurance/events";
+    }
 
     // smaže existující event
     @GetMapping("events/{eventId}/delete")
-    public String deleteEvent (@PathVariable Long eventId,
-                               RedirectAttributes redirectAttributes){
+    public String deleteEvent(@PathVariable Long eventId,
+                              RedirectAttributes redirectAttributes) {
         eventService.removeEvent(eventId);
 
         redirectAttributes.addFlashAttribute("success", "Event was deleted");
