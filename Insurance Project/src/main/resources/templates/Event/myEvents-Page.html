@@ -6,7 +6,7 @@
 </head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
+<div style="color:green"  th:text="${success}" th:if="${success}"></div>
 
 <article>
     <header>
@@ -20,7 +20,7 @@
                 <p>Event date: <span th:text="${event.eventDate}">...</span></p>
                 <p>
                     <a href="#">Edit</a>
-                    <a href="#">Delete</a>
+                    <a th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
                 </p>
             </li>
         </ul>

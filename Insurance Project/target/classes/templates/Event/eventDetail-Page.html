@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail of event</title>
+</head>
+<body>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<article>
+    <header>
+        <h1>Detail of event</h1>
+    </header>
+    <section>
+        <h3>Event #: <span th:text="${event.eventId}">...</span></h3>
+        <p>Description of Event: <span th:text="${event.eventDescription}">...</span></p>
+        <p>Date of Event: <span th:text="${event.eventDate}">...</span></p>
+        <p>
+            <a href="#">Edit</a>
+            <a th:href="@{${event.eventId} + '/delete'}">Delete</a>
+        </p>
+        <a th:href="@{/insurance/events}">
+            <button>Back</button>
+        </a>
+    </section>
+</article>
+
+</body>
+</html>

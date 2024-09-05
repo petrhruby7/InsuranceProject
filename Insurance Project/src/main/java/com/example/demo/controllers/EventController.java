@@ -69,16 +69,31 @@ public class EventController {
 
         eventService.createEvent(eventDTO, insuranceEntity);
 
-        redirectAttributes.addFlashAttribute("succes", "Your insurance event is created");
-        return "redirect:/insurance"; //todo: přesměrovat na seznam eventu?
+        redirectAttributes.addFlashAttribute("success", "Your insurance event is created");
+        return "redirect:/insurance/events";
     }
     //todo zobrazí detail eventu
-
+    @GetMapping("events/{eventId}")
+    public String renderEventDetail(@PathVariable Long eventId,
+                                    Model model){
+        EventDTO eventDTO = eventService.getById(eventId);
+        model.addAttribute("event", eventDTO);
+        return "event/eventDetail-Page";
+    }
     //todo zobrazí update eventu
 
     //todo umožní upravit event
 
-    //todo smaže existující event
+    // smaže existující event
+    @GetMapping("events/{eventId}/delete")
+    public String deleteEvent (@PathVariable Long eventId,
+                               RedirectAttributes redirectAttributes){
+        eventService.removeEvent(eventId);
+
+        redirectAttributes.addFlashAttribute("success", "Event was deleted");
+        return "redirect:/insurance/events";
+    }
+    //todo: předělat deleteInsurance z Get metody na Delete Metodu!
 }
 
 
