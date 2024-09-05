@@ -10,6 +10,7 @@
     <header>You can edit your insurance event here</header>
     <section>
         <form th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}" method="post">
+            <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
             <div>
                 <label for="eventDescription">Event description:</label><br>
                 <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>

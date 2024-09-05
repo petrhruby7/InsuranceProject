@@ -3,6 +3,7 @@ package com.example.demo.models.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ public class EventDTO {
     private LocalDate eventDate;
 
     @NotBlank(message = "Event description is required")
+    @Size(min=10, max = 250, message = "Event description must be between 10 and 250 characters")
     private String eventDescription;
 
     //region: gettery a settery

@@ -6,6 +6,7 @@ import com.example.demo.data.repositories.InsuranceRepository;
 import com.example.demo.models.dto.EventDTO;
 import com.example.demo.models.dto.mappers.EventMapper;
 import com.example.demo.models.dto.mappers.InsuranceMapper;
+import com.example.demo.models.exceptions.EventDateOutOfRangeException;
 import com.example.demo.models.services.EventServiceImpl;
 import com.example.demo.models.services.InsuranceServiceImpl;
 import jakarta.validation.Valid;
@@ -51,23 +52,29 @@ public class EventController {
     @GetMapping("{insuranceId}/event/create")
     public String renderCreateEvent(@PathVariable Long insuranceId, @ModelAttribute EventDTO eventDTO) {
         eventDTO.setInsuranceId(insuranceId);
-        return "/event/createEvent-Page";
+        return "event/createEvent-Page";
     }
 
     //možnost vytvořit event
     @PostMapping("{insuranceId}/event/create")
     public String createEvent(@Valid @ModelAttribute EventDTO eventDTO,
-                              @PathVariable Long insuranceId,
                               BindingResult result,
+                              @PathVariable Long insuranceId,
                               RedirectAttributes redirectAttributes) {
 
-        if (result.hasErrors())
-            return renderCreateEvent(insuranceId, eventDTO);
+        if (result.hasErrors()) {
+            return renderCreateEvent(eventDTO.getInsuranceId(), eventDTO);
+        }
 
         InsuranceEntity insuranceEntity = insuranceRepository.findByInsuranceId(insuranceId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid insurance ID: " + insuranceId));
 
-        eventService.createEvent(eventDTO, insuranceEntity);
+        try {
+            eventService.createEvent(eventDTO, insuranceEntity);
+        } catch (EventDateOutOfRangeException e) {
+            result.rejectValue("eventDate", "error", "The event date must be between the insurance start and end dates.");
+            return "event/createEvent-Page";//kontrola že je datum udalosti v období kdy je uživatel pojištěný
+        }
 
         redirectAttributes.addFlashAttribute("success", "Your insurance event is created");
         return "redirect:/insurance/events";
@@ -102,11 +109,16 @@ public class EventController {
             model.addAttribute("eventDTO", eventDTO);
             return "event/updateEvent-Page";
         }
+        InsuranceEntity insuranceEntity = insuranceRepository.findByInsuranceId(eventDTO.getInsuranceId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid insurance ID: " + eventDTO.getInsuranceId()));
 
-        //todo invalidní vstupy
-        eventDTO.setEventId(eventId);
-        eventService.editEvent(eventDTO);
-
+        try {
+            eventDTO.setEventId(eventId);
+            eventService.editEvent(eventDTO, insuranceEntity);
+        } catch (EventDateOutOfRangeException e) {
+            result.rejectValue("eventDate", "error", "The event date must be between the insurance start and end dates.");
+            return "event/updateEvent-Page";//kontrola že je datum udalosti v období kdy je uživatel pojištěný
+        }
 
         redirectAttributes.addFlashAttribute("success", "Your insurance event is edited");
         return "redirect:/insurance/events";

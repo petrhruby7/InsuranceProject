@@ -5,9 +5,11 @@ import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.data.repositories.EventRepository;
 import com.example.demo.models.dto.EventDTO;
 import com.example.demo.models.dto.mappers.EventMapper;
+import com.example.demo.models.exceptions.EventDateOutOfRangeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,7 +22,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDTO createEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity) {
-        //todo: zde vložit validační kontroly
+
+        checkEventDateInRange(eventDTO.getEventDate(),insuranceEntity.getStartDate(),insuranceEntity.getEndDate());
 
         EventEntity eventEntity = eventMapper.toEntity(eventDTO);
         eventEntity.setInsuranceEntity(insuranceEntity);
@@ -51,8 +54,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void editEvent(EventDTO eventDTO) {
-        //todo: zde vložit validační kontroly
+    public void editEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity) {
+        checkEventDateInRange(eventDTO.getEventDate(),insuranceEntity.getStartDate(),insuranceEntity.getEndDate());
         EventEntity fetchedEvent = getEventOrThrow(eventDTO.getEventId());
         eventMapper.updateEventEntity(eventDTO, fetchedEvent);
         eventRepository.saveAndFlush(fetchedEvent);
@@ -69,5 +72,12 @@ public class EventServiceImpl implements EventService {
         return eventRepository
                 .findByEventId(eventId)
                 .orElseThrow();
+    }
+
+    //metoda pro kontrolu že event se odehrál v datech kdy je užovatel pojištěný
+    public void checkEventDateInRange (LocalDate eventDate, LocalDate insuranceStartDate, LocalDate insuranceEndDate){
+        if(eventDate.isBefore(insuranceStartDate)||eventDate.isAfter(insuranceEndDate)){
+            throw new EventDateOutOfRangeException();
+        }
     }
 }

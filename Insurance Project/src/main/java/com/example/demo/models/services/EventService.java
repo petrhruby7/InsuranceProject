@@ -16,7 +16,7 @@ public interface EventService {
 
     EventDTO getById(Long eventId);
 
-    void editEvent(EventDTO eventDTO);
+    void editEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity);
 
     void removeEvent(Long eventId);
 }
