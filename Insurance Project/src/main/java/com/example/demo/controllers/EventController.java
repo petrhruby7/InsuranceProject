@@ -72,7 +72,7 @@ public class EventController {
         redirectAttributes.addFlashAttribute("success", "Your insurance event is created");
         return "redirect:/insurance/events";
     }
-    //todo zobrazí detail eventu
+    //zobrazí detail eventu
     @GetMapping("events/{eventId}")
     public String renderEventDetail(@PathVariable Long eventId,
                                     Model model){
@@ -80,8 +80,14 @@ public class EventController {
         model.addAttribute("event", eventDTO);
         return "event/eventDetail-Page";
     }
-    //todo zobrazí update eventu
-
+    //zobrazí update eventu
+    @GetMapping("events/{eventId}/edit")
+    public String renderEventEditForm(@PathVariable Long eventId,
+                                      EventDTO eventDTO){
+        EventDTO fetchedEvent = eventService.getById(eventId);
+        eventMapper.updateEventDTO(fetchedEvent,eventDTO);
+        return "event/updateEvent-Page";
+    }
     //todo umožní upravit event
 
     // smaže existující event
