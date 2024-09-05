@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit event</title>
+</head>
+<body>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<article>
+    <header>You can edit your insurance event here</header>
+    <section>
+        <form th:action="@{'insurance/events/' + ${eventId} +'edit'}" th:object="${eventDTO}" method="post">
+            <div>
+                <label for="eventDescription">Event description:</label><br>
+                <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>
+                <small style="color:red" th:errors="*{eventDescription}"></small>
+            </div>
+            <div>
+                <label for="eventDate">Event date:</label><br>
+                <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
+                <small style="color:red" th:errors="*{eventDate}"></small>
+            </div>
+            <div>
+                <input type="submit" value="Edit insurance event">
+            </div>
+        </form>
+        <a th:href="@{/insurance/events}">
+            <button>Back</button>
+        </a>
+    </section>
+</article>
+
+</body>
+</html>

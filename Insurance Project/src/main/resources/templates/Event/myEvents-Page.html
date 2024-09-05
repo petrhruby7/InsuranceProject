@@ -15,11 +15,11 @@
     <section>
         <ul>
             <li th:each="event: ${events}">
-                <h2>Event #: <a th:href="@{{event.insuranceId}/event/create}" th:text="${event.eventId}"></a></h2>
+                <h2>Event #: <a th:href="@{'events/' + ${event.eventId}}" th:text="${event.eventId}"></a></h2>
                 <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
                 <p>Event date: <span th:text="${event.eventDate}">...</span></p>
                 <p>
-                    <a href="#">Edit</a>
+                    <a th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
                     <a th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
                 </p>
             </li>

@@ -15,7 +15,7 @@
         <p>Description of Event: <span th:text="${event.eventDescription}">...</span></p>
         <p>Date of Event: <span th:text="${event.eventDate}">...</span></p>
         <p>
-            <a href="#">Edit</a>
+            <a th:href="@{${event.eventId} + '/edit'}">Edit</a>
             <a th:href="@{${event.eventId} + '/delete'}">Delete</a>
         </p>
         <a th:href="@{/insurance/events}">
