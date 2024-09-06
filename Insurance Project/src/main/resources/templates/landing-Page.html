@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
-    <header th:replace="~{Fragments/layout.html :: header}"></header>
-    <!-- ZDE JE DIV S SUCCCESS MESSAGE-->
-    <div style="color:green" th:text="${success}" th:if="${success}"></div>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<!-- ZDE JE DIV S SUCCCESS MESSAGE-->
+<div style="color:green" th:text="${success}" th:if="${success}"></div>
+<article>
+    <header>
+        <h1>This is landing Page</h1>
+    </header>
+    <section>
 
-    <h1>This is landing Page</h1>
+    </section>
+</article>
 
 </body>
 </html>

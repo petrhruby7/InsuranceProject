@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
-    <header th:replace="~{Fragments/layout.html :: header}"></header>
-    <div style="color:green" th:text="${success}" th:if="${success}"></div>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<div style="color:green" th:text="${success}" th:if="${success}"></div>
 
-    <h1>This is your profile page</h1>
+<article>
+    <header>
+        <h1>This is your profile page</h1>
+    </header>
+    <section>
+        <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
+        <p>Last name: <span th:text="${userDTO.lastName}">...</span></p>
+        <p>Email: <span th:text="${userDTO.email}">...</span></p>
+        <p>Phone number: <span th:text="${userDTO.phoneNumber}">...</span></p>
+        <p>Address: <span th:text="${userDTO.address}">...</span></p>
+        <p>City: <span th:text="${userDTO.city}">...</span></p>
+        <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
+        <p>Country: <span th:text="${userDTO.country}">...</span></p>
+        <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
+        <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
 
-    <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
-    <p>Last name: <span th:text="${userDTO.lastName}">...</span></p>
-    <p>Email: <span th:text="${userDTO.email}">...</span></p>
-    <p>Phone number: <span th:text="${userDTO.phoneNumber}">...</span></p>
-    <p>Address: <span th:text="${userDTO.address}">...</span></p>
-    <p>City: <span th:text="${userDTO.city}">...</span></p>
-    <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
-    <p>Country: <span th:text="${userDTO.country}">...</span></p>
-    <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
-    <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
-
-    <a th:href="@{/profile/update}">
-        <button type = button>Change my details</button>
-    </a>
-
+        <a th:href="@{/profile/update}">
+            <button type=button>Change my details</button>
+        </a>
+    </section>
+</article>
 </body>
 </html>

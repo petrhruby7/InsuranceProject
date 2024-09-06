@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
     <header th:replace="~{Fragments/layout.html :: header}"></header>
     <div style="color:green" th:text="${success}" th:if="${success}"></div>
-    <h1>You can see this page only if you are sign up!</h1>
+    <article>
+        <header>
+            <h1>You can see this page only if you are sign up!</h1>
+        </header>
+        <section>
+
+        </section>
+    </article>
 </body>
 </html>
