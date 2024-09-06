@@ -5,7 +5,11 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UserDTO {
+
+    //pole pro uživatele
+    private Long userId;
     //DTO pro vytvoření uživatele - registraci a login
+
     @NotBlank(message = "User name is required")
     private String userName; //uživatelské jméno - musí být zadáno
 
@@ -52,6 +56,15 @@ public class UserDTO {
     private String socialSecurityNumber; //rodné číslo uživatele  - musí být zadáno (######/####)
 
     //region: Gettery a Settery
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;

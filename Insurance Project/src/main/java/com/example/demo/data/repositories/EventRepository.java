@@ -12,4 +12,6 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
     Optional<EventEntity> findByEventId(Long eventId);
     //vyhledá entitu dle Id pojištění ke kterému je přiřazená
     List<EventEntity> findByInsuranceEntityInsuranceId(Long insuranceId);
+    //vyhledá entitu dle userId
+    List<EventEntity> findByInsuranceEntityUserEntityUserId(Long userId);
 }

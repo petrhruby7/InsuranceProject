@@ -13,6 +13,8 @@ public interface InsuranceService {
 
     InsuranceDTO getById(Long insuranceId);
 
+    List<InsuranceEntity> getInsurancesForCurrentUser();
+
     void editInsurance(InsuranceDTO insurance);
 
     void removeInsurance(Long insuranceId);

@@ -4,6 +4,7 @@ import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.InsuranceRepository;
 import com.example.demo.models.dto.InsuranceDTO;
+import com.example.demo.models.dto.UserDTO;
 import com.example.demo.models.dto.mappers.InsuranceMapper;
 import com.example.demo.models.exceptions.InsuranceAmountException;
 import com.example.demo.models.exceptions.InsuranceDurationException;
@@ -21,6 +22,8 @@ public class InsuranceServiceImpl implements InsuranceService {
     private InsuranceRepository insuranceRepository;
     @Autowired
     private InsuranceMapper insuranceMapper;
+    @Autowired
+    private UserServiceImpl userService;
 
     @Override
     public InsuranceDTO createInsurance(InsuranceDTO insuranceDTO, UserEntity userEntity){
@@ -45,6 +48,12 @@ public class InsuranceServiceImpl implements InsuranceService {
     public InsuranceDTO getById(Long insuranceId) {
         InsuranceEntity fetchedInsurance = getInsuranceOrThrow(insuranceId);
         return insuranceMapper.toDTO(fetchedInsurance);
+    }
+
+    @Override
+    public List<InsuranceEntity> getInsurancesForCurrentUser(){
+        UserDTO currentUser = userService.getCurrentUser();//získá konkretního uživatele
+        return insuranceRepository.findByUserEntityUserId(currentUser.getUserId());
     }
 
 
@@ -85,4 +94,6 @@ public class InsuranceServiceImpl implements InsuranceService {
             throw new InsuranceAmountException();
         }
     }
+
+
 }

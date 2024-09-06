@@ -36,7 +36,7 @@ public class InsuranceController {
     //zobrazení všech pojištění
     @GetMapping()
     public String renderInsurances(Model model){
-        List<InsuranceDTO> insurances = insuranceService.getAll();
+        List<InsuranceEntity> insurances = insuranceService.getInsurancesForCurrentUser();
         model.addAttribute("insurances", insurances);
         return "/insurance/myInsurances-Page"; //vrací šablonu kde je seznam mých pojištění
     }

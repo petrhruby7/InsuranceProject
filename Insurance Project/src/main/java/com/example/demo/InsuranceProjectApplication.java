@@ -20,3 +20,5 @@ public class InsuranceProjectApplication {
 
 //todo: updateInsurance-Page - at jde zmenit pojištění i bez start date
 //todo: updateInsurance-Page - at ty type-date maj vyplněnou hodnotu
+//todo: zobrazit jen insurance přihlšeneho uživatele
+//todo: zobrazit jen eventy přihlášeného uživatele

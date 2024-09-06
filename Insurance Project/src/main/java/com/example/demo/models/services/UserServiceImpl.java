@@ -100,9 +100,12 @@ public class UserServiceImpl implements UserService {
         return toDTO(user);
     }
 
+
+
     //metoda pro načtení údajů uživatele
     private UserDTO toDTO(UserEntity user) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUserId());
         userDTO.setUserName(user.getUsername());
         userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getFirstName());
@@ -122,4 +125,6 @@ public class UserServiceImpl implements UserService {
             throw new UserIsNotAdultException();
         }
     }
+
+
 }

@@ -12,9 +12,11 @@ public interface EventService {
 
     List<EventDTO> getAll();
 
+    EventDTO getById(Long eventId);
+
     List<EventDTO> getEventByInsuranceId(Long insuranceId);
 
-    EventDTO getById(Long eventId);
+    List<EventEntity> getEventsForCurrentUser();
 
     void editEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity);
 

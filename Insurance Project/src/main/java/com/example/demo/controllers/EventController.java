@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.data.entities.EventEntity;
 import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.data.repositories.EventRepository;
 import com.example.demo.data.repositories.InsuranceRepository;
@@ -26,24 +27,15 @@ public class EventController {
     private EventServiceImpl eventService;
 
     @Autowired
-    private InsuranceServiceImpl insuranceService;
-
-    @Autowired
     private InsuranceRepository insuranceRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
 
     @Autowired
     private EventMapper eventMapper;
 
-    @Autowired
-    private InsuranceMapper insuranceMapper;
-
-    //zobrazeni všech pojištění
+    //zobrazeni všech mých pojištění
     @GetMapping("events")
     public String renderEvents(Model model) {
-        List<EventDTO> events = eventService.getAll();
+        List<EventEntity> events = eventService.getEventsForCurrentUser();
         model.addAttribute("events", events);
         return "event/myEvents-Page"; //vrací šablonu se seznamem mých pojištění
     }
@@ -133,7 +125,7 @@ public class EventController {
         redirectAttributes.addFlashAttribute("success", "Event was deleted");
         return "redirect:/insurance/events";
     }
-    //todo: předělat deleteInsurance z Get metody na Delete Metodu!
+    //todo: předělat deleteInsurance z Get metody na Delete metodu!
 }
 
 

@@ -11,6 +11,6 @@ public interface InsuranceRepository extends JpaRepository<InsuranceEntity, Long
 
     //vyhledá entitu dle jejího unikátního id
     Optional<InsuranceEntity> findByInsuranceId(Long insuranceId);
-
-    //List<InsuranceEntity> findByUserId(Long userId);
+    //vyhledá všechny pojištění podle id
+    List<InsuranceEntity> findByUserEntityUserId(Long userId);
 }

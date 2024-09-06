@@ -4,6 +4,7 @@ import com.example.demo.data.entities.EventEntity;
 import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.data.repositories.EventRepository;
 import com.example.demo.models.dto.EventDTO;
+import com.example.demo.models.dto.UserDTO;
 import com.example.demo.models.dto.mappers.EventMapper;
 import com.example.demo.models.exceptions.EventDateOutOfRangeException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     @Autowired
     private EventMapper eventMapper;
+    @Autowired
+    private UserServiceImpl userService;
 
     @Override
     public EventDTO createEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity) {
@@ -40,6 +43,12 @@ public class EventServiceImpl implements EventService {
     } //vrací všechny pojištění
 
     @Override
+    public EventDTO getById(Long eventId) {
+        EventEntity fetchedEvent = getEventOrThrow(eventId);
+        return eventMapper.toDTO(fetchedEvent);
+    }
+
+    @Override
     public List<EventDTO> getEventByInsuranceId(Long insuranceId) {
         return eventRepository.findByInsuranceEntityInsuranceId(insuranceId)
                 .stream()
@@ -48,9 +57,9 @@ public class EventServiceImpl implements EventService {
     } //vrací pojištění podle insurance Id
 
     @Override
-    public EventDTO getById(Long eventId) {
-        EventEntity fetchedEvent = getEventOrThrow(eventId);
-        return eventMapper.toDTO(fetchedEvent);
+    public List<EventEntity> getEventsForCurrentUser() {
+        UserDTO currentUser = userService.getCurrentUser();
+        return eventRepository.findByInsuranceEntityUserEntityUserId(currentUser.getUserId());
     }
 
     @Override
