@@ -1,0 +1,30 @@
+html{
+    background-color:#386641; /*tmavě zelená*/
+}
+
+ body{
+    background-color:#ecf0f1; /*světle šedá*/
+    width:100%;
+    box-sizing:border-box;
+    margin:0;
+ }
+
+ nav ul{
+    margin:0;
+    list-style-type:none;
+    display: flex;
+    align-item: center;
+ }
+
+ footer{
+    background-color: #386641; /*tmavě zelená*/
+    color:#ecf0f1; /*světle šedá*/
+    text-align: center;
+    padding: 50px;
+ }
+
+ footer a{
+    color:#ecf0f1; /*světle šedá*/
+    text-decoration:none;
+
+ }

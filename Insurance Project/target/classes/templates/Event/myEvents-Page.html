@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>My Events</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
 <div style="color:green"  th:text="${success}" th:if="${success}"></div>
@@ -27,5 +24,6 @@
 
     </section>
 </article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>
