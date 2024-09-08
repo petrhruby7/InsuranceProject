@@ -8,23 +8,23 @@
     <section>
         <form th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}" method="post">
             <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
-            <div>
+            <div class="input">
                 <label for="eventDescription">Event description:</label><br>
                 <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>
                 <small style="color:red" th:errors="*{eventDescription}"></small>
             </div>
-            <div>
+            <div class="input">
                 <label for="eventDate">Event date:</label><br>
                 <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
                 <small style="color:red" th:errors="*{eventDate}"></small>
             </div>
-            <div>
-                <input type="submit" value="Edit insurance event">
-            </div>
+                <input class="input-btn button" type="submit" value="Edit insurance event">
         </form>
-        <a th:href="@{/insurance/events}">
-            <button>Back to Events</button>
-        </a>
+        <p>
+            <a th:href="@{/insurance/events}">
+                <button class="back-btn button">Back to Events</button>
+            </a>
+        </p>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>

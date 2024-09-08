@@ -8,20 +8,20 @@
 <article>
     <header>
         <h1>My insurances</h1>
+        <p>
+            <a class="input-btn button" href="insurance/create">Create insurance</a>
+        </p>
     </header>
     <section>
-        <p>
-            <a href="insurance/create">Create insurance</a>
-        </p>
 
         <ul>
             <li th:each="insurance: ${insurances}">
                 <h2><a th:href="@{'/insurance/' + ${insurance.insuranceId}}" th:text="${insurance.insuranceType}"></a>
                 </h2>
-                <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
-                    <button class="input-btn button">Create insurance event</button>
-                </a>
                 <p>
+                    <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                        <button class="input-btn button">Create insurance event</button>
+                    </a>
                     <a class="edit-btn button" th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
                     <a class="delete-btn button" th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">Delete</a>
                 </p>

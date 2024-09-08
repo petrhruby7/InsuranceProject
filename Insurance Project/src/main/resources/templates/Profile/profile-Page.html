@@ -20,10 +20,11 @@
         <p>Country: <span th:text="${userDTO.country}">...</span></p>
         <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
         <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
-
-        <a th:href="@{/profile/update}">
-            <button class="edit-btn button" type=button>Change my details</button>
-        </a>
+        <p>
+            <a th:href="@{/profile/update}">
+                <button class="input-btn button" type=button>Change my details</button>
+            </a>
+        </p>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>
