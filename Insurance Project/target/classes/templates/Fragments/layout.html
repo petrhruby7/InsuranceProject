@@ -8,33 +8,45 @@
     <title>Insurance project</title>
 
     <link rel="stylesheet" th:href="@{/styles/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/js/hamburger.js}" type="text/css">
+
+    <script th:src="@{/js/hamburger.js}"></script>
 </head>
 <body>
-    <header th:fragment="header">
-        <nav>
-            <div>
-                <ul>
-                    <li><a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
-                    <li>Users</li>
-                    <li><a sec:authorize="isAuthenticated()" href="/insurance">My insurances</a></li>
-                    <li><a sec:authorize="isAuthenticated()" href="/insurance/events">Events</a></li>
-                    <li><a sec:authorize="isAuthenticated()" href="/profile">My profile</a></li>
+<header th:fragment="header">
+    <nav>
+        <!-- Hamburger icon for small screens -->
+        <div class="hamburger" onclick="toggleMenu()">
+            &#9776;
+        </div>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
+                <li>Users</li>
+                <li><a sec:authorize="isAuthenticated()" href="/insurance">My&nbspinsurances</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/insurance/events">Events</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/profile">My&nbspprofile</a></li>
 
-                    <li>About us</li>
-                    <li>Contact</li>
-                    <li><a sec:authorize="isAnonymous" href="/login">login</a></li>
-                    <li><a sec:authorize="isAnonymous" href="/register"> register </a> </li>
-                    <li>
-                        <form method="post" th:action="@{/logout}">
-                            <button sec:authorize="isAuthenticated()">Log out</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <footer th:fragment="footer">
-        Vytvořil Petr Hrubý pro <a href="https://itnetwork.cz">ITnetwork.cz</a> v rámci závěrečného projektu.
-    </footer>
+                <li>About&nbspus</li>
+                <li>Contact</li>
+                <li class="auth-item">
+                    <a sec:authorize="isAnonymous" href="/login">login</a></li>
+                <li class="auth-item">
+                    <a sec:authorize="isAnonymous" href="/register"> register </a></li>
+                <li>
+                    <form method="post" th:action="@{/logout}">
+                        <button class="logout" sec:authorize="isAuthenticated()">Log&nbspout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<footer th:fragment="footer">
+    Vytvořil Petr Hrubý pro <a href="https://itnetwork.cz">ITnetwork.cz</a> v rámci závěrečného projektu.
+</footer>
 </body>
+
+
 </html>

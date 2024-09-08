@@ -16,8 +16,8 @@
                 <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
                 <p>Event date: <span th:text="${event.eventDate}">...</span></p>
                 <p>
-                    <a th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
-                    <a th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
+                    <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
+                    <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
                 </p>
             </li>
         </ul>
