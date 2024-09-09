@@ -117,7 +117,7 @@ article{
 .box{
     border: #6a994e solid 2px;
     box-shadow: 3px 2px 10px #386641;
-    padding: 25px 30px;
+    padding: 25px 30px 10px 30px;
     margin: 10px;
     border-radius: 15px;
     background-color: #a7c95711;
@@ -187,7 +187,7 @@ label{
 .button{
     font-size: 16px;
     padding: 10px 15px;
-    margin: 10px 0px;
+    margin:  0px;
     border-radius: 10px;
     transition: 0.3s ease-in;
 }
