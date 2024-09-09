@@ -9,68 +9,69 @@
         <h1>You can update your Profile here</h1>
     </header>
     <section>
-        <form class="box" th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post">
-            <div class="input">
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" th:field="*{email}"><br>
-                <small style="color:red" th:errors="*{email}"></small>
-            </div>
-            <div class="input">
-                <label for="fname">First name:</label><br>
-                <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
-                <small style="color:red" th:errors="*{firstName}"></small>
-            </div>
-            <div class="input">
-                <label for="lname">Last name:</label><br>
-                <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
-                <small style="color:red" th:errors="*{lastName}"></small>
-            </div>
-            <p>_____________________________________</p>
-            <div class="input">
-                <label for="phone">Phone number: </label><br>
-                <input type="tel" id="phone" name="phoneNumber" th:field="*{phoneNumber}"><br>
-                <small style="color:red" th:errors="*{phoneNumber}"></small>
-            </div>
-            <div class="input">
-                <label for="address">Address: </label><br>
-                <input type="text" id="address" name="address" th:field="*{address}"><br>
-                <small style="color:red" th:errors="*{address}"></small>
-            </div>
-            <div class="input">
-                <label for="city">City: </label> <br>
-                <input type="text" id="city" name="city" th:field="*{city}"><br>
-                <small style="color:red" th:errors="*{city}"></small>
-            </div>
-            <div class="input">
-                <label for="zipCode">ZIP/Postal Code: </label><br>
-                <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}"><br>
-                <small style="color:red" th:errors="*{zipCode}"></small>
-            </div>
-            <div class="input">
-                <label for="country">Country: </label><br>
-                <input type="text" id="country" name="country" th:field="*{country}"><br>
-                <small style="color:red" th:errors="*{country}"></small>
-            </div>
-            <p>_____________________________________</p>
-            <div class="input">
-                <label for="birthdate">Date of birth:</label><br>
-                <input type="date" id="birthdate" name="dateOfBirth" th:field="*{dateOfBirth}"><br>
-                <small style="color:red" th:errors="*{dateOfBirth}"></small>
-            </div>
-            <div class="input">
-                <label for="SSN">SSN/The birth number</label><br>
-                <input type="text" id="SSN" name="socialSecurityNumber" pattern="[0-9]{6}/[0-900{4}]"
-                       th:field="*{socialSecurityNumber}"><br>
-                <small style="color:red" th:errors="*{socialSecurityNumber}"></small>
-            </div>
-            <input class="input-btn button" type="submit" value="Update"> <br>
-        </form>
-        <p>
-            <a th:href="@{/profile}">
-                <button class="back-btn button">Back</button>
-            </a>
-        </p>
-
+        <div class="box">
+            <form th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post">
+                <div class="input">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" th:field="*{email}"><br>
+                    <small style="color:red" th:errors="*{email}"></small>
+                </div>
+                <div class="input">
+                    <label for="fname">First name:</label><br>
+                    <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
+                    <small style="color:red" th:errors="*{firstName}"></small>
+                </div>
+                <div class="input">
+                    <label for="lname">Last name:</label><br>
+                    <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
+                    <small style="color:red" th:errors="*{lastName}"></small>
+                </div>
+                <p>_____________________________________</p>
+                <div class="input">
+                    <label for="phone">Phone number: </label><br>
+                    <input type="tel" id="phone" name="phoneNumber" th:field="*{phoneNumber}"><br>
+                    <small style="color:red" th:errors="*{phoneNumber}"></small>
+                </div>
+                <div class="input">
+                    <label for="address">Address: </label><br>
+                    <input type="text" id="address" name="address" th:field="*{address}"><br>
+                    <small style="color:red" th:errors="*{address}"></small>
+                </div>
+                <div class="input">
+                    <label for="city">City: </label> <br>
+                    <input type="text" id="city" name="city" th:field="*{city}"><br>
+                    <small style="color:red" th:errors="*{city}"></small>
+                </div>
+                <div class="input">
+                    <label for="zipCode">ZIP/Postal Code: </label><br>
+                    <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}"><br>
+                    <small style="color:red" th:errors="*{zipCode}"></small>
+                </div>
+                <div class="input">
+                    <label for="country">Country: </label><br>
+                    <input type="text" id="country" name="country" th:field="*{country}"><br>
+                    <small style="color:red" th:errors="*{country}"></small>
+                </div>
+                <p>_____________________________________</p>
+                <div class="input">
+                    <label for="birthdate">Date of birth:</label><br>
+                    <input type="date" id="birthdate" name="dateOfBirth" th:field="*{dateOfBirth}"><br>
+                    <small style="color:red" th:errors="*{dateOfBirth}"></small>
+                </div>
+                <div class="input">
+                    <label for="SSN">SSN/The birth number</label><br>
+                    <input type="text" id="SSN" name="socialSecurityNumber" pattern="[0-9]{6}/[0-900{4}]"
+                           th:field="*{socialSecurityNumber}"><br>
+                    <small style="color:red" th:errors="*{socialSecurityNumber}"></small>
+                </div>
+                <input class="input-btn button" type="submit" value="Update"> <br>
+            </form>
+            <p>
+                <a th:href="@{/profile}">
+                    <button class="back-btn button">Back</button>
+                </a>
+            </p>
+        </div>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>

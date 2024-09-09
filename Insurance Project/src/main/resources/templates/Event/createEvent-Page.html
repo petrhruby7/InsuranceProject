@@ -7,26 +7,29 @@
 <article>
     <header>You can create your insurance event here</header>
     <section>
-        <form class="box" th:action="@{'/insurance/' + ${eventDTO.insuranceId} + '/event/create'}" th:object="${eventDTO}"
-              method="post">
-            <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
-            <div class="input">
-                <label for="eventDescription">Event description:</label><br>
-                <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>
-                <small style="color:red" th:errors="*{eventDescription}"></small>
-            </div>
-            <div class="input">
-                <label for="eventDate">Event date:</label><br>
-                <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
-                <small style="color:red" th:errors="*{eventDate}"></small>
-            </div>
-            <input class="input-btn button" type="submit" value="Create insurance event">
-        </form>
-        <p>
-            <a th:href="@{/insurance}">
-                <button class="back-btn button">Back</button>
-            </a>
-        </p>
+        <div class="box">
+            <form th:action="@{'/insurance/' + ${eventDTO.insuranceId} + '/event/create'}" th:object="${eventDTO}"
+                  method="post">
+                <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
+                <div class="input">
+                    <label for="eventDescription">Event description:</label><br>
+                    <textarea id="eventDescription" name="eventDescription"
+                              th:field="*{eventDescription}"></textarea><br>
+                    <small style="color:red" th:errors="*{eventDescription}"></small>
+                </div>
+                <div class="input">
+                    <label for="eventDate">Event date:</label><br>
+                    <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
+                    <small style="color:red" th:errors="*{eventDate}"></small>
+                </div>
+                <input class="input-btn button" type="submit" value="Create insurance event">
+            </form>
+            <p>
+                <a th:href="@{/insurance}">
+                    <button class="back-btn button">Back</button>
+                </a>
+            </p>
+        </div>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>
