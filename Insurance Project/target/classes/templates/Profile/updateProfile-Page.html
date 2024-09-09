@@ -9,7 +9,7 @@
         <h1>You can update your Profile here</h1>
     </header>
     <section>
-        <form th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post">
+        <form class="box" th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post">
             <div class="input">
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" th:field="*{email}"><br>

@@ -10,7 +10,7 @@
         <h1>This is Register Page</h1>
     </header>
     <section>
-        <form th:action="@{/register}" th:object="${userDTO}" method="post">
+        <form class="box" th:action="@{/register}" th:object="${userDTO}" method="post">
             <div class="input">
                 <label for="uname">User name:</label><br>
                 <input type="text" id="uname" name="userName" th:field="*{userName}"><br>

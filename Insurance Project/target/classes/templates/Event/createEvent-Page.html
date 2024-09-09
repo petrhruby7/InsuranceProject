@@ -7,7 +7,7 @@
 <article>
     <header>You can create your insurance event here</header>
     <section>
-        <form th:action="@{'/insurance/' + ${eventDTO.insuranceId} + '/event/create'}" th:object="${eventDTO}"
+        <form class="box" th:action="@{'/insurance/' + ${eventDTO.insuranceId} + '/event/create'}" th:object="${eventDTO}"
               method="post">
             <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
             <div class="input">

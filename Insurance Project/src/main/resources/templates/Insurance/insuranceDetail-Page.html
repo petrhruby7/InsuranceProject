@@ -8,21 +8,23 @@
         <h1>Detail of insurance</h1>
     </header>
     <section>
-        <h3 th:text="${insurance.insuranceType}">...</h3>
-        <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
-        <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
-        <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
-        <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
-        <p>
-            <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
-                <button class="input-btn button">Create insurance event</button>
-            </a>
-            <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
-            <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
-            <a th:href="@{/insurance}">
-                <button class="back-btn button">Back</button>
-            </a>
-        </p>
+        <div class="box">
+            <h3 th:text="${insurance.insuranceType}">...</h3>
+            <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+            <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+            <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
+            <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
+            <p>
+                <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                    <button class="input-btn button">Create insurance event</button>
+                </a>
+                <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
+                <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
+                <a th:href="@{/insurance}">
+                    <button class="back-btn button">Back</button>
+                </a>
+            </p>
+        </div>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>

@@ -21,22 +21,22 @@
         </div>
         <div class="menu">
             <ul>
-                <li>
-                    <a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
-                <li>Users</li>
-                <li><a sec:authorize="isAuthenticated()" href="/insurance">My&nbspinsurances</a></li>
-                <li><a sec:authorize="isAuthenticated()" href="/insurance/events">Events</a></li>
-                <li><a sec:authorize="isAuthenticated()" href="/profile">My&nbspprofile</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/home">Home</a></li>
+                <li sec:authorize="isAuthenticated()">Users</li>
+                <li sec:authorize="isAuthenticated()"><a href="/insurance">My&nbspinsurances</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/insurance/events">Events</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/profile">My&nbspprofile</a></li>
 
                 <li>About&nbspus</li>
                 <li>Contact</li>
-                <li class="auth-item">
-                    <a sec:authorize="isAnonymous" href="/login">login</a></li>
-                <li class="auth-item">
-                    <a sec:authorize="isAnonymous" href="/register"> register </a></li>
-                <li>
+
+                <li sec:authorize="isAnonymous" class="auth-item">
+                    <a href="/login">login</a></li>
+                <li sec:authorize="isAnonymous" class="auth-item">
+                    <a href="/register"> register </a></li>
+                <li class="li-logout" sec:authorize="isAuthenticated()">
                     <form method="post" th:action="@{/logout}">
-                        <button class="logout" sec:authorize="isAuthenticated()">Log&nbspout</button>
+                        <button class="logout" >Log&nbspout</button>
                     </form>
                 </li>
             </ul>

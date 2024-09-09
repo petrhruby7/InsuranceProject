@@ -6,7 +6,7 @@
 <article>
     <header>You can edit your insurance event here</header>
     <section>
-        <form th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}" method="post">
+        <form class="box" th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}" method="post">
             <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
             <div class="input">
                 <label for="eventDescription">Event description:</label><br>

@@ -8,7 +8,7 @@
     <header>You can edit you insurance here</header>
     <section>
 
-        <form th:action="@{'/insurance/edit/' + ${insuranceId}}" th:object="${insuranceDTO}" method="post">
+        <form class="box" th:action="@{'/insurance/edit/' + ${insuranceId}}" th:object="${insuranceDTO}" method="post">
             <div class="input">
                 <label for="insuranceType">Insurance type:</label><br>
                 <select id="insuranceType" name="insuranceType" th:field="*{insuranceType}">
