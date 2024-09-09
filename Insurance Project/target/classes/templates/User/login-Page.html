@@ -10,19 +10,22 @@
         <h1>This is Login Page</h1>
     </header>
     <section>
-        <form class="box" th:action="@{/login}" method="post">
-            <div class="input">
-                <label for="uname">User name:</label><br>
-                <input type="text" id="uname" name="userName"><br>
-                <!--
-                <small style="color:red" th:errors="*{userName}"></small>-->
-            </div>
-            <div class="input">
-                <label for="pass"> Password:</label><br>
-                <input type="password" id="pass" name="password"><br>
-            </div>
-            <input class="input-btn button" type="submit" value="Log in">
-        </form>
+        <div class="box">
+            <form th:action="@{/login}" method="post">
+                <div class="input">
+                    <label for="uname">User name:</label><br>
+                    <input type="text" id="uname" name="userName"><br>
+                    <!--
+                    <small style="color:red" th:errors="*{userName}"></small>-->
+                </div>
+                <div class="input">
+                    <label for="pass"> Password:</label><br>
+                    <input type="password" id="pass" name="password"><br>
+                </div>
+                <input class="input-btn button long-btn" type="submit" value="Log in">
+            </form>
+            <small>Don't have an account? <a href="/register">Sing up</a></small>
+        </div>
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>

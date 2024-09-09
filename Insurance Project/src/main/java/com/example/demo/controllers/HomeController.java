@@ -17,4 +17,14 @@ public class HomeController {
     public String homePage(){
         return "home-Page"; //vrací šablonu home page, pouze pro přihlášené
     }
+
+    @GetMapping("/aboutUs")
+    public  String aboutUsPage() {
+        return "aboutUs-Page";
+    }
+
+    @GetMapping("/contact")
+    public  String contactPage() {
+        return "contact-Page";
+    }
 }

@@ -17,7 +17,7 @@ public class ApplicationSecurityConfiguration {
     public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/").permitAll() // Povolit přístup na "/login" a "/register" bez přihlášení
+                        .requestMatchers("/login", "/register", "/", "/aboutUs", "/contact").permitAll() // Povolit přístup na "/login" a "/register" bez přihlášení
                         .requestMatchers("/styles/**", "/js/**", "/images/**").permitAll() //Povolit přístp do statických složek kde jsou uloženy CSS a JS soubory
                         .anyRequest().authenticated()  // Každý jiný požadavek musí být autentizován
                 )

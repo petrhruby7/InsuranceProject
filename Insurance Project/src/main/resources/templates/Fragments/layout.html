@@ -24,13 +24,13 @@
         <div class="menu">
             <ul>
                 <li sec:authorize="isAuthenticated()"><a href="/home">Home</a></li>
-                <li sec:authorize="isAuthenticated()">Users</li>
+                <li sec:authorize="isAuthenticated()"><a href="/myUsers">My&nbspusers</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/insurance">My&nbspinsurances</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/insurance/events">Events</a></li>
                 <li sec:authorize="isAuthenticated()"><a href="/profile">My&nbspprofile</a></li>
 
-                <li>About&nbspus</li>
-                <li>Contact</li>
+                <li><a href="/aboutUs">About&nbspus</a></li>
+                <li><a href="/contact">Contact</a></li>
 
                 <li sec:authorize="isAnonymous" class="auth-item">
                     <a href="/login">login</a></li>
