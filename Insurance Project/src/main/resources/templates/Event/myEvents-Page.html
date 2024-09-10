@@ -11,15 +11,15 @@
         <h1>My events</h1>
     </header>
     <section>
-        <ul class="list">
+        <ul class="grid-list">
             <li th:each="event: ${events}">
                 <h2>Event #: <a class="back-btn button" th:href="@{'events/' + ${event.eventId}}" th:text="${event.eventId}"></a></h2>
                 <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
                 <p>Event date: <span th:text="${event.eventDate}">...</span></p>
-                <p>
+                <div class="button-container">
                     <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
                     <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
-                </p>
+                </div>
             </li>
         </ul>
 

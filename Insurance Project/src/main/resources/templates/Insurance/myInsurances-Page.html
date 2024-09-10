@@ -14,7 +14,7 @@
     </header>
     <section>
 
-        <ul class="list">
+        <ul class="grid-list">
             <li th:each="insurance: ${insurances}">
                 <h2><a class="back-btn button" th:href="@{'/insurance/' + ${insurance.insuranceId}}" th:text="${insurance.insuranceType}"></a>
                 </h2>
@@ -27,6 +27,7 @@
                 </p>
             </li>
         </ul>
+
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>
