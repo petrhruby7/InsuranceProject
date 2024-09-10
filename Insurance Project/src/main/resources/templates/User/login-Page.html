@@ -3,12 +3,10 @@
 <head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:red" class="flash-message message-error" th:if="${param.error}"> Invalid username or password</div>
+
 
 <article>
-    <header>
-        <h1>This is Login Page</h1>
-    </header>
+    <div class="flash-error" th:if="${param.error}"> Invalid username or password</div>
     <section>
         <div class="box">
             <form th:action="@{/login}" method="post">

@@ -3,14 +3,13 @@
 <head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:green" th:text="${success}" th:if="${success}"></div>
+
 
 <article>
-    <header>
-        <h1>This is your profile page</h1>
-    </header>
+    <div class="flash-success" th:text="${success}" th:if="${success}"></div>
     <section>
         <div class="box">
+            <h1>Your Account Details:</h1>
             <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
             <p>Last name: <span th:text="${userDTO.lastName}">...</span></p>
             <p>Email: <span th:text="${userDTO.email}">...</span></p>
@@ -20,10 +19,11 @@
             <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
             <p>Country: <span th:text="${userDTO.country}">...</span></p>
             <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
+            <p>Date of birth: <span th:text="${#dates.format(userDTO.dateOfBirth, 'dd-MM-yyyy')}">...</span></p>
             <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
-            <p>
-                <a th:href="@{/profile/update}">
-                    <button class="input-btn button" type=button>Change my details</button>
+            <p >
+                <a class="centered-link" th:href="@{/profile/update}">
+                    <button class="input-btn button long-btn" type=button>Change my details</button>
                 </a>
             </p>
         </div>

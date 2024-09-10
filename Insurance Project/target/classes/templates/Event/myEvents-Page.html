@@ -3,9 +3,10 @@
 <head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:green"  th:text="${success}" th:if="${success}"></div>
+
 
 <article>
+    <div class="flash-success" th:text="${success}" th:if="${success}"></div>
     <header>
         <h1>My events</h1>
     </header>

@@ -3,9 +3,9 @@
 <head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<!-- ZDE JE DIV S SUCCCESS MESSAGE-->
-<div style="color:green" th:text="${success}" th:if="${success}"></div>
+
 <article>
+    <div class="flash-success" th:text="${success}" th:if="${success}"></div>
     <header>
         <h1>This is landing Page</h1>
     </header>

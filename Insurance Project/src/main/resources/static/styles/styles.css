@@ -31,7 +31,8 @@ body{
     background-color:#f5f8fa; /*světle šedá*/
     width:100%;
     margin: 0;
-    padding: 0;
+    padding: 0px;
+
 }
 
 a{
@@ -51,6 +52,11 @@ small{
 
 small a {
     color: #822f31;
+
+}
+
+nav{
+
 }
 
 ul{
@@ -64,6 +70,9 @@ img{
 body>header{
     background-color: #386641; /*tmavě zelená*/
     font: 20px "Raleway", sans-serif;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 nav ul{
@@ -130,24 +139,68 @@ article{
     justify-content: center;
     align-items: center;
     height: auto;
+    padding-top: 100px;
 }
 
 .box{
     border: #6a994e solid 2px;
     box-shadow: 3px 2px 10px #386641;
-    padding: 25px 30px;
+    padding: 25px 30px 15px;
     margin: 30px 10px;
     border-radius: 15px;
     background-color: #a7c95711;
     flex-direction: column;
     min-width: 400px;
 }
+.box h1{
+    margin:0;
+    font-size: 18px;
+}
+
+.box p{
+    font-weight: bold;
+}
+
+.box p span{
+    font-weight: normal;
+}
+
+.info-text {
+    max-width: 320px;
+    word-wrap: break-word;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+
+.date-info{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.date-info p{
+    font-size: 14px;
+    margin: 5px;
+}
+
+
 
 label{
     padding: 3px;
     margin: 0px;
     font-size: 16px;
 }
+
+.input{
+    box-sizing: border-box;
+    position: relative;
+}
+
+.input:has(small[th\\:errors]) {
+    margin-bottom: 40px;
+}
+
 .input input{
     padding: 5px 10px;
     margin: 3px 0 20px 0;
@@ -175,6 +228,23 @@ label{
     border-radius: 5px;
     border: #386641 solid 2px;
 
+}
+
+.input input:focus,
+.input select:focus,
+.input textarea:focus {
+    border-color: #bf9a35; /* Barva hranice při aktivním stavu */
+}
+
+.input.has-error input,
+.input.has-error select,
+.input.has-error textarea {
+    border-color: #822f31; /* Zvýraznění pole s chybou */
+}
+
+.centered-link{
+    display: flex;
+    margin: 0 -10px;
 }
 
 .input-btn{
@@ -216,6 +286,41 @@ label{
 .button:hover{
     font-size: 18px;
 }
+
+.flash-success{
+    background-color: #a7c957;
+    color:#f5f8fa;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 95%;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-shadow: 1px 4px 5px #386641 ;
+}
+
+.flash-error{
+    background-color: #bc4749;
+    color:#f5f8fa;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 95%;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-shadow: 1px 4px 5px #386641 ;
+}
+
+.error{
+    display: block;
+    color: #822f31;
+    text-align: left;
+    max-width: 300px;
+    margin-top: -16px;
+}
+
 
 footer{
     background-color: #080a16; /*velmi tmavě modrá*/
@@ -307,6 +412,7 @@ footer a{
     section ul{
         grid-template-columns: repeat(3, 1fr);
     }
+
 
     nav ul{
         flex-direction: column;

@@ -5,82 +5,79 @@
 <!--z nějakýho duvodu script nefunguje pouze v register page -->
 <script th:src="@{/js/hamburger.js}"></script>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:red" class="flash-message message-error" th:text="${error}" th:if="${error}"></div>
+
 
 <article>
-    <header>
-        <h1>This is Register Page</h1>
-    </header>
     <section>
         <div class="box">
             <form th:action="@{/register}" th:object="${userDTO}" method="post">
                 <div class="input">
                     <label for="uname">User name:</label><br>
                     <input type="text" id="uname" name="userName" th:field="*{userName}"><br>
-                    <small style="color:red" th:errors="*{userName}"></small>
+                    <small class="error" th:errors="*{userName}"></small>
                 </div>
                 <div class="input">
                     <label for="email">Email:</label><br>
                     <input type="email" id="email" name="email" th:field="*{email}"><br>
-                    <small style="color:red" th:errors="*{email}"></small>
+                    <small class="error" th:errors="*{email}"></small>
                 </div>
                 <div class="input">
                     <label for="fname">First name:</label><br>
                     <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
-                    <small style="color:red" th:errors="*{firstName}"></small>
+                    <small class="error" th:errors="*{firstName}"></small>
                 </div>
                 <div class="input">
                     <label for="lname">Last name:</label><br>
                     <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
-                    <small style="color:red" th:errors="*{lastName}"></small>
+                    <small class="error" th:errors="*{lastName}"></small>
                 </div>
                 <div class="input">
                     <label for="pass"> Password:</label><br>
                     <input type="password" id="pass" name="password" th:field="*{password}"><br>
-                    <small style="color:red" th:errors="*{password}"></small>
+                    <small class="error" th:errors="*{password}"></small>
                 </div>
                 <div class="input">
                     <label for="confirm"> Confirm password: </label><br>
                     <input type="password" id="confirm" name="confirm" th:field="*{confirmPassword}"><br>
-                    <small style="color:red" th:errors="*{confirmPassword}"></small>
+                    <small class="error" th:errors="*{confirmPassword}"></small>
                 </div>
                 <p>_____________________________________</p>
                 <div class="input">
                     <label for="phone">Phone number: </label><br>
                     <input type="tel" id="phone" name="phone" th:field="*{phoneNumber}"><br>
-                    <small style="color:red" th:errors="*{phoneNumber}"></small>
+                    <small class="error" th:errors="*{phoneNumber}"></small>
                 </div>
                 <div class="input">
                     <label for="address">Address: </label><br>
                     <input type="text" id="address" name="address" th:field="*{address}"><br>
-                    <small style="color:red" th:errors="*{address}"></small>
+                    <small class="error" th:errors="*{address}"></small>
                 </div>
                 <div class="input">
                     <label for="city">City: </label> <br>
                     <input type="text" id="city" name="city" th:field="*{city}"><br>
-                    <small style="color:red" th:errors="*{city}"></small>
+                    <small class="error" th:errors="*{city}"></small>
                 </div>
                 <div class="input">
                     <label for="zip">ZIP/Postal Code: </label><br>
                     <input type="number" id="zip" name="zipCode" th:field="*{zipCode}"><br>
-                    <small style="color:red" th:errors="*{zipCode}"></small>
+                    <small class="error" th:errors="*{zipCode}"></small>
                 </div>
                 <div class="input">
                     <label for="country">Country: </label><br>
                     <input type="text" id="country" name="country" th:field="*{country}"><br>
-                    <small style="color:red" th:errors="*{country}"></small>
+                    <small class="error" th:errors="*{country}"></small>
                 </div>
                 <p>_____________________________________</p>
                 <div class="input">
                     <label for="birthdate">Date of birth:</label><br>
                     <input type="date" id="birthdate" name="dateOfBirth" th:field="*{dateOfBirth}"><br>
-                    <small style="color:red" th:errors="*{dateOfBirth}"></small>
+                    <small class="error" th:errors="*{dateOfBirth}"></small>
                 </div>
                 <div class="input">
                     <label for="SSN">SSN/The birth number</label><br>
                     <input type="text" id="SSN" name="socialSecurityNumber" pattern="[0-9]{6}/[0-900{4}]"
                            th:field="*{socialSecurityNumber}"><br>
-                    <small style="color:red" th:errors="*{socialSecurityNumber}"></small>
+                    <small class="error" th:errors="*{socialSecurityNumber}"></small>
                 </div>
                 <input class="input-btn button long-btn" type="submit" value="Register"> <br>
             </form>
