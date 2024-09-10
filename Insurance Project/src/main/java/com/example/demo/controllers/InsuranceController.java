@@ -1,12 +1,15 @@
 package com.example.demo.controllers;
 
+import com.example.demo.data.entities.EventEntity;
 import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.data.entities.UserEntity;
 import com.example.demo.data.repositories.UserRepository;
+import com.example.demo.models.dto.EventDTO;
 import com.example.demo.models.dto.InsuranceDTO;
 import com.example.demo.models.dto.mappers.InsuranceMapper;
 import com.example.demo.models.exceptions.InsuranceAmountException;
 import com.example.demo.models.exceptions.InsuranceDurationException;
+import com.example.demo.models.services.EventServiceImpl;
 import com.example.demo.models.services.InsuranceServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class InsuranceController {
 
     @Autowired
     private InsuranceMapper insuranceMapper;
+
+    @Autowired
+    private EventServiceImpl eventService;
 
     //zobrazení všech pojištění
     @GetMapping()
@@ -82,6 +88,10 @@ public class InsuranceController {
     ){
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
         model.addAttribute("insurance", insuranceDTO);
+
+        List<EventDTO> events = eventService.getEventByInsuranceId(insuranceId);
+        model.addAttribute("events", events);
+
         return "/insurance/insuranceDetail-Page";
     }
     @GetMapping("edit/{insuranceId}")

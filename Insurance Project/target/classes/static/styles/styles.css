@@ -55,10 +55,6 @@ small a {
 
 }
 
-nav{
-
-}
-
 ul{
     list-style-type:none;
 }
@@ -156,6 +152,11 @@ article{
     margin:0;
     font-size: 18px;
 }
+.box h2{
+    font-size: 22px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
 
 .box p{
     font-weight: bold;
@@ -184,7 +185,18 @@ article{
     margin: 5px;
 }
 
+.detail-title{
+    font-size: 22px;
+    margin-bottom: 15px;
+}
 
+.detail-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
 
 label{
     padding: 3px;
@@ -195,10 +207,6 @@ label{
 .input{
     box-sizing: border-box;
     position: relative;
-}
-
-.input:has(small[th\\:errors]) {
-    margin-bottom: 40px;
 }
 
 .input input{
@@ -285,6 +293,23 @@ label{
 
 .button:hover{
     font-size: 18px;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px
+}
+
+.button-container a,
+.button-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    height: auto;
+    margin: 0;
 }
 
 .flash-success{
@@ -379,7 +404,6 @@ footer a{
     }
 
     section ul li{
-
         display: block;
         margin: 10px;
         padding: 10px 30px;
@@ -392,6 +416,21 @@ footer a{
 
     }
 
+    .no-box-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display:block;
+            box-sizing: border-box;
+        }
+
+        .no-box-list li {
+            border-bottom: 0;
+            padding: 10px;
+            border: none;
+            box-shadow: none;
+            box-sizing: border-box;
+            background-color: #6a994e32;
 
 @media screen and (max-width: 1024px){
     .hamburger{

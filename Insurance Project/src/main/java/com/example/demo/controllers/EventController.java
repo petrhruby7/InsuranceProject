@@ -87,8 +87,10 @@ public class EventController {
     @GetMapping("events/{eventId}")
     public String renderEventDetail(@PathVariable Long eventId,
                                     Model model) {
-        EventDTO eventDTO = eventService.getById(eventId);
-        model.addAttribute("event", eventDTO);
+        EventDTO fetchedEvent = eventService.getById(eventId);
+        InsuranceDTO insuranceDTO = insuranceService.getById(fetchedEvent.getInsuranceId());
+        model.addAttribute("event", fetchedEvent);
+        model.addAttribute("insuranceDTO", insuranceDTO);
         return "event/eventDetail-Page";
     }
 

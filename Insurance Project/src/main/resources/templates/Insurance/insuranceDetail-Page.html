@@ -5,25 +5,46 @@
 <header th:replace="~{Fragments/layout.html :: header}"></header>
 <article>
     <header>
-        <h1>Detail of insurance</h1>
     </header>
     <section>
         <div class="box">
-            <h3 th:text="${insurance.insuranceType}">...</h3>
+            <h2>Detail of insurance</h2>
+            <div>
+                <p>Insurance: <span
+                        th:text="${insurance.insuranceType}">...</span><span> INSURANCE #</span>
+                    <span th:text="${insurance.insuranceId}">...</span></p>
+            </div>
             <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
             <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
             <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
             <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
-            <p>
-                <a th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
-                    <button class="input-btn button">Create insurance event</button>
-                </a>
+            <div class="button-container">
                 <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
                 <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
                 <a th:href="@{/insurance}">
                     <button class="back-btn button">Back</button>
                 </a>
-            </p>
+            </div><br>
+            <h1>My Events for this insurance:</h1><br>
+            <div>
+            <a class="centered-link" th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                <button class="input-btn button long-btn">Create insurance event</button>
+            </a>
+            </div>
+            <ul class="no-box-list">
+                <li th:each="event: ${events}">
+                    <a class="centered-link" th:href="@{'events/' + ${event.eventId}}">
+                        <button class="back-btn button long-btn">Event #: <span th:text="${event.eventId}"></span></button>
+
+                    </a>
+                    <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
+                    <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                    <div class="button-container">
+                        <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
+                        <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </section>
 </article>
