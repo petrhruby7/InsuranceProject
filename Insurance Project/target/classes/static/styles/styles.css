@@ -107,8 +107,18 @@ nav ul a:hover {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-header {
-    text-align: end;
+article header{
+    width: 95%;
+}
+
+.info-header{
+    text-align: center;
+}
+
+.insurance-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 button {
@@ -139,7 +149,7 @@ article {
     justify-content: center;
     align-items: center;
     height: auto;
-    padding-top: 100px;
+    padding-top: 90px;
 }
 
 .box {
@@ -435,6 +445,18 @@ footer a {
 
 }
 
+.grid{
+    padding-bottom: 20px;
+}
+
+.grid p{
+    font-weight: bold;
+}
+
+.grid span{
+    font-weight: normal;
+}
+
 .no-box-list {
     list-style-type: none;
     padding: 0;
@@ -444,16 +466,24 @@ footer a {
 }
 
 .no-box-list li {
-    border-bottom: 0;
+    margin: 10px 0;
     padding: 10px;
     border: none;
     box-shadow: none;
     box-sizing: border-box;
     background-color: #6a994e32;
+    border-radius: 12px;
 }
 
+.no-box-list li a{
+    margin: 0;
+}
 
 @media screen and (max-width: 1024px) {
+    article {
+        padding-top: 70px;
+    }
+
     .hamburger {
         display: block;
     }
