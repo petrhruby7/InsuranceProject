@@ -14,10 +14,11 @@
         <div class="grid">
             <ul class="grid-list">
                 <li th:each="event: ${events}">
-                    <a class="centered-link" th:href="@{'events/' + ${event.eventId}}">
-                        <button class="back-btn button long-btn">Event #: <span th:text="${event.eventId}"></span>
-                        </button>
-                    </a>
+                    <div class="detail-link">
+                        <a th:href="@{'events/' + ${event.eventId}}">
+                            Event: #<span th:text="${event.eventId}"></span>
+                        </a>
+                    </div>
                     <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
                     <p>Event date: <span th:text="${event.eventDate}">...</span></p>
                     <div class="button-container">

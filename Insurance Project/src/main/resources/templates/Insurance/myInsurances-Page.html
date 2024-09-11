@@ -6,6 +6,7 @@
 
 <article>
     <div class="flash-success" th:text="${success}" th:if="${success}"></div>
+    <div class="flash-error" th:text="${error}" th:if="${error}"></div>
     <header class="insurance-header">
         <h1>My insurances</h1>
         <p>
@@ -16,23 +17,29 @@
         <div class="grid">
             <ul class="grid-list">
                 <li th:each="insurance: ${insurances}">
-                    <a class="centered-link" th:href="@{'/insurance/' + ${insurance.insuranceId}}">
-                        <button class="back-btn button long-btn"><span th:text="${insurance.insuranceType}"></span> INSURANCE #
-                            <span th:text="${insurance.insuranceId}"></span>
-                        </button>
-                    </a>
-                    <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
-                    <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+                    <div class="detail-link">
+                        <a th:href="@{'/insurance/' + ${insurance.insuranceId}}">
+                            <span th:text="${insurance.insuranceType}"></span>
+                            INSURANCE
+                        </a>
+                    </div>
                     <p>
-                        <a class="centered-link" th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                        <a class="centered-link event-btn"
+                           th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
                             <button class="input-btn button long-btn">Create event</button>
                         </a>
+                    </p>
+                    <p>Identification number: <span th:text="${insurance.insuranceId}"></span></p>
+                    <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+                    <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+
+
                     <div class="button-container">
                         <a class="edit-btn button" th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
                         <a class="delete-btn button"
                            th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">Delete</a>
                     </div>
-                    </p>
+
                 </li>
             </ul>
         </div>

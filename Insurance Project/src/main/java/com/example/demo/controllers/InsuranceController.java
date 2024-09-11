@@ -13,6 +13,7 @@ import com.example.demo.models.services.EventServiceImpl;
 import com.example.demo.models.services.InsuranceServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -138,7 +139,13 @@ public class InsuranceController {
     //smaže existující pojištění
     @GetMapping("delete/{insuranceId}")
     public String deleteInsurance (@PathVariable Long insuranceId, RedirectAttributes redirectAttributes) {
-        insuranceService.removeInsurance(insuranceId);
+
+        try {
+            insuranceService.removeInsurance(insuranceId);
+        } catch (DataIntegrityViolationException e){
+            redirectAttributes.addFlashAttribute("error", "Cannot delete insurance with events attached. Please delete the associated events first");
+            return "redirect:/insurance";
+        }
 
         redirectAttributes.addFlashAttribute("success", "Insurance was deleted");
         return "redirect:/insurance";

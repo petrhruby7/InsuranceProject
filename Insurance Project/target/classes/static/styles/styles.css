@@ -160,15 +160,17 @@ article {
     border-radius: 15px;
     background-color: #a7c95711;
     flex-direction: column;
+    max-width: 430px;
     min-width: 400px;
 }
+
 
 .box h1 {
     margin: 0;
     font-size: 18px;
 }
 
-.box h2 {
+.box .detail-title {
     font-size: 22px;
     margin-top: 0px;
     margin-bottom: 15px;
@@ -283,15 +285,16 @@ label {
 }
 
 .edit-btn {
-    background-color: #f2e8cf;
+    background-color: #e9d9af;
     border: 2px solid #bf9a35;
     color: #bf9a35;
 }
 
 .back-btn {
-    background-color: #6b79cd;
-    border: 2px solid #3a4bac;
+    background-color: #a77148;
+    border: 2px solid #8b5e3c;
     color: #f5f8fa;
+
 }
 
 .delete-btn {
@@ -306,6 +309,7 @@ label {
 }
 
 .button {
+    font: "Lora", sans-serif;
     font-size: 16px;
     padding: 10px 15px;
     border-radius: 10px;
@@ -313,7 +317,7 @@ label {
 }
 
 .button:hover {
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .button-container {
@@ -433,7 +437,8 @@ footer a {
 }
 
 .grid-list li {
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin: 10px;
     padding: 10px 30px;
     border: #6a994e solid 2px;
@@ -443,6 +448,12 @@ footer a {
     transition: all 0.3s ease;
     width: auto;
 
+}
+.grid-list li .button-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: auto;
 }
 
 .grid{
@@ -477,6 +488,33 @@ footer a {
 
 .no-box-list li a{
     margin: 0;
+}
+
+.detail-link{
+    font-size: 22px;
+    text-align: start;
+    padding-top: 15px;
+    text-transform: uppercase;
+}
+
+.detail-link span{
+    font-size: 22px;
+    font-weight:bold;
+}
+
+.detail-link a{
+    font-weight:bold;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    text-decoration: underline;
+    color: #386641;
+    transition: 0.3s ease;
+}
+
+.detail-link a:hover{
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+    color: #a77148;
 }
 
 @media screen and (max-width: 1024px) {
