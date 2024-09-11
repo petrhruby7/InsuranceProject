@@ -22,6 +22,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -93,20 +95,42 @@ public class InsuranceController {
         List<EventDTO> events = eventService.getEventByInsuranceId(insuranceId);
         model.addAttribute("events", events);
 
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String startDateFormatter = insuranceDTO.getStartDate().format(formatter);
+        String endDateFormatter = insuranceDTO.getEndDate().format(formatter);
+        model.addAttribute("formatterStartDate", startDateFormatter);
+        model.addAttribute("formatterEndDate", endDateFormatter);
+
+        //todo  opravit
+        List<String> formattedEventDates = new ArrayList<>();
+        for (EventDTO event: events){
+            String eventDateFormatter = event.getEventDate().format(formatter);
+            formattedEventDates.add(eventDateFormatter);
+        }
+        model.addAttribute("formatterEventDate", formattedEventDates);
+
         return "/insurance/insuranceDetail-Page";
     }
     @GetMapping("edit/{insuranceId}")
     public String renderEditInsuranceForm(
             @PathVariable Long insuranceId,
-            InsuranceDTO insuranceDTO
+            InsuranceDTO insuranceDTO, Model model
     ){
+
         InsuranceDTO fetchedInsurance = insuranceService.getById(insuranceId);
         insuranceMapper.updateInsuranceDTO(fetchedInsurance,insuranceDTO);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");//zobrazí datum správně
+        String formattedDate = fetchedInsurance.getStartDate().format(formatter);
+        model.addAttribute("formattedStartDate", formattedDate);
+
         return "/insurance/updateInsurance-Page";
     }
 
     @PostMapping("edit/{insuranceId}")
-    public String editArticle(
+    public String editInsurance(
             @PathVariable Long insuranceId,
             @Valid @ModelAttribute InsuranceDTO insuranceDTO,
             BindingResult result,

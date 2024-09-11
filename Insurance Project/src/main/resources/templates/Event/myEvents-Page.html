@@ -20,7 +20,7 @@
                         </a>
                     </div>
                     <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
-                    <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                    <p>Event date: <span th:text="${formatterEventDate}">...</span></p>
                     <div class="button-container">
                         <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
                         <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>

@@ -18,7 +18,7 @@
             <p>City: <span th:text="${userDTO.city}">...</span></p>
             <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
             <p>Country: <span th:text="${userDTO.country}">...</span></p>
-            <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
+            <p>Date of birth: <span th:text="${formatterDateOfBirth}">...</span></p>
             <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
             <p >
                 <a class="centered-link" th:href="@{/profile/update}">

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.yaml.snakeyaml.events.Event;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -41,7 +42,14 @@ public class EventController {
     public String renderEvents(Model model) {
         List<EventEntity> events = eventService.getEventsForCurrentUser();
         model.addAttribute("events", events);
+    /* todo dodělat to tady
+        EventDTO eventDTO;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String eventDateFormatter = eventDTO.getEventDate().format(formatter);
+        model.addAttribute("formatterEventDate", eventDateFormatter);*/
         return "event/myEvents-Page"; //vrací šablonu se seznamem mých pojištění
+
     }
 
     //zobrazeni formuláře pro vytvoření eventu
@@ -50,6 +58,14 @@ public class EventController {
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
         eventDTO.setInsuranceId(insuranceId);
         model.addAttribute("insuranceDTO", insuranceDTO);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+        String startDateFormatter = insuranceDTO.getStartDate().format(formatter);
+        String endDateFormatter = insuranceDTO.getEndDate().format(formatter);
+        model.addAttribute("formatterStartDate", startDateFormatter);
+        model.addAttribute("formatterEndDate", endDateFormatter);
+
+
         return "event/createEvent-Page";
     }
 
@@ -91,6 +107,11 @@ public class EventController {
         InsuranceDTO insuranceDTO = insuranceService.getById(fetchedEvent.getInsuranceId());
         model.addAttribute("event", fetchedEvent);
         model.addAttribute("insuranceDTO", insuranceDTO);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+        String eventDateFormatter =  fetchedEvent.getEventDate().format(formatter);
+        model.addAttribute("formatterEventDate", eventDateFormatter);
+
         return "event/eventDetail-Page";
     }
 
@@ -101,6 +122,15 @@ public class EventController {
                                       Model model) {
         EventDTO fetchedEvent = eventService.getById(eventId);
         eventMapper.updateEventDTO(fetchedEvent, eventDTO);
+
+        InsuranceDTO fetchedInsurance = insuranceService.getById(fetchedEvent.getInsuranceId());
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String startDateFormatter = fetchedInsurance.getStartDate().format(formatter);
+        String endDateFormatter = fetchedInsurance.getEndDate().format(formatter);
+        model.addAttribute("formattedStartDate", startDateFormatter);
+        model.addAttribute("formattedEndDate", endDateFormatter);
 
         InsuranceDTO insuranceDTO = insuranceService.getById(fetchedEvent.getInsuranceId());
         model.addAttribute("eventDTO", eventDTO);

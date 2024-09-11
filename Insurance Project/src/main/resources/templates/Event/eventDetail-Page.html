@@ -14,7 +14,7 @@
                     <span th:text="${insuranceDTO.insuranceId}">...</span></a></p>
             </div>
             <p>Description of Event: <span th:text="${event.eventDescription}">...</span></p>
-            <p>Date of Event: <span th:text="${event.eventDate}">...</span></p>
+            <p>Date of Event: <span th:text="${formatterEventDate}">...</span></p>
             <div class="button-container">
                 <a class="edit-btn button" th:href="@{${event.eventId} + '/edit'}">Edit</a>
                 <a class="delete-btn button" th:href="@{${event.eventId} + '/delete'}">Delete</a>

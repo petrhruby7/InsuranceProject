@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.format.DateTimeFormatter;
+
 
 @Controller
 public class ProfileController {
@@ -26,6 +28,11 @@ public class ProfileController {
     public String showProfilePage(Model model){
         UserDTO userDTO = userService.getCurrentUser();
         model.addAttribute("userDTO", userDTO);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String dateOfBirthFormatter = userDTO.getDateOfBirth().format(formatter);
+        model.addAttribute("formatterDateOfBirth", dateOfBirthFormatter);
+
         return "profile/profile-Page"; //vrací na profile-Page
     }
 
@@ -46,7 +53,7 @@ public class ProfileController {
         userProfileDTO.setCountry(currentUser.getCountry());
         userProfileDTO.setDateOfBirth(currentUser.getDateOfBirth());
         userProfileDTO.setSocialSecurityNumber(currentUser.getSocialSecurityNumber());
-
+        
         model.addAttribute("userProfileDTO", userProfileDTO);
         return "profile/updateProfile-Page"; //vrátí updateProfilePage
     }

@@ -29,8 +29,8 @@
                     <small class="error" th:errors="*{insuredItem}"></small>
                 </div>
                 <div class="input">
-                    <label for="startDate">Insurance start date:</label><br>
-                    <input type="date" id="startDate" name="startDate" th:field="*{startDate}"><br>
+                    <p class="date-info">Insurance start date: <span th:text="${formattedStartDate}">...</span></p>
+                    <input type="hidden" id="startDate" name="startDate" th:field="*{startDate}"><br>
                     <small class="error" th:errors="*{startDate}"></small>
                 </div>
                 <div class="input">
