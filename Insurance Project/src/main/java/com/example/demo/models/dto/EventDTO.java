@@ -18,8 +18,10 @@ public class EventDTO {
     private LocalDate eventDate;
 
     @NotBlank(message = "Event description is required")
-    @Size(min=10, max = 250, message = "Event description must be between 10 and 250 characters")
+    @Size(min = 10, max = 250, message = "Event description must be between 10 and 250 characters")
     private String eventDescription;
+
+    private String formattedDate;
 
     //region: gettery a settery
 
@@ -53,7 +55,15 @@ public class EventDTO {
 
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
-        }
+    }
+
+    public String getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
 
     //konec regionu: gettery a settery
 }

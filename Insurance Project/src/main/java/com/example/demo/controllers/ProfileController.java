@@ -53,7 +53,7 @@ public class ProfileController {
         userProfileDTO.setCountry(currentUser.getCountry());
         userProfileDTO.setDateOfBirth(currentUser.getDateOfBirth());
         userProfileDTO.setSocialSecurityNumber(currentUser.getSocialSecurityNumber());
-        
+
         model.addAttribute("userProfileDTO", userProfileDTO);
         return "profile/updateProfile-Page"; //vrátí updateProfilePage
     }

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,6 +61,18 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventEntity> getEventsForCurrentUser() {
         UserDTO currentUser = userService.getCurrentUser();
+        List<EventEntity> events = eventRepository.findByInsuranceEntityUserEntityUserId(currentUser.getUserId());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        List<EventDTO> formattedEvents = new ArrayList<>();
+        //todo tohle je možná zbytečný
+        for (EventEntity event: events){
+            EventDTO eventDTO = eventMapper.toDTO(event);
+            String formattedDate = event.getEventDate().format(formatter);
+            eventDTO.setFormattedDate(formattedDate);
+            formattedEvents.add(eventDTO);
+        }
+
         return eventRepository.findByInsuranceEntityUserEntityUserId(currentUser.getUserId());
     }
 

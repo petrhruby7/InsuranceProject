@@ -42,14 +42,7 @@ public class EventController {
     public String renderEvents(Model model) {
         List<EventEntity> events = eventService.getEventsForCurrentUser();
         model.addAttribute("events", events);
-    /* todo dodělat to tady
-        EventDTO eventDTO;
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String eventDateFormatter = eventDTO.getEventDate().format(formatter);
-        model.addAttribute("formatterEventDate", eventDateFormatter);*/
         return "event/myEvents-Page"; //vrací šablonu se seznamem mých pojištění
-
     }
 
     //zobrazeni formuláře pro vytvoření eventu
@@ -109,7 +102,7 @@ public class EventController {
         model.addAttribute("insuranceDTO", insuranceDTO);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-        String eventDateFormatter =  fetchedEvent.getEventDate().format(formatter);
+        String eventDateFormatter = fetchedEvent.getEventDate().format(formatter);
         model.addAttribute("formatterEventDate", eventDateFormatter);
 
         return "event/eventDetail-Page";
