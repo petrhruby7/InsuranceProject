@@ -28,3 +28,5 @@ public class InsuranceProjectApplication {
 
 //todo: login page - bez chybných hlášek? :O
 //todo: css - aby byli option in create insurance - zelený a ne modrý při výběru
+
+//todo opravit github
