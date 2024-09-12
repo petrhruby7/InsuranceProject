@@ -34,7 +34,7 @@ public class InsuranceController {
     private InsuranceServiceImpl insuranceService;
 
     @Autowired
-    private UserRepository userRepository; //nutné pro najití UserId
+    private UserRepository userRepository;
 
     @Autowired
     private InsuranceMapper insuranceMapper;
@@ -42,21 +42,22 @@ public class InsuranceController {
     @Autowired
     private EventServiceImpl eventService;
 
-    //zobrazení všech pojištění
+    //render a list of insurances belonging to the logged-in user
     @GetMapping()
-    public String renderInsurances(Model model){
+    public String renderInsurances(Model model) {
         List<InsuranceEntity> insurances = insuranceService.getInsurancesForCurrentUser();
         model.addAttribute("insurances", insurances);
-        return "/insurance/myInsurances-Page"; //vrací šablonu kde je seznam mých pojištění
+        return "/insurance/myInsurances-Page";
     }
-    //zobrazí formulář pro vytvoření pojištění
+
+    //render form for creating insurance
     @GetMapping("create")
-    public String renderCreateInsurance(@ModelAttribute InsuranceDTO insurance){
-        return "/insurance/createInsurance-Page";//vrací šablonu s formulářem pro tvorbu pojištění
+    public String renderCreateInsurance(@ModelAttribute InsuranceDTO insurance) {
+        return "/insurance/createInsurance-Page";
 
     }
 
-    //možnost vytvořit pojištění
+    //allow to create an insurance
     @PostMapping("create")
     public String createInsurance(@Valid @ModelAttribute InsuranceDTO insuranceDTO,
                                   BindingResult result,
@@ -64,70 +65,66 @@ public class InsuranceController {
         if (result.hasErrors())
             return renderCreateInsurance(insuranceDTO);
 
-        // Najde aktuálního/přihlášeného uživatele
+        // finds the currently logged user
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         try {
-            insuranceService.createInsurance(insuranceDTO,user);
+            insuranceService.createInsurance(insuranceDTO, user);
         } catch (InsuranceDurationException e) {
-            result.rejectValue("startDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
-            result.rejectValue("endDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
-            return ("/insurance/createInsurance-Page"); //kontrola že je pojištění sjednáno alespon na 6 měsicu a nepřesahuje 5let
+            result.rejectValue("startDate", "error", "The insurance must be concluded for at least 6 months, maximum 5 years");
+            result.rejectValue("endDate", "error", "The insurance must be concluded for at least 6 months, maximum 5 years");
+            return ("/insurance/createInsurance-Page"); //checking that the insurance is arranged for at least 6 months and does not exceed 5 years
         } catch (InsuranceAmountException e) {
             result.rejectValue("amount", "error", "The sum insured must be greater than CZK 10,000 and less than CZK 10,000,000");
-            return ("/insurance/createInsurance-Page");// kontrola že že pojistná částka je v hodnotě mezi 10 000 - 10 000 000
+            return ("/insurance/createInsurance-Page");//check that the sum insured is between CZK 10,000 - CZK 10,000,000
         }
 
         redirectAttributes.addFlashAttribute("success", "Insurance is created");
-        return "redirect:/insurance"; //po vytvoření pojištění přesměruje zpět na seznam pojištění
+        return "redirect:/insurance";
     }
 
-    //zobrazí detail pojištění
+    //render detail of insurance
     @GetMapping("{insuranceId}")
     public String renderInsuranceDetail(
             @PathVariable Long insuranceId,
             Model model
-    ){
+    ) {
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
         model.addAttribute("insurance", insuranceDTO);
 
         List<EventDTO> events = eventService.getEventByInsuranceId(insuranceId);
         model.addAttribute("events", events);
 
-
+        //reformats data into the pattern dd.MM.yyyy
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String startDateFormatter = insuranceDTO.getStartDate().format(formatter);
         String endDateFormatter = insuranceDTO.getEndDate().format(formatter);
         model.addAttribute("formatterStartDate", startDateFormatter);
         model.addAttribute("formatterEndDate", endDateFormatter);
 
-        //todo  opravit
-        List<String> formattedEventDates = new ArrayList<>();
-        for (EventDTO event: events){
-            String eventDateFormatter = event.getEventDate().format(formatter);
-            formattedEventDates.add(eventDateFormatter);
-        }
-        model.addAttribute("formatterEventDate", formattedEventDates);
-
         return "/insurance/insuranceDetail-Page";
     }
+
+    //render form for editing insurance
     @GetMapping("edit/{insuranceId}")
     public String renderEditInsuranceForm(
             @PathVariable Long insuranceId,
             InsuranceDTO insuranceDTO, Model model
-    ){
+    ) {
 
         InsuranceDTO fetchedInsurance = insuranceService.getById(insuranceId);
-        insuranceMapper.updateInsuranceDTO(fetchedInsurance,insuranceDTO);
+        insuranceMapper.updateInsuranceDTO(fetchedInsurance, insuranceDTO);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");//zobrazí datum správně
+        //reformats data into the pattern dd.MM.yyyy
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String formattedDate = fetchedInsurance.getStartDate().format(formatter);
         model.addAttribute("formattedStartDate", formattedDate);
 
         return "/insurance/updateInsurance-Page";
     }
 
+    //allow to edit the data of insurance
     @PostMapping("edit/{insuranceId}")
     public String editInsurance(
             @PathVariable Long insuranceId,
@@ -145,27 +142,27 @@ public class InsuranceController {
             insuranceDTO.setInsuranceId(insuranceId);
             insuranceService.editInsurance(insuranceDTO);
 
-        }catch (InsuranceDurationException e) {
-            result.rejectValue("startDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
-            result.rejectValue("endDate", "error","The insurance must be concluded for at least 6 months, maximum 5 years");
-            return "/insurance/updateInsurance-Page"; //kontrola že je pojištění sjednáno alespon na 6 měsicu a nepřesahuje 5let
+        } catch (InsuranceDurationException e) {
+            result.rejectValue("startDate", "error", "The insurance must be concluded for at least 6 months, maximum 5 years");
+            result.rejectValue("endDate", "error", "The insurance must be concluded for at least 6 months, maximum 5 years");
+            return "/insurance/updateInsurance-Page"; //checking that the insurance is arranged for at least 6 months and does not exceed 5 years
         } catch (InsuranceAmountException e) {
             result.rejectValue("amount", "error", "The sum insured must be greater than CZK 10,000 and less than CZK 10,000,000");
-            return "/insurance/updateInsurance-Page";// kontrola že že pojistná částka je v hodnotě mezi 10 000 - 10 000 000
+            return "/insurance/updateInsurance-Page"; //check that the sum insured is between CZK 10,000 - CZK 10,000,000
         }
 
         redirectAttributes.addFlashAttribute("success", "Insurance was updated");
         return "redirect:/insurance";
     }
-    //todo: v tenhle moment funguje uprava špatně... pojištění které jsem založil 1.9 devaty a chci upravit 3.9 musím změnit na to že bylo založeno 3.9!!
 
-    //smaže existující pojištění
+
+    //delete existing insurance
     @GetMapping("delete/{insuranceId}")
-    public String deleteInsurance (@PathVariable Long insuranceId, RedirectAttributes redirectAttributes) {
+    public String deleteInsurance(@PathVariable Long insuranceId, RedirectAttributes redirectAttributes) {
 
         try {
             insuranceService.removeInsurance(insuranceId);
-        } catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             redirectAttributes.addFlashAttribute("error", "Cannot delete insurance with events attached. Please delete the associated events first");
             return "redirect:/insurance";
         }
@@ -173,7 +170,7 @@ public class InsuranceController {
         redirectAttributes.addFlashAttribute("success", "Insurance was deleted");
         return "redirect:/insurance";
     }
-    //todo: předělat deleteInsurance z Get metody na Delete Metodu!
+
 
 }
 

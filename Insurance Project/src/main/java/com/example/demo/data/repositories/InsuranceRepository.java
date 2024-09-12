@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface InsuranceRepository extends JpaRepository<InsuranceEntity, Long> {
 
-
-    //vyhledá entitu dle jejího unikátního id
+    //find entity by its unique ID
     Optional<InsuranceEntity> findByInsuranceId(Long insuranceId);
-    //vyhledá všechny pojištění podle id
+
+    //find list of entities by logged user ID
     List<InsuranceEntity> findByUserEntityUserId(Long userId);
 }

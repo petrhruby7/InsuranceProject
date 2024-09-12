@@ -6,25 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    //zobrazí úvodní stránku
+    //render landing page
     @GetMapping("/")
-    public String landingPage(){
-        return "landing-Page"; //vrací šablonu landing page, úvodní stránka pro nepřihlášené
+    public String landingPage() {
+        return "landing-Page";
     }
 
-    //zobrazí domovskou stránku pro přihlášené uživatele
+    //render home page
     @GetMapping("/home")
-    public String homePage(){
-        return "home-Page"; //vrací šablonu home page, pouze pro přihlášené
+    public String homePage() {
+        return "home-Page";
     }
 
+    //render about us Page
     @GetMapping("/aboutUs")
-    public  String aboutUsPage() {
+    public String aboutUsPage() {
         return "aboutUs-Page";
     }
 
+    //render contact page
     @GetMapping("/contact")
-    public  String contactPage() {
+    public String contactPage() {
         return "contact-Page";
     }
 }

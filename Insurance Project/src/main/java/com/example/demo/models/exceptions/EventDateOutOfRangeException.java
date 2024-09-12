@@ -1,4 +1,4 @@
 package com.example.demo.models.exceptions;
 
-public class EventDateOutOfRangeException extends RuntimeException{
+public class EventDateOutOfRangeException extends RuntimeException {
 }

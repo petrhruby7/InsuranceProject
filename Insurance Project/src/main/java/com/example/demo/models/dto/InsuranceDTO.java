@@ -7,30 +7,28 @@ import java.time.LocalDate;
 
 public class InsuranceDTO {
 
-    //pole pro uživatele
+    //fields for users and insurance
     private Long insuranceId;
     private Long userId;
 
     @NotNull(message = "You must choose type of insurance.")
-    private InsuranceType insuranceType;//výběr typu pojištění (přes enum)
+    private InsuranceType insuranceType;
 
     @NotNull(message = "Sum insured is required")
     @Positive(message = "Sum insured must be positive number")
-    private int amount; //pojistná částka - musí být zadána
+    private int amount;
 
-    //@NotBlank(message = "Insured item is required")
-    private String insuredItem; // pojištěný předmět či osobs (nemusí být zadána)
+    private String insuredItem;
 
     @NotNull(message = "Insurance start date is required")
     @FutureOrPresent(message = "Insurance start date must be today or in future")
-    private LocalDate startDate; //začátek pojištění - dnes nebo někdy v budoucnu
+    private LocalDate startDate;
 
     @NotNull(message = "Insurance end date is required")
     @Future(message = "Insurance end date must be in future")
-    private LocalDate endDate; //konec pojištění todo - nastavit aby byl aspoň rok v budoucnosti od startu pojištění
+    private LocalDate endDate;
 
-    //region: gettery a settery
-
+    //Region: getters a setters
 
     public Long getInsuranceId() {
         return insuranceId;
@@ -88,5 +86,5 @@ public class InsuranceDTO {
         this.endDate = endDate;
     }
 
-    //konec regionu
+    //End of region: getters a setters
 }

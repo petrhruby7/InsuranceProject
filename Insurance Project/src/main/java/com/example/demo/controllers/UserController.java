@@ -15,26 +15,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
 
-    //zobrazení login formuláře
+    //render login page
     @GetMapping("/login")
     public String loginPage() {
-        return "/user/login-Page"; //vrací šablonu login page
+        return "/user/login-Page";
     }
 
-    //zobrazení register formuláře
+    //render register page
     @GetMapping("/register")
     public String showRegisterPage(@ModelAttribute UserDTO userDTO) {
-        return "/user/register-Page"; //vrací šablonu register page
+        return "/user/register-Page";
     }
 
-    //možnost registrovat se - vpylnit udaje do registračního formuláře
+    //will allow you to create a registration
     @PostMapping("/register")
     public String handleRegisterPage(
             @Valid @ModelAttribute UserDTO userDTO,
@@ -42,28 +41,27 @@ public class UserController {
             RedirectAttributes redirectAttributes
     ) {
         if (result.hasErrors())
-            return showRegisterPage(userDTO); //při chybné registraci znovu vrací register page
+            return showRegisterPage(userDTO);
 
         try {
             userService.createUser(userDTO);
         } catch (DuplicateUserNameException e) {
             result.rejectValue("userName", "error", "Username is already taken");
-            return ("/user/register-Page"); //kontrola zda Username není zabrán
+            return ("/user/register-Page"); //check if UserName is not taken
         } catch (DuplicateEmailException e) {
             result.rejectValue("email", "error", "Email is already taken");
-            return ("/user/register-Page"); //kontrola zda email není zabrán
+            return ("/user/register-Page"); //check if email is not taken
         } catch (PasswordDoNotEqualException e) {
             result.rejectValue("password", "error", "Passwords do not match. please try again");
             result.rejectValue("confirmPassword", "error", "Passwords do not match. please try again");
-            return ("/user/register-Page"); //kontrola zda je zadáno správně heslo
+            return ("/user/register-Page"); //check if password and confirm password matches
         } catch (UserIsNotAdultException e) {
             result.rejectValue("dateOfBirth", "error", "User is not older than 18 years");
-            return ("/user/register-Page"); //kontrola že je uživatel dospělý
+            return ("/user/register-Page"); //check if User is adult
         }
 
-        redirectAttributes.addFlashAttribute("success", "User is registered");//uspěšná hláška, zjeví se pokud se podaří uživateli zaregistrovat se
-
-        return "redirect:/"; // po uspěšné registraci přesměruje uživatele a vrací langing page
+        redirectAttributes.addFlashAttribute("success", "User is registered");
+        return "redirect:/";
     }
 
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories // Aktivuji JPA ve svém ICP projektu
+@EnableJpaRepositories //I am activating JPA in my ICP project
 public class InsuranceProjectApplication {
 
     public static void main(String[] args) {
@@ -22,10 +22,10 @@ public class InsuranceProjectApplication {
 //todo: smazat muj vlastní profil
 //todo: přihlasit rovvnou po registraci
 
-
 //todo: chci řadit eventy a insurace dle svého id
 
 //todo: css - aby byli option in create insurance - zelený a ne modrý při výběru
 //todo: možnost schovat nav bar?
 
 //todo: nápovědy k formulářům
+//todo: předělat deleteInsurance z Get metody na Delete Metodu!

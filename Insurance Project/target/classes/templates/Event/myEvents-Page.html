@@ -20,7 +20,9 @@
                         </a>
                     </div>
                     <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
+                    <!-- TU JE DATUM VE ŠPATNÉM FORMÁTU
                     <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                    -->
                     <div class="button-container">
                         <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">
                             <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon"> Edit</a>

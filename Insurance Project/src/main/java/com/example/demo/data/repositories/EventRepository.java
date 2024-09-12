@@ -8,10 +8,12 @@ import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
-    //vyhledá entitu dle jejího unikátního id
+    //find entity by its unique ID
     Optional<EventEntity> findByEventId(Long eventId);
-    //vyhledá entitu dle Id pojištění ke kterému je přiřazená
+
+    //find list of entities by logged user ID
     List<EventEntity> findByInsuranceEntityInsuranceId(Long insuranceId);
-    //vyhledá entitu dle userId
+
+    //find list of entities by associated insurance ID
     List<EventEntity> findByInsuranceEntityUserEntityUserId(Long userId);
 }

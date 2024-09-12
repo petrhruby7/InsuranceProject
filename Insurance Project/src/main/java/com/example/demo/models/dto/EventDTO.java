@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class EventDTO {
 
-    //pole pro užovatele
+    //fields for users and insurances
     private Long eventId;
     private Long insuranceId;
 
@@ -21,9 +21,7 @@ public class EventDTO {
     @Size(min = 10, max = 250, message = "Event description must be between 10 and 250 characters")
     private String eventDescription;
 
-    private String formattedDate;
-
-    //region: gettery a settery
+    //Region: getters a setters
 
     public Long getEventId() {
         return eventId;
@@ -57,13 +55,5 @@ public class EventDTO {
         this.eventDescription = eventDescription;
     }
 
-    public String getFormattedDate() {
-        return formattedDate;
-    }
-
-    public void setFormattedDate(String formattedDate) {
-        this.formattedDate = formattedDate;
-    }
-
-    //konec regionu: gettery a settery
+    //End of region: getters a setters
 }
