@@ -10,7 +10,8 @@
     <header class="insurance-header">
         <h1>My insurances</h1>
         <p>
-            <a class="input-btn button" href="insurance/create">Create insurance</a>
+            <a class="input-btn button" href="insurance/create">
+                <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create insurance</a>
         </p>
     </header>
     <section>
@@ -26,7 +27,8 @@
                     <p>
                         <a class="centered-link event-btn"
                            th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
-                            <button class="input-btn button long-btn">Create event</button>
+                            <button class="input-btn button long-btn">
+                                <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create event</button>
                         </a>
                     </p>
                     <p>Identification number: <span th:text="${insurance.insuranceId}"></span></p>
@@ -35,9 +37,11 @@
 
 
                     <div class="button-container">
-                        <a class="edit-btn button" th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
+                        <a class="edit-btn button" th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">
+                            <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
                         <a class="delete-btn button"
-                           th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">Delete</a>
+                           th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">
+                            <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
                     </div>
 
                 </li>

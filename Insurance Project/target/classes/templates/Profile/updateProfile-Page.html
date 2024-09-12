@@ -62,13 +62,14 @@
                            th:field="*{socialSecurityNumber}"><br>
                     <small class="error" th:errors="*{socialSecurityNumber}"></small>
                 </div>
-                <input class="input-btn button long-btn" type="submit" value="Update"> <br>
+                <input class="input-btn button long-btn" type="submit" value="Confirm changes"> <br>
             </form>
-            <p>
+            <div>
                 <a class="centered-link" th:href="@{/profile}">
-                    <button class="back-btn button long-btn">Back</button>
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back</button>
                 </a>
-            </p>
+            </div>
         </div>
     </section>
 </article>

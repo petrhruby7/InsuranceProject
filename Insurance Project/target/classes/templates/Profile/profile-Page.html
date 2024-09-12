@@ -22,7 +22,8 @@
             <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
             <p >
                 <a class="centered-link" th:href="@{/profile/update}">
-                    <button class="input-btn button long-btn" type=button>Change my details</button>
+                    <button class="edit-btn button long-btn" type=button>
+                        <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Change my details</button>
                 </a>
             </p>
         </div>

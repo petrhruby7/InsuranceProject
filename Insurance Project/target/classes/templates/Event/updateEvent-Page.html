@@ -32,11 +32,12 @@
                     <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
                     <small class="error" th:errors="*{eventDate}"></small>
                 </div>
-                <input class="input-btn button long-btn" type="submit" value="Edit insurance event">
+                <input class="input-btn button long-btn" type="submit" value="Confirm changes">
             </form>
             <p>
                 <a class="centered-link" th:href="@{/insurance/events}">
-                    <button class="back-btn button long-btn">Back to Events</button>
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back to Events</button>
                 </a>
             </p>
         </div>

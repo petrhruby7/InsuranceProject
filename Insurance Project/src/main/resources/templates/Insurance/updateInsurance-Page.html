@@ -38,11 +38,12 @@
                     <input type="date" id="endDate" name="endDate" th:field="*{endDate}"><br>
                     <small class="error" th:errors="*{endDate}"></small>
                 </div>
-                <input class="input-btn button long-btn" type="submit" value="Edit">
+                <input class="input-btn button long-btn" type="submit" value="Confirm changes">
             </form>
             <p>
                 <a class="centered-link" th:href="@{/insurance}">
-                    <button class="back-btn button long-btn">Back</button>
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back</button>
                 </a>
             </p>
         </div>

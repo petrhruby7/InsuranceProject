@@ -96,7 +96,6 @@ public class InsuranceController {
         model.addAttribute("events", events);
 
 
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String startDateFormatter = insuranceDTO.getStartDate().format(formatter);
         String endDateFormatter = insuranceDTO.getEndDate().format(formatter);

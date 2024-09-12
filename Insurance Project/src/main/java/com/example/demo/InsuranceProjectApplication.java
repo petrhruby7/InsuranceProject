@@ -14,13 +14,18 @@ public class InsuranceProjectApplication {
 
 }
 
-//todo: DateTimeFormater utility třída - DRY
+//todo: DateTimeFormater utility třída - DRY??
 //todo: formatovat data na stránce My events + Insurance detail
 
 //todo: možnost změnit uživatelské heslo
 //todo: po registraci zustan rovnou přihlášený?
 //todo: smazat muj vlastní profil
+//todo: přihlasit rovvnou po registraci
+
 
 //todo: chci řadit eventy a insurace dle svého id
 
 //todo: css - aby byli option in create insurance - zelený a ne modrý při výběru
+//todo: možnost schovat nav bar?
+
+//todo: nápovědy k formulářům

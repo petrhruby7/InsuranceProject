@@ -17,15 +17,19 @@
             <p>Start of insurance: <span th:text="${formatterStartDate}">...</span></p>
             <p>End of insurance: <span th:text="${formatterEndDate}">...</span></p>
             <div class="button-container">
-                <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
-                <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
-                <a class="back-btn button" th:href="@{/insurance}">Back</a>
+                <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">
+                    <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
+                <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">
+                    <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
+                <a class="back-btn button" th:href="@{/insurance}">
+                    <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back</a>
             </div>
             <br>
             <h1>My Events for this insurance:</h1><br>
             <div>
                 <a class="centered-link" th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
-                    <button class="input-btn button long-btn">Create insurance event</button>
+                    <button class="input-btn button long-btn">
+                        <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create insurance event</button>
                 </a>
             </div>
             <ul class="no-box-list">
@@ -36,10 +40,14 @@
                         </a>
                     </div>
                     <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
+                    <!-- TU JE DATUM VE ŠPATNÉM FORMÁTU
                     <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                    -->
                     <div class="button-container">
-                        <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">Edit</a>
-                        <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">Delete</a>
+                        <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">
+                            <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
+                        <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">
+                            <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
                     </div>
                 </li>
             </ul>
