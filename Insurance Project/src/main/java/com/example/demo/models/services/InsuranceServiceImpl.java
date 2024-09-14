@@ -86,6 +86,7 @@ public class InsuranceServiceImpl implements InsuranceService {
      */
     @Override
     public void editInsurance(InsuranceDTO insuranceDTO) {
+
         validateInsuranceDuration(insuranceDTO.getStartDate(), insuranceDTO.getEndDate());
         validateInsuranceAmount(insuranceDTO.getAmount());
 
@@ -112,6 +113,7 @@ public class InsuranceServiceImpl implements InsuranceService {
      * @return The corresponding InsuranceEntity.
      */
     public InsuranceEntity getInsuranceOrThrow(Long insuranceId) {
+
         return insuranceRepository
                 .findByInsuranceId(insuranceId)
                 .orElseThrow();
@@ -144,6 +146,4 @@ public class InsuranceServiceImpl implements InsuranceService {
             throw new InsuranceAmountException();
         }
     }
-
-
 }

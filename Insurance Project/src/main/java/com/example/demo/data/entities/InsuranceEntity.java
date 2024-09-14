@@ -8,15 +8,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "Insurance")
-public class InsuranceEntity{
+public class InsuranceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long insuranceId;
 
     @ManyToOne
-    @JoinColumn (name = "user_id", nullable = false)
-    private  UserEntity userEntity;
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -96,8 +96,8 @@ public class InsuranceEntity{
     }
 
     //added getter - find user ID
-    public Long getUserId(){
-        if(getUserEntity()==null){
+    public Long getUserId() {
+        if (getUserEntity() == null) {
             return null;
         }
         return this.userEntity.getUserId();

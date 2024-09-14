@@ -3,7 +3,6 @@ package com.example.demo.models.dto.mappers;
 import com.example.demo.data.entities.InsuranceEntity;
 import com.example.demo.models.dto.InsuranceDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")

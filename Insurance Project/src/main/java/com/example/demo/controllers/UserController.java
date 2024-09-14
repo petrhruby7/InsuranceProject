@@ -30,6 +30,7 @@ public class UserController {
     //render register page
     @GetMapping("/register")
     public String showRegisterPage(@ModelAttribute UserDTO userDTO) {
+
         return "/user/register-Page";
     }
 
@@ -63,5 +64,4 @@ public class UserController {
         redirectAttributes.addFlashAttribute("success", "User is registered");
         return "redirect:/";
     }
-
 }

@@ -14,7 +14,6 @@ public class InsuranceProjectApplication {
 
 }
 
-//todo: DateTimeFormater utility třída - DRY??
 //todo: formatovat data na stránce My events + Insurance detail
 
 //todo: možnost změnit uživatelské heslo
@@ -24,8 +23,10 @@ public class InsuranceProjectApplication {
 
 //todo: chci řadit eventy a insurace dle svého id
 
-//todo: css - aby byli option in create insurance - zelený a ne modrý při výběru
+//todo: JS - aby byli option in create insurance - zelený a ne modrý při výběru
 //todo: možnost schovat nav bar?
 
 //todo: nápovědy k formulářům
 //todo: předělat deleteInsurance z Get metody na Delete Metodu!
+
+//todo: metody nesmí být v controlleru - žadny mapper a žednej repository

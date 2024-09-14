@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
+
     /**
      * Retrieves the current user from the security context.
      *
@@ -126,7 +127,7 @@ public class UserServiceImpl implements UserService {
      * Converts a UserEntity to UserDTO.
      *
      * @param user UserEntity object to be converted.
-     * @return     UserDTO object with user details.
+     * @return UserDTO object with user details.
      */
     private UserDTO toDTO(UserEntity user) {
         UserDTO userDTO = new UserDTO();
@@ -142,6 +143,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setCountry(user.getCountry());
         userDTO.setDateOfBirth(user.getDateOfBirth());
         userDTO.setSocialSecurityNumber(user.getSocialSecurityNumber());
+
         return userDTO;
     }
 
@@ -156,6 +158,4 @@ public class UserServiceImpl implements UserService {
             throw new UserIsNotAdultException();
         }
     }
-
-
 }

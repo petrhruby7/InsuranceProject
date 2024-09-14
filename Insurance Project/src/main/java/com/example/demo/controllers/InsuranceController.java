@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -69,6 +68,8 @@ public class InsuranceController {
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        
+        //create a new insurance
         try {
             insuranceService.createInsurance(insuranceDTO, user);
         } catch (InsuranceDurationException e) {

@@ -50,10 +50,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDTO> getAll() {
         // Find all event entities and map them to DTOs.
-        return eventRepository.findAll()
-                .stream()
-                .map(i -> eventMapper.toDTO(i))
-                .toList();
+        return eventRepository.findAll().stream().map(i -> eventMapper.toDTO(i)).toList();
     }
 
     /**
@@ -77,10 +74,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDTO> getEventByInsuranceId(Long insuranceId) {
         // Find all events related to a specific insurance and map them to DTOs.
-        return eventRepository.findByInsuranceEntityInsuranceId(insuranceId)
-                .stream()
-                .map(i -> eventMapper.toDTO(i))
-                .toList();
+        return eventRepository.findByInsuranceEntityInsuranceId(insuranceId).stream().map(i -> eventMapper.toDTO(i)).toList();
     }
 
     /**
@@ -107,9 +101,7 @@ public class EventServiceImpl implements EventService {
         checkEventDateInRange(eventDTO.getEventDate(), insuranceEntity.getStartDate(), insuranceEntity.getEndDate());
 
         EventEntity fetchedEvent = getEventOrThrow(eventDTO.getEventId());
-
         eventMapper.updateEventEntity(eventDTO, fetchedEvent);
-
         eventRepository.saveAndFlush(fetchedEvent);
     }
 
@@ -132,9 +124,7 @@ public class EventServiceImpl implements EventService {
      */
     private EventEntity getEventOrThrow(Long eventId) {
         // Try to find the event by ID, or throw an exception if not found.
-        return eventRepository
-                .findByEventId(eventId)
-                .orElseThrow();
+        return eventRepository.findByEventId(eventId).orElseThrow();
     }
 
     /**

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.format.DateTimeFormatter;
 
-
 @Controller
 public class ProfileController {
 
@@ -43,7 +42,6 @@ public class ProfileController {
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         UserDTO currentUser = userService.getCurrentUser();
 
-
         userProfileDTO.setEmail(currentUser.getEmail());
         userProfileDTO.setFirstName(currentUser.getFirstName());
         userProfileDTO.setLastName(currentUser.getLastName());
@@ -68,6 +66,7 @@ public class ProfileController {
             Model model
     ) {
         if (result.hasErrors()) {
+
             model.addAttribute("userProfileDTO", userProfileDTO);
             return "profile/updateProfile-Page";
         }
@@ -83,7 +82,7 @@ public class ProfileController {
         }
 
         redirectAttributes.addFlashAttribute("success", "Your changes have been saved");
+
         return "redirect:/profile";
     }
-
 }
