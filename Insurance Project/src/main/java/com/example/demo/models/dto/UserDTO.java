@@ -5,53 +5,64 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UserDTO {
-    //DTO pro vytvoření uživatele - registraci a login
+
+    //field for user
+    private Long userId;
+
     @NotBlank(message = "User name is required")
-    private String userName; //uživatelské jméno - musí být zadáno
+    private String userName;
 
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is required")
-    private String email;// uživatelský email - musí být zadán ve formátu emailu
+    private String email;
 
     @NotBlank(message = "First name is required")
-    private String firstName; //Křestní jméno užvatele  - musí být zadáno
+    private String firstName;
 
     @NotBlank(message = "Last name is required")
-    private String lastName; //Příjmení uživatele  - musí být zadáno
+    private String lastName;
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password should be at least 6 characters long")
-    private String password; //Heslo uživatele  - musí být zadáno a být alespoň 6 znaků dlouhé
+    private String password;
 
     @NotBlank(message = "Confirm password is required")
     @Size(min = 6, message = "Password should be at least 6 characters long")
-    private String confirmPassword; //Potvrzení heslo - musí být zadáno a musí se shodovat s heslem
+    private String confirmPassword;
 
     @NotBlank(message = "phoneNumber is required")
-    private String phoneNumber; //telefoní číslo uživatele  - musí být zadán
+    private String phoneNumber;
 
     @NotBlank(message = "Address is required")
-    private String address; //adressa uživatele - musí být zadána
+    private String address;
 
     @NotBlank(message = "City is required")
-    private String city; //město uživatele - musí být zadáno
+    private String city;
 
     @NotBlank(message = "ZIP/Postal code is required")
     @Pattern(regexp = "\\d{5}", message = "Your ZIP/Postal code must contain 5 digits")
-    private String zipCode; //Psč uživatele  - musí být zadáno (5 čísel)
+    private String zipCode;
 
     @NotBlank(message = "Country is required")
-    private String country; //stát uživatele  - musí být zadáno
+    private String country;
 
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be in past")
-    private LocalDate dateOfBirth; // datum narození uživatele  - musí být zadáno (musí být datum v minulosti)
+    private LocalDate dateOfBirth;
 
     @NotBlank(message = "social security number (the birth number) is required")
     @Pattern(regexp = "\\d{6}/\\d{4}", message = "social security number (the birth number) must be in format ######/####")
-    private String socialSecurityNumber; //rodné číslo uživatele  - musí být zadáno (######/####)
+    private String socialSecurityNumber;
 
-    //region: Gettery a Settery
+    //Region: getters a setters
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;
@@ -157,6 +168,6 @@ public class UserDTO {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    //konec region
+    ////End of region: getters a setters
 
 }

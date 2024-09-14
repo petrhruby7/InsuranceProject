@@ -7,34 +7,22 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "Events")
 public class EventEntity {
-    /**
-     * Id události: generuje se samo
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
-    /**
-     * navazuje na existují Entity - InsuranceEntity
-     * Událostí je více na jedno pojištění
-     */
+
     @ManyToOne
     @JoinColumn(name = "insurance_id", nullable = false)
     private InsuranceEntity insuranceEntity;
-    /**
-     * Datum kdy se událost stala
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private LocalDate eventDate;
-    /**
-     * popis pojistné událost
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private String eventDescription;
 
-    //sekce: Gettery a Settery
-
+    //Region: getters and setters
 
     public Long getEventId() {
         return eventId;
@@ -68,7 +56,7 @@ public class EventEntity {
         this.eventDescription = eventDescription;
     }
 
-    //getter navic - získá ID pojištění
+    //added getter - find an insurance Id
     public Long getInsuranceId() {
         if (getInsuranceEntity() == null) {
             return null;
@@ -76,6 +64,5 @@ public class EventEntity {
         return this.insuranceEntity.getInsuranceId();
     }
 
-
-    //konec sekce Gettery a Settery
+    // End of region: getters and setters
 }

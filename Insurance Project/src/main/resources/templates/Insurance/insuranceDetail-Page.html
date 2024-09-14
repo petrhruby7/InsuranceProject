@@ -1,33 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail pojištění</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
 <article>
-    <header>
-        <h1>Detail of insurance</h1>
-    </header>
     <section>
-        <h3 th:text="${insurance.insuranceType}">...</h3>
-        <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
-        <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
-        <p>Start of insurance: <span th:text="${insurance.startDate}">...</span></p>
-        <p>End of insurance: <span th:text="${insurance.endDate}">...</span></p>
-        <p>
-            <a th:href="@{'edit/' + ${insurance.insuranceId}}">Edit</a>
-            <a th:href="@{'delete/' + ${insurance.insuranceId}}">Delete</a>
-        </p>
-        <a th:href="@{/insurance/event/create}">
-            <button>Create insurance event</button>
-        </a>
-        <a th:href="@{/insurance}">
-            <button>Back</button>
-        </a>
+        <div class="box">
+            <h1 class="detail-title">Detail of insurance</h1>
+            <div>
+                <p>Insurance: <span
+                        th:text="${insurance.insuranceType}">...</span><span> INSURANCE #</span>
+                    <span th:text="${insurance.insuranceId}">...</span></p>
+            </div>
+            <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+            <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
+            <p>Start of insurance: <span th:text="${formatterStartDate}">...</span></p>
+            <p>End of insurance: <span th:text="${formatterEndDate}">...</span></p>
+            <div class="button-container">
+                <a class="edit-btn button" th:href="@{'edit/' + ${insurance.insuranceId}}">
+                    <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
+                <a class="delete-btn button" th:href="@{'delete/' + ${insurance.insuranceId}}">
+                    <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
+                <a class="back-btn button" th:href="@{/insurance}">
+                    <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back</a>
+            </div>
+            <br>
+            <h1>My Events for this insurance:</h1><br>
+            <div>
+                <a class="centered-link" th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                    <button class="input-btn button long-btn">
+                        <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create insurance event</button>
+                </a>
+            </div>
+            <ul class="no-box-list">
+                <li th:each="event: ${events}">
+                    <div class="detail-link">
+                        <a th:href="@{'events/' + ${event.eventId}}">
+                            Event #: <span th:text="${event.eventId}"></span>
+                        </a>
+                    </div>
+                    <p>Event description: <span th:text="${event.eventDescription}">...</span></p>
+                    <!-- TU JE DATUM VE ŠPATNÉM FORMÁTU
+                    <p>Event date: <span th:text="${event.eventDate}">...</span></p>
+                    -->
+                    <div class="button-container">
+                        <a class="edit-btn button" th:href="@{'events/' + ${event.eventId} + '/edit'}">
+                            <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
+                        <a class="delete-btn button" th:href="@{'events/' + ${event.eventId} + '/delete'}">
+                            <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </section>
 </article>
-
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>

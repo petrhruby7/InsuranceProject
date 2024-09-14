@@ -17,8 +17,9 @@ public class ApplicationSecurityConfiguration {
     public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/").permitAll() // Povolit přístup na "/login" a "/register" bez přihlášení
-                        .anyRequest().authenticated()  // Každý jiný požadavek musí být autentizován
+                        .requestMatchers("/login", "/register", "/", "/aboutUs", "/contact").permitAll() // Allow access without authentication
+                        .requestMatchers("/styles/**", "/js/**", "/images/**").permitAll() //Allow access to files for CSS, img and JS files
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")  // Přihlašovací stránka na URL "/login"
@@ -31,7 +32,7 @@ public class ApplicationSecurityConfiguration {
         return http.build();
     }
 
-    //umožní hashovat hesla do databáze
+    //will allow to passwords be hashed into database
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

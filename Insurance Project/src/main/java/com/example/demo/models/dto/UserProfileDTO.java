@@ -6,43 +6,41 @@ import java.time.LocalDate;
 
 public class UserProfileDTO {
 
-    //DTO pro update údajů které chci měnit aniž bych byl nucen měnit heslo
-
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is required")
-    private String email;// uživatelský email - musí být zadán ve formátu emailu
+    private String email;
 
     @NotBlank(message = "First name is required")
-    private String firstName; //Křestní jméno užvatele  - musí být zadáno
+    private String firstName;
 
     @NotBlank(message = "Last name is required")
-    private String lastName; //Příjmení uživatele  - musí být zadáno
+    private String lastName;
 
     @NotBlank(message = "phoneNumber is required")
-    private String phoneNumber; //telefonní číslo uživatele - musí být zadáno
+    private String phoneNumber;
 
     @NotBlank(message = "Address is required")
-    private String address; //addresa uživatele  - musí být zadána
+    private String address;
 
     @NotBlank(message = "City is required")
-    private String city; // město uživatele - musí být zadáno
+    private String city;
 
     @NotBlank(message = "ZIP/Postal code is required")
     @Pattern(regexp = "\\d{5}", message = "Your ZIP/Postal code must contain 5 digits")
-    private String zipCode; //Psč uživatele - musí být zadáno (5 čísel)
+    private String zipCode;
 
     @NotBlank(message = "Country is required")
-    private String country; //stát uživatele  - musí být zadáno
+    private String country;
 
     @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be in past")
-    private LocalDate dateOfBirth; //datum narození uživatele - musí být zadáno (musí být v minulosti)
+    private LocalDate dateOfBirth;
 
     @NotBlank(message = "social security number (the birth number) is required")
     @Pattern(regexp = "\\d{6}/\\d{4}", message = "social security number (the birth number) must be in format ######/####")
-    private String socialSecurityNumber; //rodné číslo uživatele - musí být zadáno (######/####)
+    private String socialSecurityNumber;
 
-    //region getters a setters
+    //region: getters and setters
 
     public String getEmail() {
         return email;
@@ -123,7 +121,7 @@ public class UserProfileDTO {
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
-    //konec getters a setters
+    //End of region: getters a setters
 }
 
 

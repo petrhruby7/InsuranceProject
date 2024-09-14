@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>My insurances</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
-<div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
 
 <article>
-    <header>
+    <div class="flash-success" th:text="${success}" th:if="${success}"></div>
+    <div class="flash-error" th:text="${error}" th:if="${error}"></div>
+    <header class="insurance-header">
         <h1>My insurances</h1>
+        <p>
+            <a class="input-btn button" href="insurance/create">
+                <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create insurance</a>
+        </p>
     </header>
     <section>
-        <p>
-            <a href="insurance/create">Create insurance</a>
-        </p>
+        <div class="grid">
+            <ul class="grid-list">
+                <li th:each="insurance: ${insurances}">
+                    <div class="detail-link">
+                        <a th:href="@{'/insurance/' + ${insurance.insuranceId}}">
+                            <span th:text="${insurance.insuranceType}"></span>
+                            INSURANCE
+                        </a>
+                    </div>
+                    <p>
+                        <a class="centered-link event-btn"
+                           th:href="@{'/insurance/' + ${insurance.insuranceId} + '/event/create'}">
+                            <button class="input-btn button long-btn">
+                                <img th:src="@{/images/add.png}" alt="add-icon" class="icon invert">Create event</button>
+                        </a>
+                    </p>
+                    <p>Identification number: <span th:text="${insurance.insuranceId}"></span></p>
+                    <p>Sum insured: <span th:text="${insurance.amount}">...</span></p>
+                    <p>Insured item/person: <span th:text="${insurance.insuredItem}">...</span></p>
 
-        <ul>
-            <li th:each="insurance: ${insurances}">
-                <h2><a th:href="@{'/insurance/' + ${insurance.insuranceId}}" th:text="${insurance.insuranceType}"></a>
-                </h2>
-                <a th:href="@{/insurance/event/create}">
-                    <button>Create insurance event</button>
-                </a>
-                <p>
-                    <a th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">Edit</a>
-                    <a th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">Delete</a>
-                </p>
-            </li>
-        </ul>
+
+                    <div class="button-container">
+                        <a class="edit-btn button" th:href="@{'insurance/edit/' + ${insurance.insuranceId}}">
+                            <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Edit</a>
+                        <a class="delete-btn button"
+                           th:href="@{'insurance/delete/' + ${insurance.insuranceId}}">
+                            <img th:src="@{/images/delete.png}" alt="delete-icon" class="icon invert">Delete</a>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
     </section>
 </article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>

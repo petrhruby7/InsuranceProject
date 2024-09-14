@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{Fragments/layout.html :: head}"></head>
+<body>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
+<article>
+    <section>
+        <div class="box">
+            <h1>Insurance editing form:</h1><br>
+            <div>
+                <p>Your insurance type: <span
+                        th:text="${insuranceDTO.insuranceType}">...</span><span> INSURANCE #</span>
+                    <span th:text="${insuranceDTO.insuranceId}">...</span></p>
+            </div>
+            <p>Insured item/person: <span th:text="${insuranceDTO.insuredItem}">...</span></p>
+            <form th:action="@{'/insurance/events/' + ${eventId} + '/edit'}" th:object="${eventDTO}"
+                  method="post">
+                <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
+                <div class="input">
+                    <label for="eventDescription">Event description:</label><br>
+                    <textarea id="eventDescription" name="eventDescription"
+                              th:field="*{eventDescription}"></textarea><br>
+                    <small class="error" th:errors="*{eventDescription}"></small>
+                </div>
+                <p class="info-text">Your insured event must have occurred between the dates:</p>
+                <div class="date-info">
+                    <p>Start date: <span th:text="${formattedStartDate}">...</span></p>
+                    <p>End date: <span th:text="${formattedEndDate}">...</span></p>
+                </div>
+                <div class="input">
+                    <label for="eventDate">Event date:</label><br>
+                    <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
+                    <small class="error" th:errors="*{eventDate}"></small>
+                </div>
+                <input class="input-btn button long-btn" type="submit" value="Confirm changes">
+            </form>
+            <p>
+                <a class="centered-link" th:href="@{/insurance/events}">
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back to Events</button>
+                </a>
+            </p>
+        </div>
+    </section>
+</article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
+</body>
+</html>

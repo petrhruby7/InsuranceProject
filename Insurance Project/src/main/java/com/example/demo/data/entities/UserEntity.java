@@ -13,120 +13,73 @@ import java.util.List;
 @Table(name = "Users")
 public class UserEntity implements UserDetails {
 
-    /**
-     * Id uživatele: samo se generuje
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    /**
-     * User name:uživatelské jméno - musí být jedinečné, potřebné pro přihlášení
-     * musí být vyplněno
-     */
     @Column(nullable = false, unique = true)
     private String userName;
 
-    /**
-     * email: musí být jedinečný
-     * musí být vyplněn
-     */
     @Column(nullable = false, unique = true)
     private String email;
 
-    /**
-     * Křestní jméno uživatele
-     * musí být vyplněné
-     */
     @Column(nullable = false)
     private String firstName;
 
-    /**
-     * Přijmení uživatele
-     * musí být vyplněno
-     */
     @Column(nullable = false)
     private String lastName;
 
-    /**
-     * heslo uživatele
-     * musí být vyplněno
-     */
     @Column(nullable = false)
     private String password;
 
-    /**
-     * telefoní číslo uživatel
-     * musí být vyplněno
-     */
     @Column(nullable = false)
     private String phoneNumber;
-    /**
-     * adresa uživatele
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private String address;
-    /**
-     * město uživatele
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private String city;
-    /**
-     * směrovací číslo uživatele - tzv. PSČ
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private String zipCode;
-    /**
-     * Stát uživatele
-     * muí být vyplněno
-     */
+
     @Column(nullable = false)
     private String country;
-    /**
-     * Datum narození uživatele
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private LocalDate dateOfBirth;
-    /**
-     * rodné číslo uživatele
-     * musí být vyplěno
-     */
+
     @Column(nullable = false)
     private String socialSecurityNumber;
-    /**
-     * Seznam pojištění které si může uživatel sjednat
-     * Uživatel je jeden a může mít mnoho poijštění
-     */
+
     @OneToMany
     private List<InsuranceEntity> insurances;
 
-    // todo: boolean zda jakou má roli
+    //Region: UserDetails Methods
 
-    //region: UserDetails Methods
-
+    //helps user to log in
     @Override
     public String getUsername() {
         return userName;
-    } //pomáhá uživateli přihlásit dle uživatelského jména
+    }
 
+    //helps user to log in
     @Override
     public String getPassword() {
         return password;
-    } //pomáhá uživateli přihlásit dle uživatelského jména
+    }
 
+    // method for implementing roles
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //todo implementace rolí
         return null;
     }
 
-    //konec regionu UserDetails Methods
+    //End of region: UserDetails Methods
 
-    // region gettery a settery
+    //Region: getters a setters
 
     public Long getUserId() {
         return userId;
@@ -232,6 +185,5 @@ public class UserEntity implements UserDetails {
         this.insurances = insurances;
     }
 
-
-    // konec regionu gettery a settery
+    // End of region: getters and setters
 }

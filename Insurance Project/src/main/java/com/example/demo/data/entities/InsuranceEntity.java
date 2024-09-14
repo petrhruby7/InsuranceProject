@@ -8,58 +8,36 @@ import java.util.List;
 
 @Entity
 @Table(name = "Insurance")
-public class InsuranceEntity{
-    /**
-     * Id pojištění: samo se generuje
-     */
+public class InsuranceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long insuranceId;
-    /**
-     * navazujeme na existující Entity - UserEntity
-     * InsuranceEntity je více na jednu UserEntity
-     */
+
     @ManyToOne
-    @JoinColumn (name = "user_id", nullable = false)
-    private  UserEntity userEntity;
-    /**
-     * Typ pojištění - vybírá se bude přes ENUM
-     * musí být vyplněno
-     */
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private InsuranceType insuranceType;
-    /**
-     * pojistná částka
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private int amount;
-    /**
-     * předmět pojištění
-     * NEMUSÍ být vyplněno
-     */
+
     @Column
     private String insuredItem;
-    /**
-     * datum vzniku pojištění
-     * musí být vyplněno
-     */
+
     @Column(nullable = false)
     private LocalDate startDate;
-    /**
-     * konec vniku pojištění
-     */
+
     @Column(nullable = false)
     private LocalDate endDate;
-    /**
-     * seznam událostí, které mužou při pojištění vzniknout
-     * Pojištění je jedno a může mít mnoho událostí
-     */
+
     @OneToMany
     private List<EventEntity> events;
 
-    //sekce Gettery a settery
+    // Region: getters and setters
 
     public Long getInsuranceId() {
         return insuranceId;
@@ -117,9 +95,9 @@ public class InsuranceEntity{
         this.endDate = endDate;
     }
 
-    //getter navíc - získá ID uživatele
-    public Long getUserId(){
-        if(getUserEntity()==null){
+    //added getter - find user ID
+    public Long getUserId() {
+        if (getUserEntity() == null) {
             return null;
         }
         return this.userEntity.getUserId();
@@ -133,7 +111,7 @@ public class InsuranceEntity{
         this.events = events;
     }
 
-    //konec sekce Gettery a Settery
+    // End of region: getters and setters
 
 
 }

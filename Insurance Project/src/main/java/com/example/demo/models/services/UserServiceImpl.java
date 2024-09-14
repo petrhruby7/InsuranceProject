@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.time.Period;
 import java.time.LocalDate;
 
@@ -25,31 +26,35 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
+    /**
+     * Creates a new user
+     *
+     * @param userDTO User data transfer object containing user details.
+     */
     @Override
     public void createUser(UserDTO userDTO) {
-        //kontrola správnosti hesla
+        //check if password and confirm password matches
         if (!userDTO.getPassword().equals(userDTO.getConfirmPassword()))
             throw new PasswordDoNotEqualException();
 
-        //kontrola zda existuje uživatelské jméno
+        //check if UserName is not taken
         if (userRepository.findByUserName(userDTO.getUserName()).isPresent()) {
             throw new DuplicateUserNameException();
         }
-        //kontrola zda již existuje email
+        //check if email is not taken
         if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             throw new DuplicateEmailException();
         }
-        //kontrola zda je registrovaný starší 18let
+        //check if User is adult
         validateUserAge(userDTO.getDateOfBirth());
 
-        //nastavení parametrů nového usera, včetně hashování hesla
+        //setting parameters of the new user, including password hashing
         UserEntity user = new UserEntity();
         user.setUserName(userDTO.getUserName());
         user.setEmail(userDTO.getEmail());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));//heslo se hashuje
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setAddress(userDTO.getAddress());
         user.setCity(userDTO.getCity());
@@ -57,23 +62,26 @@ public class UserServiceImpl implements UserService {
         user.setCountry(userDTO.getCountry());
         user.setDateOfBirth(userDTO.getDateOfBirth());
         user.setSocialSecurityNumber(userDTO.getSocialSecurityNumber());
-        //uložení udajů
-        userRepository.save(user);
 
+        userRepository.save(user);
     }
 
+    /**
+     * Updates an existing user with new data and checks if the date is valid.
+     *
+     * @param userProfileDTO Updated user data transfer object.
+     */
     @Override
     public void updateUserProfile(UserProfileDTO userProfileDTO) {
-        //získání aktuálního uživatele
+        //finds the currently logged-in user
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        //kontrola věku
+        //check if User is adult
         validateUserAge(userProfileDTO.getDateOfBirth());
 
-
-        //aktualizace údajů
+        //updates the user's data
         user.setEmail(userProfileDTO.getEmail());
         user.setFirstName(userProfileDTO.getFirstName());
         user.setLastName(userProfileDTO.getLastName());
@@ -84,16 +92,29 @@ public class UserServiceImpl implements UserService {
         user.setCountry(userProfileDTO.getCountry());
         user.setDateOfBirth(userProfileDTO.getDateOfBirth());
         user.setSocialSecurityNumber(userProfileDTO.getSocialSecurityNumber());
-        //uložení změn
+
         userRepository.save(user);
     }
 
+    /**
+     * Loads a user by their username for authentication.
+     *
+     * @param username Username of the user to be loaded.
+     * @return UserDetails object for the specified username.
+     * @throws UsernameNotFoundException if the user is not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username, " + username + " not found"));
     }
 
+    /**
+     * Retrieves the current user from the security context.
+     *
+     * @return UserDTO object for the current user.
+     * @throws UsernameNotFoundException if the user is not found.
+     */
     public UserDTO getCurrentUser() {
         String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByUserName(currentUserName)
@@ -101,9 +122,16 @@ public class UserServiceImpl implements UserService {
         return toDTO(user);
     }
 
-    //metoda pro načtení údajů uživatele
+
+    /**
+     * Converts a UserEntity to UserDTO.
+     *
+     * @param user UserEntity object to be converted.
+     * @return UserDTO object with user details.
+     */
     private UserDTO toDTO(UserEntity user) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUserId());
         userDTO.setUserName(user.getUsername());
         userDTO.setEmail(user.getEmail());
         userDTO.setFirstName(user.getFirstName());
@@ -115,13 +143,19 @@ public class UserServiceImpl implements UserService {
         userDTO.setCountry(user.getCountry());
         userDTO.setDateOfBirth(user.getDateOfBirth());
         userDTO.setSocialSecurityNumber(user.getSocialSecurityNumber());
+
         return userDTO;
     }
 
-    private void validateUserAge(LocalDate dateOfBirth){
+    /**
+     * Validates that the user's age is 18 or older.
+     *
+     * @param dateOfBirth The date of birth of the user.
+     * @throws UserIsNotAdultException if the user is under 18 years old.
+     */
+    private void validateUserAge(LocalDate dateOfBirth) {
         if (Period.between(dateOfBirth, LocalDate.now()).getYears() < 18) {
             throw new UserIsNotAdultException();
         }
     }
-
 }

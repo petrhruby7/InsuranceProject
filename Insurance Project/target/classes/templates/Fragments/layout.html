@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="závěrečný project pro ITnetwork">
+    <meta name="keyword" content="portfolio, programátor, project, Petr Hrubý">
+    <meta name="author" content="Petr Hrubý">
+    <title>Insurance project</title>
+
+    <link rel="stylesheet" th:href="@{/styles/styles.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/js/hamburger.js}" type="text/css">
+    <link rel="shotcut icon" th:href="@{/images/healthcare.png}">
+
+    <script th:src="@{/js/hamburger.js}"></script>
 </head>
 <body>
-    <header th:fragment="header">
-        <nav>
-            <div>
-                <ul>
-                    <li><a sec:authorize="isAuthenticated()" href="/home">Home</a></li>
-                    <li><a sec:authorize="isAuthenticated()" href="/insurance">My insurances</a></li>
-                    <li>Users</li>
-                    <li>Events</li>
-                    <li><a sec:authorize="isAuthenticated()" href="/profile">Profile</a></li>
+<header th:fragment="header">
+    <nav>
+        <!-- Hamburger icon for small screens -->
+        <div class="hamburger" onclick="toggleMenu()">
+            &#9776;
+        </div>
+        <div class="menu">
+            <ul>
+                <li sec:authorize="isAuthenticated()"><a href="/home">Home</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/myUsers">My&nbspusers</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/insurance">My&nbspinsurances</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/insurance/events">Events</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/profile">My&nbspprofile</a></li>
 
-                    <li>About us</li>
-                    <li>Contact</li>
-                    <li><a sec:authorize="isAnonymous" href="/login">login</a></li>
-                    <li><a sec:authorize="isAnonymous" href="/register"> register </a> </li>
-                    <li>
-                        <form method="post" th:action="@{/logout}">
-                            <button sec:authorize="isAuthenticated()">Log out</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+                <li><a href="/aboutUs">About&nbspus</a></li>
+                <li><a href="/contact">Contact</a></li>
+
+                <li sec:authorize="isAnonymous" class="auth-item">
+                    <a href="/login">login</a></li>
+                <li sec:authorize="isAnonymous" class="auth-item">
+                    <a href="/register"> register </a></li>
+                <li class="li-logout" sec:authorize="isAuthenticated()">
+                    <form method="post" th:action="@{/logout}">
+                        <button class="logout" >Log&nbspout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<footer th:fragment="footer">
+    Created by Petr Hrubý for <a href="https://itnetwork.cz">ITnetwork.cz</a> as part of the final project.
+</footer>
 </body>
+
+
 </html>

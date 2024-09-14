@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Create event</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
 
 <article>
-    <header>You can create your insurance event here</header>
     <section>
-        <form th:action="@{/insurance/event/create}" th:object="${eventDTO}" method="post">
+        <div class="box">
+            <h1>Insurance event creation form:</h1><br>
             <div>
-                <label for="eventDescription">Event description:</label><br>
-                <textarea id="eventDescription" name="eventDescription" th:field="*{eventDescription}"></textarea><br>
-                <small style="color:red" th:errors="*{eventDescription}"></small>
+                <p>Your insurance type: <span
+                        th:text="${insuranceDTO.insuranceType}">...</span><span> INSURANCE #</span>
+                    <span th:text="${insuranceDTO.insuranceId}">...</span></p>
             </div>
-            <div>
-                <label for="eventDate">Event date:</label><br>
-                <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
-                <small style="color:red" th:errors="*{eventDate}"></small>
-            </div>
-            <div>
-                <input type="submit" value="Create insurance event">
-            </div>
-        </form>
+            <p>Insured item/person: <span th:text="${insuranceDTO.insuredItem}">...</span></p>
+            <form th:action="@{'/insurance/' + ${eventDTO.insuranceId} + '/event/create'}" th:object="${eventDTO}"
+                  method="post">
+                <input type="hidden" name="insuranceId" th:value="${eventDTO.insuranceId}">
+                <div class="input">
+                    <label for="eventDescription">Event description:</label><br>
+                    <textarea id="eventDescription" name="eventDescription"
+                              th:field="*{eventDescription}"></textarea><br>
+                    <small class="error" th:errors="*{eventDescription}"></small>
+                </div>
+                <p class="info-text">Your insured event must have occurred between the dates:</p>
+                <div class="date-info">
+                    <p>Start date: <span th:text="${formatterStartDate}">...</span></p>
+                    <p>End date: <span th:text="${formatterEndDate}">...</span></p>
+                </div>
+                <div class="input">
+                    <label for="eventDate">Event date:</label><br>
+                    <input type="date" id="eventDate" name="eventDate" th:field="*{eventDate}"><br>
+                    <small class="error" th:errors="*{eventDate}"></small>
+                </div>
+                <input class="input-btn button long-btn" type="submit" value="Create insurance event">
+            </form>
 
-        <a th:href="@{/insurance}">
-            <button>Back</button>
-        </a>
+            <p>
+                <a class="centered-link" th:href="@{/insurance}">
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back
+                    </button>
+                </a>
+            </p>
+        </div>
     </section>
 </article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>

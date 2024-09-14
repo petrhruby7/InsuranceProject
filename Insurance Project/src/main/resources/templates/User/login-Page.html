@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
-    <header th:replace="~{Fragments/layout.html :: header}"></header>
-    <div style="color:red" class="flash-message message-error" th:if="${param.error}"> Invalid user name or password </div>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
 
-    <h1>This is Login Page</h1>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label for="uname">User name:</label><br>
-            <input type="text" id="uname" name="userName"><br>
-           <!-- <small style="color:red" th:errors="*{userName}"></small> -->
-        </div>
-        <div>
-            <label for="pass"> Password:</label><br>
-            <input type="password" id="pass" name="password"><br>
 
+<article>
+    <div class="flash-error" th:if="${param.error}"> Invalid username or password</div>
+    <section>
+        <div class="box">
+            <form th:action="@{/login}" method="post">
+                <div class="input">
+                    <label for="uname">User name:</label><br>
+                    <input type="text" id="uname" name="userName"><br>
+                </div>
+                <div class="input">
+                    <label for="pass"> Password:</label><br>
+                    <input type="password" id="pass" name="password"><br>
+                </div>
+                <input class="input-btn button long-btn" type="submit" value="Log in">
+            </form>
+            <small>Don't have an account? <a href="/register">Sing up</a></small>
         </div>
-        <div>
-            <input type="submit" value="Log in">
-        </div>
-    </form>
-
+    </section>
+</article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
+
 </html>

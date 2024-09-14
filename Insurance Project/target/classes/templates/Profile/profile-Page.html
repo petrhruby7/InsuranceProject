@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
-    <header th:replace="~{Fragments/layout.html :: header}"></header>
-    <div style="color:green" class="flash-message message-success" th:text="${success}" th:if="${success}"></div>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
 
-    <h1>This is your profile page</h1>
 
-    <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
-    <p>Last name: <span th:text="${userDTO.lastName}">...</span></p>
-    <p>Email: <span th:text="${userDTO.email}">...</span></p>
-    <p>Phone number: <span th:text="${userDTO.phoneNumber}">...</span></p>
-    <p>Address: <span th:text="${userDTO.address}">...</span></p>
-    <p>City: <span th:text="${userDTO.city}">...</span></p>
-    <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
-    <p>Country: <span th:text="${userDTO.country}">...</span></p>
-    <p>Date of birth: <span th:text="${userDTO.dateOfBirth}">...</span></p>
-    <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
-
-    <a th:href="@{/profile/update}">
-        <button type = button>Change my details</button>
-    </a>
-
+<article>
+    <div class="flash-success" th:text="${success}" th:if="${success}"></div>
+    <section>
+        <div class="box">
+            <h1 class="detail-title">Your Account Details:</h1>
+            <p>First name: <span th:text="${userDTO.firstName}">...</span></p>
+            <p>Last name: <span th:text="${userDTO.lastName}">...</span></p>
+            <p>Email: <span th:text="${userDTO.email}">...</span></p>
+            <p>Phone number: <span th:text="${userDTO.phoneNumber}">...</span></p>
+            <p>Address: <span th:text="${userDTO.address}">...</span></p>
+            <p>City: <span th:text="${userDTO.city}">...</span></p>
+            <p>ZIP/Postal Code: <span th:text="${userDTO.zipCode}">...</span></p>
+            <p>Country: <span th:text="${userDTO.country}">...</span></p>
+            <p>Date of birth: <span th:text="${formatterDateOfBirth}">...</span></p>
+            <p>SSN/The birth number: <span th:text="${userDTO.socialSecurityNumber}">...</span></p>
+            <p >
+                <a class="centered-link" th:href="@{/profile/update}">
+                    <button class="edit-btn button long-btn" type=button>
+                        <img th:src="@{/images/editing.png}" alt="edit-icon" class="icon">Change my details</button>
+                </a>
+            </p>
+        </div>
+    </section>
+</article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>

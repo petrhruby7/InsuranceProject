@@ -1,75 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Update Profile</title>
-</head>
+<head th:replace="~{Fragments/layout.html :: head}"></head>
 <body>
-    <header th:replace="~{Fragments/layout.html :: header}"></header>
-    <h1>You can update your Profile here</h1>
+<header th:replace="~{Fragments/layout.html :: header}"></header>
 
-    <form th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post" >
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" th:field="*{email}"><br>
-            <small style="color:red" th:errors="*{email}"></small>
+<article>
+    <section>
+        <div class="box">
+            <h1>Update Your Personal Information:</h1><br>
+            <form th:action="@{/profile/update}" th:object="${userProfileDTO}" method="post">
+                <div class="input">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" th:field="*{email}"><br>
+                    <small class="error" th:errors="*{email}"></small>
+                </div>
+                <div class="input">
+                    <label for="fname">First name:</label><br>
+                    <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
+                    <small class="error" th:errors="*{firstName}"></small>
+                </div>
+                <div class="input">
+                    <label for="lname">Last name:</label><br>
+                    <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
+                    <small class="error" th:errors="*{lastName}"></small>
+                </div>
+                <br>
+                <div class="input">
+                    <label for="phone">Phone number: </label><br>
+                    <input type="tel" id="phone" name="phoneNumber" th:field="*{phoneNumber}"><br>
+                    <small class="error" th:errors="*{phoneNumber}"></small>
+                </div>
+                <div class="input">
+                    <label for="address">Address: </label><br>
+                    <input type="text" id="address" name="address" th:field="*{address}"><br>
+                    <small class="error" th:errors="*{address}"></small>
+                </div>
+                <div class="input">
+                    <label for="city">City: </label> <br>
+                    <input type="text" id="city" name="city" th:field="*{city}"><br>
+                    <small class="error" th:errors="*{city}"></small>
+                </div>
+                <div class="input">
+                    <label for="zipCode">ZIP/Postal Code: </label><br>
+                    <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}"><br>
+                    <small class="error" th:errors="*{zipCode}"></small>
+                </div>
+                <div class="input">
+                    <label for="country">Country: </label><br>
+                    <input type="text" id="country" name="country" th:field="*{country}"><br>
+                    <small class="error" th:errors="*{country}"></small>
+                </div>
+                <br>
+                <div class="input">
+                    <label for="birthdate">Date of birth:</label><br>
+                    <input type="date" id="birthdate" name="dateOfBirth" th:field="*{dateOfBirth}"><br>
+                    <small class="error" th:errors="*{dateOfBirth}"></small>
+                </div>
+                <div class="input">
+                    <label for="SSN">SSN/The birth number</label><br>
+                    <input type="text" id="SSN" name="socialSecurityNumber" pattern="[0-9]{6}/[0-900{4}]"
+                           th:field="*{socialSecurityNumber}"><br>
+                    <small class="error" th:errors="*{socialSecurityNumber}"></small>
+                </div>
+                <input class="input-btn button long-btn" type="submit" value="Confirm changes"> <br>
+            </form>
+            <div>
+                <a class="centered-link" th:href="@{/profile}">
+                    <button class="back-btn button long-btn">
+                        <img th:src="@{/images/back.png}" alt="back-icon" class="icon invert">Back</button>
+                </a>
+            </div>
         </div>
-        <div>
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="firstName" th:field="*{firstName}"><br>
-            <small style="color:red" th:errors="*{firstName}"></small>
-        </div>
-        <div>
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lastName" th:field="*{lastName}"><br>
-            <small style="color:red" th:errors="*{lastName}"></small>
-        </div>
-        <p>_____________________________________</p>
-        <div>
-            <label for="phone">Phone number: </label><br>
-            <input type="tel" id="phone" name="phoneNumber" th:field="*{phoneNumber}"><br>
-            <small style="color:red" th:errors="*{phoneNumber}"></small>
-        </div>
-        <div>
-            <label for="address">Address: </label><br>
-            <input type="text" id="address" name="address" th:field="*{address}"><br>
-            <small style="color:red" th:errors="*{address}"></small>
-        </div>
-        <div>
-            <label for="city">City: </label> <br>
-            <input type="text" id="city" name="city" th:field="*{city}"><br>
-            <small style="color:red" th:errors="*{city}"></small>
-        </div>
-        <div>
-            <label for="zipCode">ZIP/Postal Code: </label><br>
-            <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}"><br>
-            <small style="color:red" th:errors="*{zipCode}"></small>
-        </div>
-        <div>
-            <label for="country">Country: </label><br>
-            <input type="text" id="country" name="country" th:field="*{country}"><br>
-            <small style="color:red" th:errors="*{country}"></small>
-        </div>
-        <p>_____________________________________</p>
-        <div>
-            <label for="birthdate">Date of birth:</label><br>
-            <input type="date" id="birthdate" name="dateOfBirth" th:field="*{dateOfBirth}"><br>
-            <small  style="color:red" th:errors="*{dateOfBirth}"></small>
-        </div>
-        <div>
-            <label for="SSN">SSN/The birth number</label><br>
-            <input type="text" id="SSN" name="socialSecurityNumber" pattern="[0-9]{6}/[0-900{4}]" th:field="*{socialSecurityNumber}"><br>
-            <small style="color:red" th:errors="*{socialSecurityNumber}"></small>
-        </div>
-        <div>
-            <input type="submit" value="Update"> <br>
-        </div>
-    </form>
-
-    <a th:href="@{/profile}">
-        <button>Back</button>
-    </a>
-
+    </section>
+</article>
+<footer th:replace="~{Fragments/layout.html :: footer}"></footer>
 </body>
 </html>

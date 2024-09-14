@@ -3,12 +3,13 @@ package com.example.demo.models.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class EventDTO {
 
-    //pole pro užovatele
+    //fields for users and insurances
     private Long eventId;
     private Long insuranceId;
 
@@ -17,9 +18,10 @@ public class EventDTO {
     private LocalDate eventDate;
 
     @NotBlank(message = "Event description is required")
+    @Size(min = 10, max = 250, message = "Event description must be between 10 and 250 characters")
     private String eventDescription;
 
-    //region: gettery a settery
+    //Region: getters a setters
 
     public Long getEventId() {
         return eventId;
@@ -51,7 +53,7 @@ public class EventDTO {
 
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
-        }
+    }
 
-    //konec regionu: gettery a settery
+    //End of region: getters a setters
 }
