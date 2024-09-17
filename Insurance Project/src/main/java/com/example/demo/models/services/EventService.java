@@ -9,7 +9,7 @@ import java.util.List;
 public interface EventService {
 
     //Method for creating an insurance event
-    EventDTO createEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity);
+    EventDTO createEvent(EventDTO eventDTO, Long insuranceId);
 
     //Method for finding all existing events
     List<EventDTO> getAll();
@@ -24,7 +24,7 @@ public interface EventService {
     List<EventEntity> getEventsForCurrentUser();
 
     //Method for editing of existing event
-    void editEvent(EventDTO eventDTO, InsuranceEntity insuranceEntity);
+    void editEvent(EventDTO eventDTO, Long insuranceId);
 
     //Method for deleting od existing event
     void removeEvent(Long eventId);
