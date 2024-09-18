@@ -27,17 +27,25 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private UserServiceImpl userService;
 
-
+    /**
+     * Creates a new event and associates it with the specified insurance.
+     *
+     * @param eventDTO DTO containing event details.
+     * @param insuranceId ID of the insurance to which the event belongs.
+     * @return The created EventDTO.
+     * @throws EventDateOutOfRangeException if the event date is outside the insurance coverage period.
+     */
     @Override
     public EventDTO createEvent(EventDTO eventDTO, Long insuranceId) {
 
         InsuranceEntity insuranceEntity = getInsuranceEntity(insuranceId);
 
-        // Validace data přímo ve service třídě
+        // Validate event date within the insurance coverage period
         if (!isEventDateInRange(eventDTO.getEventDate(), eventDTO.getInsuranceId())) {
             throw new EventDateOutOfRangeException();
         }
 
+        //mapping En    
         EventEntity eventEntity = eventMapper.toEntity(eventDTO);
         eventEntity.setInsuranceEntity(insuranceEntity);
 
