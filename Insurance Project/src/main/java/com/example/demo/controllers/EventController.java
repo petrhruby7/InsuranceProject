@@ -36,14 +36,22 @@ public class EventController {
     //render form for create an insurance event
     @GetMapping("{insuranceId}/event/create")
     public String renderCreateEvent(@PathVariable Long insuranceId, @ModelAttribute EventDTO eventDTO, Model model) {
-
         eventDTO.setInsuranceId(insuranceId);
         prepareCreateFormData(eventDTO.getInsuranceId(), model);
-
         return "event/createEvent-Page";
     }
 
-    //allow to create an insurance event
+    /**
+     * Handles creating a new insurance event.
+     * Validates the input, ensuring that the event date falls within the insurance coverage period.
+     *
+     * @param eventDTO           DTO containing the event data.
+     * @param result             Binding result for validation errors.
+     * @param insuranceId        ID of the insurance to which the event is related.
+     * @param redirectAttributes Attributes for passing flash messages to the view.
+     * @param model              Model to pass data to the view.
+     * @return A redirect to the list of events if successful, otherwise re-renders the form.
+     */
     @PostMapping("{insuranceId}/event/create")
     public String createEvent(@Valid @ModelAttribute EventDTO eventDTO,
                               BindingResult result,
@@ -56,14 +64,14 @@ public class EventController {
             return "event/createEvent-Page";
         }
 
-
+        //Checks if the given event date is within the coverage period of the specified insurance.
         if (!eventService.isEventDateInRange(eventDTO.getEventDate(), insuranceId)) {
             result.rejectValue("eventDate", "error", "The event date must be between the insurance start and end dates.");
             prepareCreateFormData(eventDTO.getInsuranceId(), model);
             return "event/createEvent-Page";
         }
-        eventService.createEvent(eventDTO, insuranceId);
 
+        eventService.createEvent(eventDTO, insuranceId);
         redirectAttributes.addFlashAttribute("success", "Your insurance event is created");
         return "redirect:/insurance/events";
     }
@@ -74,13 +82,11 @@ public class EventController {
                                     Model model) {
         EventDTO fetchedEvent = eventService.getById(eventId);
         InsuranceDTO insuranceDTO = insuranceService.getById(fetchedEvent.getInsuranceId());
+        String eventDateFormatter = eventService.formatDate(fetchedEvent.getEventDate());
+
         model.addAttribute("event", fetchedEvent);
         model.addAttribute("insuranceDTO", insuranceDTO);
-
-        //reformats data into the pattern dd.MM.yyyy
-        String eventDateFormatter = eventService.formatDate(fetchedEvent.getEventDate());
         model.addAttribute("formatterEventDate", eventDateFormatter);
-
         return "event/eventDetail-Page";
     }
 
@@ -88,15 +94,22 @@ public class EventController {
     @GetMapping("events/{eventId}/edit")
     public String renderEventEditForm(@PathVariable Long eventId,
                                       Model model) {
-        //load event from database
         EventDTO fetchedEvent = eventService.getById(eventId);
-
-        // Připrav data pro formulář
         prepareEditFormData(fetchedEvent.getInsuranceId(), fetchedEvent, model);
         return "event/updateEvent-Page";
     }
 
-    // allow to edit existing insurance event
+    /**
+     * Handles editing an existing insurance event.
+     * Validates that the event date is within the coverage period of the related insurance.
+     *
+     * @param eventId            ID of the event to be edited.
+     * @param eventDTO           DTO containing updated event details.
+     * @param result             Binding result for validation errors.
+     * @param redirectAttributes Attributes for passing flash messages to the view.
+     * @param model              Model to pass data to the view.
+     * @return A redirect to the list of events if successful, otherwise re-renders the edit form.
+     */
     @PostMapping("events/{eventId}/edit")
     public String editEvent(@PathVariable Long eventId,
                             @Valid @ModelAttribute EventDTO eventDTO,
@@ -105,23 +118,18 @@ public class EventController {
                             Model model) {
 
         if (result.hasErrors()) {
-            // Připrav data pro formulář při chybě
             prepareEditFormData(eventDTO.getInsuranceId(), eventDTO, model);
-
             return "event/updateEvent-Page";
         }
 
-        // Kontrola, zda je datum události v rozmezí platnosti pojištění
+        //Checks if the given event date is within the coverage period of the specified insurance.
         if (!eventService.isEventDateInRange(eventDTO.getEventDate(), eventDTO.getInsuranceId())) {
             result.rejectValue("eventDate", "error", "The event date must be between the insurance start and end dates.");
-            // Připrav data pro formulář při chybě
-
             prepareEditFormData(eventDTO.getInsuranceId(), eventDTO, model);
             return "event/updateEvent-Page";
         }
 
         eventService.editEvent(eventDTO, eventId);
-
         redirectAttributes.addFlashAttribute("success", "Your insurance event is edited");
         return "redirect:/insurance/events";
     }
@@ -131,11 +139,16 @@ public class EventController {
     public String deleteEvent(@PathVariable Long eventId,
                               RedirectAttributes redirectAttributes) {
         eventService.removeEvent(eventId);
-
         redirectAttributes.addFlashAttribute("success", "Event was deleted");
         return "redirect:/insurance/events";
     }
 
+    /**
+     * Prepares the necessary form data for creating an insurance event.
+     *
+     * @param insuranceId ID of the insurance for which the event is being created.
+     * @param model       Model object to which form data attributes are added.
+     */
     private void prepareCreateFormData(Long insuranceId, Model model) {
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
         String startDateFormatter = eventService.formatDate(insuranceDTO.getStartDate());
@@ -146,6 +159,13 @@ public class EventController {
         model.addAttribute("formatterEndDate", endDateFormatter);
     }
 
+    /**
+     * Prepares the necessary form data for editing an insurance event.
+     *
+     * @param insuranceId ID of the insurance associated with the event being edited.
+     * @param eventDTO    Event data transfer object containing event details.
+     * @param model       Model object to which form data attributes are added.
+     */
     private void prepareEditFormData(Long insuranceId, EventDTO eventDTO, Model model) {
         InsuranceDTO insuranceDTO = insuranceService.getById(insuranceId);
         String startDateFormatter = eventService.formatDate(insuranceDTO.getStartDate());
@@ -159,5 +179,3 @@ public class EventController {
         model.addAttribute("formattedEventDate", eventDateFormatter);
     }
 }
-
-
