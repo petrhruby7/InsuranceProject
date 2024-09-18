@@ -27,20 +27,28 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private UserServiceImpl userService;
 
-
+    /**
+     * Creates a new event and associates it with the specified insurance.
+     *
+     * @param eventDTO    DTO containing event details.
+     * @param insuranceId ID of the insurance to which the event belongs.
+     * @return The created EventDTO.
+     * @throws EventDateOutOfRangeException if the event date is outside the insurance coverage period.
+     */
     @Override
     public EventDTO createEvent(EventDTO eventDTO, Long insuranceId) {
-
         InsuranceEntity insuranceEntity = getInsuranceEntity(insuranceId);
 
-        // Validace data přímo ve service třídě
+        // Validate event date within the insurance coverage period
         if (!isEventDateInRange(eventDTO.getEventDate(), eventDTO.getInsuranceId())) {
             throw new EventDateOutOfRangeException();
         }
 
+        //mapping Event DTO to Entity
         EventEntity eventEntity = eventMapper.toEntity(eventDTO);
         eventEntity.setInsuranceEntity(insuranceEntity);
 
+        //saving new event Entity
         eventEntity = eventRepository.saveAndFlush(eventEntity);
         return eventMapper.toDTO(eventEntity);
     }
@@ -52,7 +60,6 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     public List<EventDTO> getAll() {
-        // Find all event entities and map them to DTOs.
         return eventRepository.findAll().stream().map(i -> eventMapper.toDTO(i)).toList();
     }
 
@@ -65,7 +72,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO getById(Long eventId) {
         EventEntity fetchedEvent = getEventOrThrow(eventId);
-        //return mapped DTO
         return eventMapper.toDTO(fetchedEvent);
     }
 
@@ -77,7 +83,6 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     public List<EventDTO> getEventByInsuranceId(Long insuranceId) {
-        // Find all events related to a specific insurance and map them to DTOs.
         return eventRepository.findByInsuranceEntityInsuranceId(insuranceId).stream().map(i -> eventMapper.toDTO(i)).toList();
     }
 
@@ -89,20 +94,26 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventEntity> getEventsForCurrentUser() {
         UserDTO currentUser = userService.getCurrentUser();
-
         return eventRepository.findByInsuranceEntityUserEntityUserId(currentUser.getUserId());
     }
 
-
+    /**
+     * Edits an existing event.
+     *
+     * @param eventDTO    DTO containing updated event details.
+     * @param insuranceId ID of the insurance to which the event belongs.
+     * @throws EventDateOutOfRangeException if the event date is outside the insurance coverage period.
+     */
     @Override
     public void editEvent(EventDTO eventDTO, Long insuranceId) {
         EventEntity fetchedEvent = getEventOrThrow(eventDTO.getEventId());
 
-        // Validace data přímo ve service třídě
+        // Validate event date within the insurance coverage period
         if (!isEventDateInRange(eventDTO.getEventDate(), eventDTO.getInsuranceId())) {
             throw new EventDateOutOfRangeException();
         }
 
+        //update edited DTO to event Entity and save changes
         eventMapper.updateEventEntity(eventDTO, fetchedEvent);
         eventRepository.saveAndFlush(fetchedEvent);
     }
@@ -118,7 +129,12 @@ public class EventServiceImpl implements EventService {
         eventRepository.delete(fetchedEvent);
     }
 
-
+    /**
+     * Helper method to fetch an insurance entity by its ID or throw an exception if it does not exist.
+     *
+     * @param insuranceId ID of the insurance.
+     * @return The corresponding InsuranceEntity.
+     */
     private InsuranceEntity getInsuranceEntity(Long insuranceId) {
         return insuranceRepository.findByInsuranceId(insuranceId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid insurance ID: " + insuranceId));
@@ -131,23 +147,32 @@ public class EventServiceImpl implements EventService {
      * @return The corresponding EventEntity.
      */
     private EventEntity getEventOrThrow(Long eventId) {
-        // Try to find the event by ID, or throw an exception if not found.
         return eventRepository.findByEventId(eventId).orElseThrow();
     }
 
+    /**
+     * Checks if the given event date is within the coverage period of the specified insurance.
+     *
+     * @param eventDate   Date of the event to check.
+     * @param insuranceId ID of the insurance entity.
+     * @return True if the event date is within the insurance coverage period, false otherwise.
+     */
     public boolean isEventDateInRange(LocalDate eventDate, Long insuranceId) {
-
+        //find insurance Entity by its ID and check if eventDate is in period between insurance startDate and endDate.
         InsuranceEntity insuranceEntity = getInsuranceEntity(insuranceId);
-
         return !(eventDate.isBefore(insuranceEntity.getStartDate()) || eventDate.isAfter(insuranceEntity.getEndDate()));
     }
 
-    // formátovací vzor může být definován jako konstantní hodnota
+    // Date formatting pattern can be defined as a constant
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    // Metoda pro formátování LocalDate na požadovaný řetězec
+    /**
+     * Formats a LocalDate to a string with the pattern "dd.MM.yyyy".
+     *
+     * @param date The date to format.
+     * @return The formatted date string.
+     */
     public String formatDate(LocalDate date) {
         return date.format(DATE_FORMATTER);
     }
-
 }
