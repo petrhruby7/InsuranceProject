@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import jakarta.annotation.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -22,11 +25,5 @@ public class HomeController {
     @GetMapping("/aboutUs")
     public String aboutUsPage() {
         return "aboutUs-Page";
-    }
-
-    //render contact page
-    @GetMapping("/contact")
-    public String contactPage() {
-        return "contact-Page";
     }
 }

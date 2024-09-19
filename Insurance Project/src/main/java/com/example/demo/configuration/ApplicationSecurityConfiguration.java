@@ -18,7 +18,7 @@ public class ApplicationSecurityConfiguration {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/register", "/", "/aboutUs", "/contact").permitAll() // Allow access without authentication
-                        .requestMatchers("/styles/**", "/js/**", "/images/**").permitAll() //Allow access to files for CSS, img and JS files
+                        .requestMatchers("/styles/**", "/js/**", "/images/**", "/files/**").permitAll() //Allow access to files for CSS, img and JS files
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

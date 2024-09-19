@@ -4,11 +4,34 @@
 <body>
 <header th:replace="~{Fragments/layout.html :: header}"></header>
 <article>
-    <header class="info-header">
-        <h1>This page is under reconstruction!</h1>
-    </header>
-    <section>
-        <img th:src="@{/images/unfinished web.png}" alt="construction-site">
+    <section class="profile">
+        <div class="profile-text">
+            <h1>Kdo jsem:</h1>
+            <p>Jmenuji se Petr Hrubý a donedávné doby jsem se živil jako konstruktér strojírenských přípravků. Tato
+                práce mě však nenaplňovala a rozhodl jsem opustit cestu bezpečně vyšlapané kariéry a rovnýma nohama
+                skočit do neprobádaných vod programování. </p>
+            <p>Proč právě programování? Protože mezi mé záliby patří kresba pixelartu, což mě přivedlo ke skupině
+                nadšených lidí, kteří programují hry pro zábavu. Společně jsme pak několik her spolu vytvořili.</p>
+            <p>Když jsem pak zkusil zjistit, co to tam vlastně píšou, záhy mě to pohltilo. Dlouho jsem se odhodlával,
+                ale nakonec tomu osud chtěl a já opustil svou starou práci a přihlásil se na rekvalifikační kurz.</p>
+            <h1>O projektu:</h1>
+            <p>V rámci doplnění rekvalifikačního kurzu jsem měl za úkol vytvořit stránky fiktivní pojišťovny. Na těchto
+                stránkách bylo primárním cílem vytvořit systém, který umožní uživateli vytvořit si účet a v něm si moct
+                vytvořit své pojištění a v rámci těchto pojištění pak mít i možnost vytvořit pojistné události.
+                Pojištění a pojistné události by měli mít možnost editace a smazaní.</p>
+            <p>Insurance project company, nebo jak jsem si projekt sám nazval <strong>ICP</strong>, je napsán v
+                programovacím jazyku Java a vybraný framework je Spring Boot.</p>
+            <p>Jedná se o můj úplně první větší projekt na kterém jsem se učil a stále učím mluvit plynně ajťácky. </p>
+            <div class="button-container">
+                <a href="/files/Zivotopis_Petr_Hruby_CZ.pdf" download="Petr-Hruby-CV(CZ).pdf" class="input-btn button">
+                    <img th:src="@{/images/download.png}" alt="download-icon" class="icon invert">
+                    Stáhnout CV (CZ)</a>
+                <a href="/files/CV_Resume_Petr_Hruby_AJ.pdf" download="Petr-Hruby-CV(AJ).pdf" class="input-btn button">
+                    <img th:src="@{/images/download.png}" alt="download-icon" class="icon invert">
+                    Download CV (AJ)</a>
+            </div>
+        </div>
+        <img th:src="@{/images/My-photo.jpg}" alt="my-photo" class="profile-img">
     </section>
 </article>
 <footer th:replace="~{Fragments/layout.html :: footer}"></footer>
